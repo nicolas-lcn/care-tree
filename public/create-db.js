@@ -14,5 +14,7 @@ db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profile
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
 db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbUpvotes INTEGER, nbReports INTEGER, category INTEGER, state INTEGER, user TEXT,'
           + 'FOREIGN KEY (category) REFERENCES category(id), FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (user) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER PRIMARY KEY, username TEXT PRIMARY KEY, '
-          + 'PRIMARY KEY(FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
+db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT, '
+          + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
+
+db.prepare('INSERT INTO user VALUES (\'admin\', \'1234\', \'\', 0, 1)').run();
