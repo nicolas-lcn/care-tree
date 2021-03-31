@@ -10,15 +10,15 @@ db.prepare('DROP TABLE IF EXISTS challenge').run();
 db.prepare('DROP TABLE IF EXISTS acceptedchallenges').run();
 
 db.prepare('CREATE TABLE category (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, bonusPoints INTEGER)').run();
-db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profilePic TEXT, points INTEGER, isAdmin INTEGER)').run();
+db.prepare('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, profilePic TEXT, points INTEGER, isAdmin INTEGER)').run();
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
-db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbUpvotes INTEGER, nbReports INTEGER, category INTEGER, state INTEGER, user TEXT,'
-          + 'FOREIGN KEY (category) REFERENCES category(id), FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (user) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT, '
-          + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
+db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbUpvotes INTEGER, nbReports INTEGER, category INTEGER, state INTEGER, user INTEGER,'
+          + 'FOREIGN KEY (category) REFERENCES category(id), FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (user) REFERENCES user(id))').run();
+db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, userid INTEGER, '
+          + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (userid) REFERENCES user(id))').run();
 
 db.prepare('INSERT INTO user VALUES (\'admin\', \'1234\', \'\', 0, 1)').run();
-let user1 = db.prepare('INSERT INTO user VALUES (\'superMarmotte\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
+let user1 = db.prepare('INSERT INTO user VALUES (\'SuperMarmotte\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
 let user2 = db.prepare('INSERT INTO user VALUES (\'PachydermeDélicat\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
 let user3 = db.prepare('INSERT INTO user VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
 let user4 = db.prepare('INSERT INTO user VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
