@@ -35,6 +35,7 @@ let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run(
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowId;
 
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, user1);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 5, 0, ?, ?, ?)").run(health, open, user2);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Complimenter un inconnu', 'Donnez-', 5, 0, ?, ?, ?)").run(eco, open, user1);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, user1);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 10, 0, ?, ?, ?)").run(health, open, user2);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Complimenter un inconnu', '', 3, 0, ?, ?, ?)").run(kindness, open, user3);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('No meat !', 'Ne pas manger de viande pendant toute une semaine.', 15, 1, ?, ?, ?)").run(eco, open, user1);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES (?, 'Tout est dit dans le titre :)', 15, 1, ?, ?, ?)").run("Donner 20€ à l'association de votre choix", expensive, open, user3);

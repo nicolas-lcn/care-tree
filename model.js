@@ -4,7 +4,7 @@ const Sqlite = require('better-sqlite3');
 let db = new Sqlite('db.sqlite');
 
 exports.getChallenges = (page) => {
-  const num_per_page = 32;
+  const num_per_page = 4;
   page = parseInt(page || 1);
 
   
