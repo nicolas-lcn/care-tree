@@ -6,16 +6,18 @@
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-4">
       {{#results}}
       <div class="col mb-3">
         <a href="/read/{{entry}}">
+        </a>
           <div class="card mb-4 h-100">
             <div class="card-body">
                 <p class="card-text">{{title}}</p>
-            </div>
+              <p class="card-text">{{description}}</p>
+              <p class="card-text">Suggéré par : {{user}}</p>
+              <p class="card-text">Likes : {{nbUpvotes}}</p>
           </div>
-        </a>
       </div>
       {{/results}}
   </div>
