@@ -47,8 +47,8 @@ app.get('/', (req, res) => {
 });
 
 /* Retourne les résultats de la recherche à partir de la requête "query" */
-app.get('/search', (req, res) => {
-  var found = model.search(req.query.query, req.query.page);
+app.get('/challenges', (req, res) => {
+  var found = model.getChallenges(req.query.page);
   res.render('search', found);
 });
 
