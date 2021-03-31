@@ -41,16 +41,18 @@ function is_authenticated(req, res, next) {
 
 /**** Routes pour voir les pages du site ****/
 
-/* Retourne une page principale avec le nombre de recettes */
+
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-/* Retourne les résultats de la recherche à partir de la requête "query" */
+
 app.get('/challenges', (req, res) => {
   var found = model.getChallenges(req.query.page);
-  res.render('search', found);
+  res.render('challenges', found);
 });
+
+//////////////////////////////////////////////////////////////////////////////////
 
 /* Retourne le contenu d'une recette d'identifiant "id" */
 app.get('/read/:id', (req, res) => {

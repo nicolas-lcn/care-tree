@@ -20,11 +20,17 @@
       </div>
       {{/results}}
   </div>
-
+  {{#prev_page}}
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-primary" href="/challenges?page={{prev_page}}">Page précédente</a>
+      </div>
+    </div>
+  {{/prev_page}}
   {{#next_page}}
   <div class="row">
     <div class="col">
-      <a class="btn btn-primary" href="/search?query={{query}}&page={{next_page}}">Page suivante</a>
+      <a class="btn btn-primary" href="/challenges?page={{next_page}}">Page suivante</a>
     </div>
   </div>
   {{/next_page}}
