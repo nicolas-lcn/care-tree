@@ -23,16 +23,16 @@ let user2 = db.prepare('INSERT INTO user VALUES (\'PachydermeDélicat\', \'1234\
 let user3 = db.prepare('INSERT INTO user VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
 let user4 = db.prepare('INSERT INTO user VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
 
-let eco = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'écologie\', 100)').run().lastInsertRowId;
-let health = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'santé\', 100)').run().lastInsertRowId;
-let kindness = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'gentillesse\', 100)').run().lastInsertRowId;
-let expensive = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'coûteux\', 100)').run().lastInsertRowId;
-let other = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'autre\', 0)').run().lastInsertRowId;
+let eco = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'écologie\', 100)').run().lastInsertRowid;
+let health = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'santé\', 100)').run().lastInsertRowid;
+let kindness = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'gentillesse\', 100)').run().lastInsertRowid;
+let expensive = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'coûteux\', 100)').run().lastInsertRowid;
+let other = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'autre\', 0)').run().lastInsertRowid;
 
 
-let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowId;
-let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowId;
-let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowId;
+let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowid;
+let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowid;
+let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowid;
 
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, user1);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 10, 0, ?, ?, ?)").run(health, open, user2);
