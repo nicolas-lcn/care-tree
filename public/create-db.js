@@ -18,12 +18,20 @@ db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT,
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
 
 db.prepare('INSERT INTO user VALUES (\'admin\', \'1234\', \'\', 0, 1)').run();
-let userId = db.prepare('INSERT INTO user VALUES (\'user\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
+let user1 = db.prepare('INSERT INTO user VALUES (\'superMarmotte\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
+let user2 = db.prepare('INSERT INTO user VALUES (\'PachydermeDélicat\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
+let user3 = db.prepare('INSERT INTO user VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
+let user4 = db.prepare('INSERT INTO user VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
 
 let eco = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'écologie\', 100)').run().lastInsertRowId;
+let health = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'santé\', 100)').run().lastInsertRowId;
+let kindness = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'gentillesse\', 100)').run().lastInsertRowId;
+let expensive = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'\', 100)').run().lastInsertRowId;
+let other = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'autre\', 0)').run().lastInsertRowId;
+
 
 let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowId;
 let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowId;
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowId;
 
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, userId);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, user1);
