@@ -26,7 +26,7 @@ let user4 = db.prepare('INSERT INTO user VALUES (\'PieuvreDumbo\', \'1234\', \'\
 let eco = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'écologie\', 100)').run().lastInsertRowId;
 let health = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'santé\', 100)').run().lastInsertRowId;
 let kindness = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'gentillesse\', 100)').run().lastInsertRowId;
-let expensive = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'\', 100)').run().lastInsertRowId;
+let expensive = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'coûteux\', 100)').run().lastInsertRowId;
 let other = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'autre\', 0)').run().lastInsertRowId;
 
 
@@ -34,4 +34,7 @@ let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastIn
 let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowId;
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowId;
 
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, user1);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 5, 0, ?, ?, ?)").run(health, open, user2);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Complimenter un inconnu', 'Donnez-', 5, 0, ?, ?, ?)").run(eco, open, user1);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, user1);
