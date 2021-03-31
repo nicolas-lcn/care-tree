@@ -9,15 +9,26 @@
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-4">
       {{#results}}
       <div class="col mb-3">
+        <div class="col mb-3">
+        <a href="/read/{{entry}}">
+          <div class="card mb-4 h-100">
+            <img class="card-img-top" src="{{img}}">
+            <div class="card-body">
+                <p class="card-text">{{title}}</p>
+            </div>
+          </div>
+        </a>
+      </div>
         <a href="/read/{{entry}}">
         </a>
           <div class="card mb-4 h-100">
             <div class="card-body">
                 <p class="card-text">{{title}}</p>
-              <p class="card-text">{{description}}</p>
-              <p class="card-text">Suggéré par : {{user}}</p>
-              <p class="card-text">Likes : {{nbUpvotes}}</p>
-              <p class="card-text">Catégorie : {{categoryName}}</p>
+              <p>{{description}}</p>
+              <p>Suggéré par : {{username}}</p>
+              <p>Likes : {{nbUpvotes}}</p>
+              <p>Catégorie : {{categoryName}}</p>
+              
           </div>
       </div>
       {{/results}}

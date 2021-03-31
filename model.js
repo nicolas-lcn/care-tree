@@ -9,9 +9,10 @@ exports.getChallenges = (page) => {
 
   
   var num_found = db.prepare('SELECT count(*) FROM challenge').get()['count(*)'];
-  var results = db.prepare('SELECT challenge.id, title, description, nbUpvotes, category.name AS categoryName, state, user '
+  var results = db.prepare('SELECT challenge.id, title, description, nbUpvotes, category.name AS categoryName, state, username '
                            + 'FROM challenge JOIN category ON challenge.category = category.id '
                            + 'JOIN state ON challenge.state = state.id '
+                           + 'JOIN user ON challenge.user = user.id '
                            + 'ORDER BY challenge.id LIMIT ? OFFSET ?').all(num_per_page, (page - 1) * num_per_page);
 
   return {

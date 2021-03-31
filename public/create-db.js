@@ -18,10 +18,10 @@ db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, userid INTEGER
           + 'PRIMARY KEY(challengeid, userid), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (userid) REFERENCES user(id))').run();
 
 db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'admin\', \'1234\', \'\', 0, 1)').run();
-let user1 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'SuperMarmotte\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
-let user2 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PachydermeDélicat\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
-let user3 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
-let user4 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowId;
+let user1 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'SuperMarmotte\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
+let user2 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PachydermeDélicat\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
+let user3 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
+let user4 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
 
 let eco = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'écologie\', 100)').run().lastInsertRowid;
 let health = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'santé\', 100)').run().lastInsertRowid;
