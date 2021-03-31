@@ -59,7 +59,7 @@ app.get('/read/:id', (req, res) => {
 });
 
 app.get('/create', (req, res) => {
-  res.render('create');
+  res.render('challenges');
 });
 
 app.get('/update/:id', (req, res) => {
