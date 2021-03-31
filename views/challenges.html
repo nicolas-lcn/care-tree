@@ -1,0 +1,12 @@
+{{> header}}
+
+  <h1> Liste des films </h1>
+<a href="/add-movie-form"><button type="button">Ajouter un film</button></a>
+<ul>
+    {{#movies}}
+    <li>{{title}} <a href="/movie-details/{{id}}">Détails</a> <a href="/edit-movie-form/{{id}}">Modifier</a>
+        <a href="/delete-movie-form/{{id}}">Supprimer</a></li>
+    {{/movies}}
+</ul>
+
+{{> footer}}
