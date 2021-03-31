@@ -46,7 +46,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-
 app.get('/challenges', (req, res) => {
   var found = model.getChallenges(req.query.page);
   res.render('challenges', found);
