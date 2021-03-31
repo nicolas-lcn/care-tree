@@ -26,4 +26,4 @@ let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastIn
 let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowId;
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowId;
 
-db.prepare(`INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ("Se débarrasser de ses vieux vêtements", "Donnez-les ou revendez-les !", 5, 0, ${eco}, ${open}, ${userId})`).run();
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, category, state, user) VALUES ('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, ?, ?, ?)").run(eco, open, userId);
