@@ -64,9 +64,10 @@ app.get('/new_user', (req, res) => {
 
 app.post('/login', (req, res) => {
   var id = model.login(req.body.username, req.body.password);
-  if (id === -1) {
+  if (id == -1) {
     res.redirect('/login');
   } else {
+    console.log(req.body.username + "s'est connecté");
     req.session.username = req.body.username;
     req.session.user = id;
     res.redirect('/');
@@ -75,7 +76,7 @@ app.post('/login', (req, res) => {
 
 app.post('/new_user', (req, res) => {
   let id = model.new_user(req.body.username, req.body.password);
-  if (id !== undefined) {
+  if (id != undefined) {
     req.session.username = req.body.username;
     req.session.user = id;
     res.redirect('/');

@@ -32,8 +32,8 @@ exports.getChallenges = page => {
 
 exports.login = (username, password) => {
   let select = db
-    .prepare("SELECT rowid FROM users WHERE username = ? AND password = ?")
+    .prepare("SELECT id FROM user WHERE username = ? AND password = ?")
     .get(username, password);
-  if (select) return select.rowid;
-  return -1;
+  console.log(select);
+  return (select? select:-1);
 };
