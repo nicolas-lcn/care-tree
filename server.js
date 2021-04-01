@@ -63,12 +63,11 @@ app.get('/new_user', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  var id = model.login(req.body.username, req.body.password);
-  if (id == -1) {
+  let username = model.login(req.body.username, req.body.password);
+  if (username == null) {
     res.redirect('/login');
   } else {
     req.session.username = req.body.username;
-    req.session.user = id;
     res.redirect('/');
   }
 })

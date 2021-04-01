@@ -8,11 +8,6 @@ function crypt_password(password) {
   return saved_hash;
 }
 
-function compare_password (password, saved_hash) {
-  return bcrypt.compareSync(password, saved_hash)==true;
-}; 
-
-
 db.prepare('DROP TABLE IF EXISTS challenge').run();
 db.prepare('DROP TABLE IF EXISTS category').run();
 db.prepare('DROP TABLE IF EXISTS state').run();

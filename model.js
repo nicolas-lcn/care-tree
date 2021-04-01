@@ -6,7 +6,7 @@ let db = new Sqlite("db.sqlite");
 
 
 function compare_password (password, saved_hash) {
-  return bcrypt.compareSync(password, saved_hash) == true;
+  return bcrypt.compareSync(password, saved_hash);
 }; 
 
 
@@ -39,7 +39,7 @@ exports.getChallenges = page => {
 
 exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
-    .get(username, password);
-  console.log
-  return (select? select:-1);
+    .get(username);
+  
+  return (compare_password(password, select.password) ? select.username: null);
 };
