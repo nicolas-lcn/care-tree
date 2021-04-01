@@ -1,7 +1,14 @@
 "use strict";
 const Sqlite = require("better-sqlite3");
+const bcrypt = require("bcrypt");
 
 let db = new Sqlite("db.sqlite");
+
+
+function compare_password (password, saved_hash) {
+  return bcrypt.compareSync(password, saved_hash) == true;
+}; 
+
 
 exports.getChallenges = page => {
   const num_per_page = 4;
@@ -31,8 +38,8 @@ exports.getChallenges = page => {
 };
 
 exports.login = (username, password) => {
-  let select = db
-    .prepare("SELECT id FROM user WHERE username = ? AND password = ?")
+  let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
     .get(username, password);
+  console.log
   return (select? select:-1);
 };
