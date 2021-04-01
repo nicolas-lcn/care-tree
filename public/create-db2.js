@@ -1,6 +1,16 @@
 const Sqlite = require('better-sqlite3');
+const bcrypt = require('bcrypt');
 
 let db = new Sqlite('db.sqlite');
+
+function crypt_password(password) {
+  var saved_hash = bcrypt.hashSync(password,10);
+  return saved_hash;
+}
+
+function compare_password (password, saved_hash) {
+  return bcrypt.compareSync(password, saved_hash)==true;
+}; 
 
 
 db.prepare('DROP TABLE IF EXISTS challenge').run();
@@ -18,26 +28,28 @@ db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT,
 
 let username1 = "SuperMarmotton";
 let username2 = "PachydermeDéclicat";
-let 
+let username3 = "PapillonCourageux";
+let username4 = "PieuvreDumbo;"
 
-db.prepare('INSERT INTO user VALUES (\'admin\', \'1234\', \'\', 0, 1)').run();
-db.prepare('INSERT INTO user VALUES (\'SuperMarmotte\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (\'PachydermeDélicat\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
+let password = crypt_password('1234');
 
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 1)').run('admin', );
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 0)').run(username1).lastInsertRowid;
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 0)').run(username2).lastInsertRowid;
+db.prepare('INSERT INTO user VALUES (?, \'1234\', \'\', 0, 0)').run(username3).lastInsertRowid;
+db.prepare('INSERT INTO user VALUES (?, \'1234\', \'\', 0, 0)').run(username4).lastInsertRowid;
 
 let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowid;
 let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowid;
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowid;
 
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, user) VALUES "
-           + "(?, ?, ?, ?, ?, ?)").run('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, open, 'SuperMarmotte');
+           + "(?, ?, ?, ?, ?, ?)").run('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, open, username1);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, user) VALUES "
-           + "(?, ?, ?, ?, ?, ?)").run('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 10, 0, open, 'PachydermeDélicat');
+           + "(?, ?, ?, ?, ?, ?)").run('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 10, 0, open, username2);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, user) VALUES "
-           + "(?, ?, ?, ?, ?, ?)").run('Complimenter un inconnu', '', 3, 0, open, 'PapillonCourageux');
+           + "(?, ?, ?, ?, ?, ?)").run('Complimenter un inconnu', '', 3, 0, open, username3);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, user) VALUES "
-           + "(?, ?, ?, ?, ?, ?)").run('No meat !', 'Ne pas manger de viande pendant toute une semaine.', 15, 1, open, 'SuperMarmotte');
+           + "(?, ?, ?, ?, ?, ?)").run('No meat !', 'Ne pas manger de viande pendant toute une semaine.', 15, 1, open, username4);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, user) "
-           + "VALUES (?, ?, ?, ?, ?, ?)").run("Donner 20€ à l'association de votre choix", 'Tout est dit dans le titre :)', 15, 1, open, 'PieuvreDumbo');
+           + "VALUES (?, ?, ?, ?, ?, ?)").run("Donner 20€ à l'association de votre choix", 'Tout est dit dans le titre :)', 15, 1, open, username1);
