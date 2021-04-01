@@ -53,25 +53,6 @@ app.get('/challenges', (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-/* Retourne le contenu d'une recette d'identifiant "id" */
-app.get('/read/:id', (req, res) => {
-  var entry = model.read(req.params.id);
-  res.render('read', entry);
-});
-
-app.get('/create', (req, res) => {
-  res.render('challenges');
-});
-
-app.get('/update/:id', (req, res) => {
-  var entry = model.read(req.params.id);
-  res.render('update', entry);
-});
-
-app.get('/delete/:id', (req, res) => {
-  var entry = model.read(req.params.id);
-  res.render('delete', {id: req.params.id, title: entry.title});
-});
 
 app.get('/login', (req, res) => {
   res.render('login');

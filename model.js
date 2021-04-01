@@ -23,4 +23,6 @@ exports.getChallenges = (page) => {
     page: page,
     num_pages: parseInt(num_found / num_per_page) + 1,
   };
+  
+exports.login = ()
 };
