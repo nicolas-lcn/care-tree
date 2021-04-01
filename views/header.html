@@ -46,26 +46,41 @@
   </div>
 </nav>
 -->
-  <header class="px-3 py-2">
+  <header class="px-3 py-2 container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <div class="container-fluid">
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" aria-current="page" href="/">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/challenges">Challenges</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Mon arbre</a>
-            </li>
-          </ul>
-        </div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#myNavbar"
+        aria-controls="myNavbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-center order-last"
+        id="myNavbar"
+      >
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="/">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/challenges">Challenges</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mon arbre</a>
+          </li>
+        </ul>
       </div>
+      <a
+        href="/login"
+        class="btn btn-light text-dark me-2 nav-info d-flex mx-md-5 order-0 order-md-last"
+      >
+        Login
+      </a>
     </nav>
   </header>
 
