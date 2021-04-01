@@ -23,6 +23,7 @@ let user2 = db.prepare('INSERT INTO user (username, password, profilePic, points
 let user3 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PapillonCourageux\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
 let user4 = db.prepare('INSERT INTO user (username, password, profilePic, points, isAdmin) VALUES (\'PieuvreDumbo\', \'1234\', \'\', 0, 0)').run().lastInsertRowid;
 
+
 let eco = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'écologie\', 100)').run().lastInsertRowid;
 let health = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'santé\', 100)').run().lastInsertRowid;
 let kindness = db.prepare('INSERT INTO category (name, bonusPoints) VALUES (\'gentillesse\', 100)').run().lastInsertRowid;
