@@ -67,7 +67,6 @@ app.post('/login', (req, res) => {
   if (id == -1) {
     res.redirect('/login');
   } else {
-    console.log(req.body.username + "s'est connecté");
     req.session.username = req.body.username;
     req.session.user = id;
     res.redirect('/');

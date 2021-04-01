@@ -34,6 +34,5 @@ exports.login = (username, password) => {
   let select = db
     .prepare("SELECT id FROM user WHERE username = ? AND password = ?")
     .get(username, password);
-  console.log(select);
   return (select? select:-1);
 };

@@ -75,14 +75,16 @@
           </li>
         </ul>
       </div>
+      {{^authenticated}}
       <div class="nav-info d-flex mx-md-5 order-0 order-md-last">
-      <a
-        href="/login"
-        class="btn btn-light text-dark me-2"
-      >
-        Login
-      </a>
-  </div>
+        <a
+          href="/login"
+          class="btn btn-light text-dark me-2"
+        >
+          Login
+        </a>
+      </div>
+      {{/authenticated}}
     </nav>
   </header>
 
