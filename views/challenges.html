@@ -8,18 +8,23 @@
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-4">
       {{#results}}
-      <div class="col mb-3">
-        <a href="/read/{{entry}}">
-        </a>
-          <div class="card mb-4 h-100">
-            <div class="card-body">
-                <p class="card-text">{{title}}</p>
-              <p>{{description}}</p>
-              <p>Suggéré par : {{author}}</p>
-              <p>Likes : {{nbUpvotes}}</p>
+        <div class="col mb-3">
+            <div class="card mb-4 h-100">
+              <div class="card-body">
+                <p>{{title}}</p>
+                <hr/>
+                <p>{{description}}</p>
+                <p>Suggéré par : {{author}}</p>
+                <div class="row">
+                  <p class="col">Likes : {{nbUpvotes}}</p>
+                  <button class="btn btn-primary col" type="button" href="/acceptChallenge/{{id}}">
+                    Accepter
+                  </button>
+                  <a class="col" href="/reportChallenge/{{id}}">Signaler</a>
+                </div>
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
       {{/results}}
   </div>
   {{#prev_page}}
