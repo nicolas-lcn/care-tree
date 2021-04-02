@@ -48,18 +48,14 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Mon arbre</a>
           </li>
-          {{#authenticated}}
-          <li>
-            <form class = "form-inline my-2 my-lg-0" action="/logout" method ="post">
-              {{name}}
-              <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
-            </form>
+          {{}}
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{name}}</a>
           </li>
-          {{/authenticated}}
         </ul>
       </div>
-      {{^authenticated}}
-      <div class="list-group list-group-horizontal nav-info d-flex mx-md-5 order-0 order-md-last w-25 p-2">
+      <div class="list-group list-group-horizontal nav-info d-flex mx-md-5 order-0 order-md-last px-0" style="width : 300px;">
+        {{^authenticated}}
           <a
             href="/login"
             class="list-group-item list-group-item-action list-group-item-secondary"
@@ -72,8 +68,14 @@
           >
             S'inscrire
           </a>
+        {{/authenticated}}
+        {{#authenticated}}
+          <form class = "form-inline list-group-item border-0" action="/logout" method ="post">
+              <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
+            </form>
+        {{/authenticated}}
       </div>
-      {{/authenticated}}
+      
     </nav>
   </header>
 
