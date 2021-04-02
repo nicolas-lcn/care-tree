@@ -1,0 +1,53 @@
+{{> header}}
+
+  <div class="row">
+    <div class="col">
+      <h1>{{num_found}} Défis {{#page}} (page {{page}}/{{num_pages}}) {{/page}}</h1>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-4">
+      {{#results}}
+        <div class="col mb-3">
+            <div class="card mb-0 h-100">
+              <div class="card-body">
+                <p>{{title}}</p>
+                <hr/>
+                <p class="my-5 py-5">{{description}}</p>
+                <p>Suggéré par : {{author}}</p>
+                
+                
+                
+                <div class="row">
+                  <div class="col">
+                    <a href="/upvoteChallenge/{{id}}">
+                    <i class="far fa-thumbs-up fa-2x" style="color: black;"></i>
+                    {{nbUpvotes}}
+                    </a>
+                  </div>
+                  <button class="btn btn-primary col" type="button" href="/acceptChallenge/{{id}}">
+                    Accepter
+                  </button>
+                  <a class="col pt-4" href="/reportChallenge/{{id}}">Signaler</a>
+                </div>
+              </div>
+            </div>
+        </div>
+      {{/results}}
+  </div>
+  {{#prev_page}}
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-primary" href="/challenges?page={{prev_page}}">Page précédente</a>
+      </div>
+    </div>
+  {{/prev_page}}
+  {{#next_page}}
+  <div class="row">
+    <div class="col">
+      <a class="btn btn-primary" href="/challenges?page={{next_page}}">Page suivante</a>
+    </div>
+  </div>
+  {{/next_page}}
+
+{{> footer}}
