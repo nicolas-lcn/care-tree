@@ -48,35 +48,40 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Mon arbre</a>
           </li>
+          {{#authenticated}}
+          <li>
+            <form class = "form-inline my-2 my-lg-0" action="/logout" method ="post">
+              {{name}}
+              <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
+            </form>
+          </li>
+          {{/authenticated}}
         </ul>
       </div>
       {{^authenticated}}
-      <div class="nav-info d-flex">
-        <a
-          href="/login"
-          class="btn btn-light text-dark me-2"
-        >
-          Se connecter
-        </a>
-      </div>
-      {{/authenticated}}
-       <div class="nav-info d-flex mx-md-5 order-0 order-md-last">
-        <a
-          href="/signup"
-          class="btn btn-outline-info me-2"
-        >
-          S'inscrire
-        </a>
-      </div>
-      {{#authenticated}}
-      <div class="nav-info d-flex">
-        <a
-          href="/login"
-          class="btn btn-light text-dark me-2"
-        >
-          Se déconnecter
-        </a>
-      </div>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">
+          <div class="nav-info d-flex  my-2 my-sm-0">
+          <a
+            href="/login"
+            class="btn btn-light text-dark me-2"
+          >
+            Se connecter
+          </a>
+        </div>
+</li>
+        <li class="list-group-item">
+          <div class="nav-info d-flex mx-md-5 order-0 order-md-last">
+          <a
+            href="/signup"
+            class="btn btn-outline-info me-2"
+          >
+            S'inscrire
+          </a>
+        </div>
+        </li>
+      </ul>
+         
       {{/authenticated}}
     </nav>
   </header>
