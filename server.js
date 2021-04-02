@@ -9,7 +9,8 @@ var app = express();
 
 
 function middleware(req, res, next) {
-  if(req.session.user !== undefined) {
+  console.log("running middleware")
+  if(req.session.user != undefined) {
     res.locals.authenticated = true;
 
   } else {
@@ -33,9 +34,12 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 function is_authenticated(req, res, next) {
-  if(req.session.user !== undefined) {
+  console.log("is the user authenticated?")
+  if(req.session.user != undefined) {
+    console.log("yes")
     return next();
   }
+  console.log("no")
   res.status(401).send('Authentication required');
 }
 
@@ -58,8 +62,8 @@ app.get('/login', (req, res) => {
   res.render('login');
 })
 
-app.get('/new_user', (req, res) => {
-  res.render('new_user');
+app.get('/signup', (req, res) => {
+  res.render('signup');
 })
 
 app.post('/login', (req, res) => {
@@ -72,7 +76,7 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.post('/new_user', (req, res) => {
+app.post('/signup', (req, res) => {
   let id = model.new_user(req.body.username, req.body.password);
   if (id != undefined) {
     req.session.username = req.body.username;
