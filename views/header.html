@@ -48,10 +48,11 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Mon arbre</a>
           </li>
-          {{}}
+          {{#authenticated}}
           <li class="nav-item">
             <a class="nav-link" href="#">{{name}}</a>
           </li>
+          {{/authenticated}}
         </ul>
       </div>
       <div class="list-group list-group-horizontal nav-info d-flex mx-md-5 order-0 order-md-last px-0" style="width : 300px;">
