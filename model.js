@@ -9,6 +9,11 @@ function compare_password (password, saved_hash) {
   return bcrypt.compareSync(password, saved_hash);
 }; 
 
+function crypt_password(password) {
+  var saved_hash = bcrypt.hashSync(password,10);
+  return saved_hash;
+}
+
 
 exports.getChallenges = page => {
   const num_per_page = 4;
@@ -43,3 +48,7 @@ exports.login = (username, password) => {
   
   return (compare_password(password, select.password) ? select.username: null);
 };
+
+exports.new_user = (username, password) => {
+  
+}
