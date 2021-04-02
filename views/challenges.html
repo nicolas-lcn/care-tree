@@ -11,32 +11,34 @@
         <div class="col mb-3">
             <div class="card mb-0 h-100">
               
-              
-              <div class="d-flex align-items-end flex-column bd-highlight mb-3" style="height: 200px;">
-                <div class="p-2 bd-highlight">
+              <div class="d-flex align-items-start flex-column mb-3 h-100">
+                <div class="">
                   <p>{{title}}</p>
                   <hr/>
                 </div>
-                <div class="p-2 bd-highlight">
-                  <p class="my-5 py-5">{{description}}</p>
+                <div class="my-3 px-2">
+                  <p class="">{{description}}</p>
                 </div>
+                
+                
                 <div class="mt-auto p-2 bd-highlight">
                   <p>Suggéré par : {{author}}</p>
-                  <div class="row ">
-                    <div class="col">
-                      <a href="/upvoteChallenge/{{id}}">
-                      <i class="far fa-thumbs-up fa-2x" style="color: black;"></i>
-                      {{nbUpvotes}}
-                      </a>
-                    </div>
-                    <button class="btn btn-primary col" type="button" href="/acceptChallenge/{{id}}">
-                      Accepter
-                    </button>
-                    <a class="col pt-4" href="/reportChallenge/{{id}}">Signaler</a>
+                  <div class="row">
+                  <div class="col">
+                    <a href="/upvoteChallenge/{{id}}">
+                    <i class="far fa-thumbs-up fa-2x" style="color: black;"></i>
+                    {{nbUpvotes}}
+                    </a>
                   </div>
+                    <a fref="/acceptChallenge/{{id}}">
+                      <button class="btn btn-primary col" type="button">
+                        Accepter
+                      </button>
+                    </a>
+                  <a class="col pt-4" href="/reportChallenge/{{id}}">Signaler</a>
+                </div>
                 </div>
               </div>
-              
               
             </div>
         </div>
