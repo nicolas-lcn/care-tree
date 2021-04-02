@@ -12,7 +12,7 @@
             <div class="card mb-0 h-100">
               
               <div class="d-flex align-items-start flex-column mb-3 h-100">
-                <div class="">
+                <div class="w-100 px-2">
                   <p>{{title}}</p>
                   <hr/>
                 </div>
@@ -30,12 +30,12 @@
                     {{nbUpvotes}}
                     </a>
                   </div>
-                    <a fref="/acceptChallenge/{{id}}">
-                      <button class="btn btn-primary col" type="button">
+                    <a class = "col" href="/acceptChallenge/{{id}}">
+                      <button class="btn btn-primary" type="button" href="/acceptChallenge/{{id}}">
                         Accepter
                       </button>
                     </a>
-                  <a class="col pt-4" href="/reportChallenge/{{id}}">Signaler</a>
+                  <a class="col pt-3" href="/reportChallenge/{{id}}">Signaler</a>
                 </div>
                 </div>
               </div>
