@@ -9,37 +9,33 @@ var app = express();
 
 
 function update_locals(req, res, next) {
-  console.log("running middleware");
   console.log(req.session.name);
   if(req.session.name) {
-    console.log("updating locals");
     res.locals.authenticated = true;
-    res.locals.name = req.session.username;
+    res.locals.name = req.session.name;
   }
   return next();
 }
-
+app.use(update_locals);
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //TODO: random secret
 app.use(cookieSession({
+  name :'session',
   secret:'bGtrZ8a5gh6e58g75dgd47zVZDsH75FSsa5',
 }));
-app.use(update_locals);
+
 
 app.engine('html', mustache());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
 function is_authenticated(req, res, next) {
-  console.log("is the user authenticated?")
   if(req.session.name != null) {
-    console.log("yes")
     return next();
   }
-  console.log("no")
   res.status(401).send('Authentication required');
 }
 
@@ -72,6 +68,7 @@ app.post('/login', (req, res) => {
     res.redirect('/login');
   } else {
     req.session.name = req.body.username;
+    console.log(req.session.name)
     res.redirect('/');
   }
 })
