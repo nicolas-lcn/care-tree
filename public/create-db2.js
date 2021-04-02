@@ -24,7 +24,7 @@ db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT,
 let username1 = "SuperMarmotton";
 let username2 = "PachydermeDéclicat";
 let username3 = "PapillonCourageux";
-let username4 = "PieuvreDumbo;"
+let username4 = "PieuvreDumbo";
 
 let password = crypt_password('1234');
 
