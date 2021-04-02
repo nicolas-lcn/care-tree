@@ -71,10 +71,9 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-  let id = model.new_user(req.body.username, req.body.password);
-  if (id != undefined) {
-    req.session.username = req.body.username;
-    req.session.user = id;
+  let new_username = model.new_user(req.body.username, req.body.password);
+  if (new_username != null) {
+    req.session.name = req.body.username;
     res.redirect("/");
   } else {
     res.redirect("/new_user");
