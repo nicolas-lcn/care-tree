@@ -24,10 +24,8 @@ exports.getChallenges = page => {
   ];
   var results = db
     .prepare(
-      "SELECT challenge.id, title, description, nbUpvotes, category.name AS categoryName, state, username " +
-        "FROM challenge JOIN category ON challenge.category = category.id " +
-        "JOIN state ON challenge.state = state.id " +
-        "JOIN user ON challenge.user = user.id " +
+      "SELECT challenge.id, title, description, nbUpvotes, state, author " +
+        "FROM challenge " +
         "ORDER BY challenge.id LIMIT ? OFFSET ?"
     )
     .all(num_per_page, (page - 1) * num_per_page);
