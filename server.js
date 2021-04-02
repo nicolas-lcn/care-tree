@@ -8,13 +8,13 @@ var model = require('./model');
 var app = express();
 
 
-function middleware(req, res, next) {
-  console.log("running middleware")
-  if(req.session.user != undefined) {
+function update_locals(req, res, next) {
+  console.log("running middleware");
+  console.log(req.session.name);
+  if(req.session.name) {
+    console.log("updating locals");
     res.locals.authenticated = true;
-
-  } else {
-    res.locals.authenticated = false;
+    res.locals.name = req.session.username;
   }
   return next();
 }
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieSession({
   secret:'bGtrZ8a5gh6e58g75dgd47zVZDsH75FSsa5',
 }));
-app.use(middleware);
+app.use(update_locals);
 
 app.engine('html', mustache());
 app.set('view engine', 'html');
@@ -35,7 +35,7 @@ app.set('views', __dirname + '/views');
 
 function is_authenticated(req, res, next) {
   console.log("is the user authenticated?")
-  if(req.session.user != undefined) {
+  if(req.session.name != null) {
     console.log("yes")
     return next();
   }
@@ -71,7 +71,7 @@ app.post('/login', (req, res) => {
   if (username == null) {
     res.redirect('/login');
   } else {
-    req.session.username = req.body.username;
+    req.session.name = req.body.username;
     res.redirect('/');
   }
 })
