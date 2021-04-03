@@ -44,17 +44,28 @@
         </div>
       {{/results}}
   </div>
-    <div class="row justify-content-center">
-      {{#prev_page}}
-          <div class="col-">
-            <a class="btn btn-primary" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i>    Page précédente</a>
+    <div class="row justify-content-center w-100">
+      <div class="col-2">
+        <div class="row">
+          {{#prev_page}}
+          <div class="col">
+            <a class="btn btn-primary" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i></a>
           </div>
-      {{/prev_page}}
-      {{#next_page}}
+        {{/prev_page}}
         <div class="col">
-          <a class="btn btn-primary" href="/challenges?page={{next_page}}">Page suivante    <i class="fas fa-chevron-right"></i></a>
+          <p>
+            {{page}}
+          </p>
         </div>
-      {{/next_page}}
+        {{#next_page}}
+          <div class="col">
+            <a class="btn btn-primary" href="/challenges?page={{next_page}}"><i class="fas fa-chevron-right"></i></a>
+          </div>
+        {{/next_page}}
+        </div>
+        
+      </div>
+      
     </div>
 
 {{> footer}}
