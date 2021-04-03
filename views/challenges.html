@@ -45,39 +45,19 @@
       {{/results}}
   </div>
 
-    <nav>
+  <div class="row justify-content-center p-0 m-0">
+    <nav class="col-4">
       <ul class="pagination">
-        <li class="page-item disabled">
-          <span class="page-link"><i class="fas fa-chevron-left"></i></span>
+        <li class="page-item {{#prev_disabled}}disabled{{/prev_disabled}}">
+          <a class="page-link" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i></a>
         </li>
-        <li class="page-item disabled"><p class="page-link" href="#">{{page}}</p></li>
-        <li class="page-item">
-          <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+        <li class="page-item"><p class="page-link" href="#">{{page}}</p></li>
+        <li class="page-item {{#next_disabled}}disabled{{/next_disabled}}">
+          <a class="page-link" href="/challenges?page={{next_page}}"><i class="fas fa-chevron-right"></i></a>
         </li>
       </ul>
     </nav>
-    <div class="row justify-content-center w-100">
-      <div class="col-2">
-        <div class="row">
-          {{#prev_page}}
-          <div class="col">
-            <a class="btn btn-primary" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i></a>
-          </div>
-        {{/prev_page}}
-        <div class="col">
-          <p>
-            {{page}}
-          </p>
-        </div>
-        {{#next_page}}
-          <div class="col">
-            <a class="btn btn-primary" href="/challenges?page={{next_page}}"><i class="fas fa-chevron-right"></i></a>
-          </div>
-        {{/next_page}}
-        </div>
-        
-      </div>
-      
-    </div>
+ </div>
+    
 
 {{> footer}}

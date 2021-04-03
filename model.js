@@ -34,7 +34,9 @@ exports.getChallenges = page => {
     results: results,
     num_found: num_found,
     prev_page: page > 1 ? page - 1 : 1,
+    prev_disabled: page == 1,
     next_page: page * num_per_page <= num_found ? page + 1 : page,
+    next_disabled: page * num_per_page > num_found,
     page: page,
     num_pages: parseInt(num_found / num_per_page) + 1
   };
