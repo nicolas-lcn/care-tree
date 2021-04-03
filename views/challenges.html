@@ -13,20 +13,20 @@
               
               <div class="d-flex align-items-start flex-column mb-3 h-100">
                 <div class="w-100 px-4">
-                  <p>{{title}}</p>
+                  <p class="mx-2 mt-3" style="text-align: justify;">{{title}}</p>
                   <hr/>
                 </div>
                 <div class="my-3 px-2">
-                  <p class="">{{description}}</p>
+                  <p class="mx-3" style="text-align: justify">{{description}}</p>
                 </div>
                 
                 
                 <div class="mt-auto p-2 bd-highlight w-100">
-                  <p>Suggéré par : {{author}}</p>
+                  <p style="font-size: 0.8em;">  Suggéré par : <i>{{author}}</i></p>
                   <div class="row justify-content-around">
                   <div class="col">
                     <a href="/upvoteChallenge/{{id}}">
-                    <i class="far fa-thumbs-up fa-2x" style="color: black;"></i>
+                    <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
                     {{nbUpvotes}}
                     </a>
                   </div>
