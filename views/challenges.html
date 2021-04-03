@@ -1,12 +1,8 @@
 {{> header}}
 
-  <div class="row">
-    <div class="col">
-      <h1>{{num_found}} Défis {{#page}} (page {{page}}/{{num_pages}}) {{/page}}</h1>
-    </div>
-  </div>
+  
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-5">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mx-5 pt-4">
       {{#results}}
         <div class="col mb-3">
             <div class="card mb-0 h-100">
@@ -44,10 +40,8 @@
         </div>
       {{/results}}
   </div>
-
-  <div class="row justify-content-center p-0 m-0">
-    <nav class="col-4">
-      <ul class="pagination">
+    <nav class="pt-4">
+      <ul class="pagination justify-content-center">
         <li class="page-item {{#prev_disabled}}disabled{{/prev_disabled}}">
           <a class="page-link" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i></a>
         </li>
@@ -57,7 +51,7 @@
         </li>
       </ul>
     </nav>
- </div>
+    
     
 
 {{> footer}}
