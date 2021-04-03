@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mx-5">
       {{#results}}
         <div class="col mb-3">
             <div class="card mb-0 h-100">
@@ -44,19 +44,17 @@
         </div>
       {{/results}}
   </div>
-  {{#prev_page}}
-    <div class="row">
-      <div class="col">
-        <a class="btn btn-primary" href="/challenges?page={{prev_page}}">Page précédente</a>
-      </div>
+    <div class="row justify-content-center">
+      {{#prev_page}}
+          <div class="col-">
+            <a class="btn btn-primary" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i>    Page précédente</a>
+          </div>
+      {{/prev_page}}
+      {{#next_page}}
+        <div class="col">
+          <a class="btn btn-primary" href="/challenges?page={{next_page}}">Page suivante    <i class="fas fa-chevron-right"></i></a>
+        </div>
+      {{/next_page}}
     </div>
-  {{/prev_page}}
-  {{#next_page}}
-  <div class="row">
-    <div class="col">
-      <a class="btn btn-primary" href="/challenges?page={{next_page}}">Page suivante</a>
-    </div>
-  </div>
-  {{/next_page}}
 
 {{> footer}}
