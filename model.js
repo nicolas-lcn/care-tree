@@ -14,6 +14,7 @@ function crypt_password(password) {
   return saved_hash;
 }
 
+
 exports.getChallenges = page => {
   const num_per_page = 4;
   page = parseInt(page || 1);
@@ -50,13 +51,7 @@ exports.login = (username, password) => {
 
 exports.new_user = (username, password) => {
   let insert = db.prepare("INSERT INTO user (username, password) VALUES (?,?)");
-  let errors = null;
   let cryptedPassword = crypt_password(password);
-  try{
-    insert.run(username, cryptedPassword);
-  } catch (error){
-    errors = error;
-    console.log(error);
-  }
+  insert.run(username, cryptedPassword);
   return (insert.changes!=0)? username : null;
 };

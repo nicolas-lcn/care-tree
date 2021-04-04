@@ -5,8 +5,6 @@ var mustache = require("mustache-express");
 const cookieSession = require("cookie-session");
 const { body, validationResult } = require("express-validator");
 
-let errorsString ="";
-
 var model = require("./model");
 var app = express();
 
@@ -87,15 +85,13 @@ app.post("/signup",
          (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    errorsString = { errors: errors.array() };
+    return res.status(400).json({ errors: errors.array() });
   }
   let new_username = model.new_user(req.body.username, req.body.password);
-  if (new_username != null && !errors.isEmpty()) {
+  if (new_username != null) {
     req.session.name = req.body.username;
-    console.log(errorsString)
     res.redirect("/");
   } else {
-    console.log(errorsString)
     res.redirect("/signup");
   }
 });
