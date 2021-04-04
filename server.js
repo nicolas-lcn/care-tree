@@ -5,6 +5,8 @@ var mustache = require("mustache-express");
 const cookieSession = require("cookie-session");
 const { body, validationResult } = require("express-validator");
 
+let errors ="";
+
 var model = require("./model");
 var app = express();
 
@@ -78,7 +80,7 @@ app.post("/signup",
     .withMessage('Le mot de passe doit contenir au moins 1 chiffre'),
          body('passwordConfirmation').custom((value, { req }) => {
     if (value !== req.body.password) {
-      throw new Error('Les mots de passe de correspondent pas.');
+      errors = 'Les mots de passe de correspondent pas.'
     }
     return true;
   }),
@@ -92,7 +94,7 @@ app.post("/signup",
     req.session.name = req.body.username;
     res.redirect("/");
   } else {
-    res.redirect("/new_user");
+    res.redirect("/signup");
   }
 });
 
