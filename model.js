@@ -26,7 +26,7 @@ exports.getChallenges = page => {
     .prepare(
       "SELECT challenge.id, title, description, nbUpvotes, state, author " +
         "FROM challenge " +
-        "ORDER BY challenge.id LIMIT ? OFFSET ?"
+        "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
     )
     .all(num_per_page, (page - 1) * num_per_page);
 
