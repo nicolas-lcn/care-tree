@@ -78,7 +78,7 @@ app.post("/signup",
     .withMessage('Le mot de passe doit contenir au moins 1 chiffre'),
          body('passwordConfirmation').custom((value, { req }) => {
     if (value !== req.body.password) {
-      alert('Les mots de passe de correspondent pas.');
+      throw new Error('Les mots de passe de correspondent pas.');
     }
     return true;
   }),
