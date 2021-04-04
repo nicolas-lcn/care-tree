@@ -15,36 +15,6 @@ app.use(
   })
 );
 
-const signUp_ValidationRules =() =>{
-  
-}
-
-function check_validation(req, res, next){
-   const errors = validationResult(req)
-  if (errors.isEmpty()) {
-    return next()
-  }
-  const extractedErrors = []
-  errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
-
-  return res.status(422).json({
-    errors: extractedErrors,
-  })
-}
-  /*
-   body('password')
-    .isLength({ min: 8 })
-    .withMessage('Le mot de passe doit faire au moins 8 caractères')
-    .matches(/\d/)
-    .withMessage('Le mot de passe doit contenir au moins 1 chiffre');
-         body('passwordConfirmation').custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error('Les mots de passe de correspondent pas.');
-    }
-    return next();
-  }*/
-}
-
 function update_locals(req, res, next) {
   if (req.session.name) {
     res.locals.authenticated = true;
@@ -100,7 +70,18 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/signup", 
-         check_validation,
+         //body("email").isEmail(),
+         body('password')
+    .isLength({ min: 8 })
+    .withMessage('Le mot de passe doit faire au moins 8 caractères')
+    .matches(/\d/)
+    .withMessage('Le mot de passe doit contenir au moins 1 chiffre'),
+         body('passwordConfirmation').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      alert('Les mots de passe de correspondent pas.');
+    }
+    return true;
+  }),
          (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
