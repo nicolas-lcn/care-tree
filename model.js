@@ -14,6 +14,9 @@ function crypt_password(password) {
   return saved_hash;
 }
 
+function get_errors (){
+  
+}
 
 exports.getChallenges = page => {
   const num_per_page = 4;
