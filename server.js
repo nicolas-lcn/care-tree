@@ -3,6 +3,7 @@
 var express = require("express");
 var mustache = require("mustache-express");
 const cookieSession = require("cookie-session");
+const { body, validationResult } = require("express-validator");
 
 var model = require("./model");
 var app = express();
@@ -70,7 +71,13 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.post("/signup", (req, res) => {
+app.post("/signup", 
+         body("password").isLength({ min: 8 }), 
+         (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   let new_username = model.new_user(req.body.username, req.body.password);
   if (new_username != null) {
     req.session.name = req.body.username;
