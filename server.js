@@ -16,7 +16,6 @@ app.use(
 );
 
 function update_locals(req, res, next) {
-  console.log(req.session.name);
   if (req.session.name) {
     res.locals.authenticated = true;
     res.locals.name = req.session.name;
@@ -66,13 +65,23 @@ app.post("/login", (req, res) => {
     res.redirect("/login");
   } else {
     req.session.name = req.body.username;
-    console.log(req.session.name);
     res.redirect("/");
   }
 });
 
 app.post("/signup", 
-         body("password").isLength({ min: 8 }), 
+         //body("email").isEmail(),
+          check('password')
+    .isLength({ min: 8 })
+    .withMessage('Le mot de passe doit faire au moins 8 caractères')
+    .matches(/\d/)
+    .withMessage('must contain a number'),
+         body('passwordConfirmation').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Les mots de passe de correspondent pas.');
+    }
+    return true;
+  }),
          (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
