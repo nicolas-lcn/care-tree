@@ -4,9 +4,9 @@
     <i class="fas fa-plus"></i>      Défiez la communauté !
   </button>
 
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mx-5 px-5 pt-4">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 mx-5 px-3 pt-5 g-5">
       {{#results}}
-        <div class="col mb-3">
+        <div class="col mb-5">
             <div class="card mb-0 h-100">
               
               <div class="d-flex align-items-start flex-column mb-3 h-100">
@@ -28,12 +28,12 @@
                     {{nbUpvotes}}
                     </a>
                   </div>
-                    <a class = "col-6 px-0" href="/acceptChallenge/{{id}}">
-                      <button class="btn btn-outline-primary" type="button" href="/acceptChallenge/{{id}}">
+                    <a class = "col-6 px-0 d-flex justify-content-center" style="text-decoration: none;" href="/acceptChallenge/{{id}}">
+                      <button class="btn btn-outline-primary" style="text-decoration: none;" type="button" href="/acceptChallenge/{{id}}">
                         Je relève le défi !
                       </button>
                     </a>
-                  <a class="col-3 pt-3 px-0" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
+                  <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
                 </div>
                 </div>
               </div>
