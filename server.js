@@ -89,7 +89,9 @@ app.post("/signup",
     if (new_username != null) {
       req.session.name = req.body.username;
       res.redirect("/");
-    } 
+    } else{
+      res.render("signup", {errors : {msg : "Nom d'utilisateur déjà pris"}});
+    }
   }else {
     res.render("signup", {errors : errors.array()});
   }

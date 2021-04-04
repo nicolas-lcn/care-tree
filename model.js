@@ -50,7 +50,7 @@ exports.login = (username, password) => {
 };
 
 exports.new_user = (username, password) => {
-  let verify = db.prepare("SELECT * FROM user WHERE username = ?").run(username);
+  let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
   if(verify) return null;
   let insert = db.prepare("INSERT INTO user (username, password) VALUES (?,?)");
   let cryptedPassword = crypt_password(password);
