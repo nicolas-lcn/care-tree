@@ -84,15 +84,14 @@ app.post("/signup",
   }),
          (req, res) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-  let new_username = model.new_user(req.body.username, req.body.password);
-  if (new_username != null) {
-    req.session.name = req.body.username;
-    res.redirect("/");
-  } else {
-    res.redirect("/signup");
+  if (errors.isEmpty()) {
+    let new_username = model.new_user(req.body.username, req.body.password);
+    if (new_username != null) {
+      req.session.name = req.body.username;
+      res.redirect("/");
+    } 
+  }else {
+    res.render("signup", {errors : errors.array()});
   }
 });
 
