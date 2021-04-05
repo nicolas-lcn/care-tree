@@ -101,6 +101,34 @@ app.post("/signup",
   }
 });
 
+app.post("/createChallenge", 
+         //body("email").isEmail(),
+         body('title')
+    .isLength({ min: 8 })
+    .withMessage('Le mot de passe doit faire au moins 8 caractères')
+    .matches(/\d/)
+    .withMessage('Le mot de passe doit contenir au moins 1 chiffre'),
+         body('passwordConfirmation').custom((value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Les mots de passe de correspondent pas.');
+    }
+    return true;
+  }),
+         (req, res) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    let new_username = model.new_user(req.body.username, req.body.password);
+    if (new_username != null) {
+      req.session.name = req.body.username;
+      res.redirect("/");
+    } else{
+      res.render("signup", {errors : {msg : "Nom d'utilisateur déjà pris"}});
+    }
+  }else {
+    res.render("signup", {errors : errors.array()});
+  }
+});
+
 app.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/");
