@@ -59,6 +59,10 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+app.get("/createChallenge", (req, res) => {
+  res.render("createChallenge");
+});
+
 app.post("/login", (req, res) => {
   let username = model.login(req.body.username, req.body.password);
   if (username == null) {
