@@ -1,30 +1,24 @@
 {{> header}}
 
-<form class="container overflow-hidden justify-content-center" action="/login" method="post">
+<h2>
+  Prêt à changer le monde ? Proposez un défi qui le rendra meilleur !
+</h2>
+
+<form class="container overflow-hidden justify-content-center" action="/createChallenge" method="post">
   <div class="row mt-3" >
-  <h1 class = "col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center h3 mb-3 fw-normal">
-  Se connecter sur ARBRE
-  </h1>
-  </div>
-  <div class="row mt-3" >
-    <div
-      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
-    >
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating">
       <input
         type="text"
         class="form-control"
-        id="floatingInput"
+        id="title"
         placeholder="votreNomUtilisateur"
-        name="username"
-        required
-      />
-      <label for="floatingInput">Nom d'utilisateur</label>
+        name="title"
+        required/>
+      <label for="title">Titre</label>
     </div>
   </div>
   <div class="row mt-3" >
-    <div
-      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
-    >
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating">
       <input
         type="password"
         class="form-control"
