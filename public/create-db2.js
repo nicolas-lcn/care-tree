@@ -52,3 +52,8 @@ db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, sta
            + "(?, ?, ?, ?, ?, ?, ?)").run('No meat !', 'Ne pas manger de viande pendant toute une semaine.', 15, 1, open, username4, expireDate);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
            + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("Donner 20€ à l'association de votre choix", 'Tout est dit dans le titre :)', 15, 1, open, username1, expireDate);
+
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', 0, 0, open, username1, Date.now() - 1000);
+db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', 0, 0, closed, username1, expireDate);

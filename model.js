@@ -19,17 +19,20 @@ exports.getChallenges = page => {
   const num_per_page = 4;
   page = parseInt(page || 1);
 
-  var num_found = db.prepare("SELECT count(*) FROM challenge").get()[
-    "count(*)"
-  ];
+  var num_found = db.prepare("SELECT count(*) FROM challenge " +
+            "JOIN state ON challenge.state = state.id " +
+            "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
+  
   var results = db
     .prepare(
-      "SELECT id, title, description, nbUpvotes, state, author " +
+      "SELECT challenge.id, title, description, nbUpvotes, state.name, author " +
         "FROM challenge " +
-        "WHERE expireDate " +
+        "JOIN state ON challenge.state = state.id " +
+        "WHERE expireDate > ? " +
+        "AND state.name = ? " +
         "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
     )
-    .all(num_per_page, (page - 1) * num_per_page);
+    .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
 
   return {
     results: results,
