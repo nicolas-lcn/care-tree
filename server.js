@@ -31,11 +31,13 @@ app.engine("html", mustache());
 app.set("view engine", "html");
 app.set("views", __dirname + "/views");
 
+
+
 function is_authenticated(req, res, next) {
-  if (req.session.name != null) {
+  if (req.session.name) {
     return next();
   }
-  res.status(401).send("Authentication required");
+  res.render("login");
 }
 
 /**** Routes pour voir les pages du site ****/
@@ -106,18 +108,7 @@ app.post("/signup",
 });
 
 app.post("/createChallenge", 
-         //body("email").isEmail(),
-         body('title')
-    .isLength({ min: 8 })
-    .withMessage('Le mot de passe doit faire au moins 8 caractères')
-    .matches(/\d/)
-    .withMessage('Le mot de passe doit contenir au moins 1 chiffre'),
-         body('passwordConfirmation').custom((value, { req }) => {
-    if (value !== req.body.password) {
-      throw new Error('Les mots de passe de correspondent pas.');
-    }
-    return true;
-  }),
+         is_authenticated(),
          (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
