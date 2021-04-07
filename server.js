@@ -116,7 +116,7 @@ app.post("/signup",
 app.post("/edit_profile", 
          //body("email").isEmail(),
          body("oldPassword").custom((value, { req }) => {
-    if (model.login(req.body.username, value) == null) {
+    if (model.login(req.session.name, value) == null) {
       throw new Error('Mot de passe erroné');
     }
     return true;
@@ -135,7 +135,7 @@ app.post("/edit_profile",
          (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    let new_username = model.edit_user_infos(req.session.name, req.body.username, req.body.password);
+    let new_username = model.edit_user_infos(req.body.newPassword);
     if (new_username != null) {
       req.session.name = req.body.username;
       res.render("profile");

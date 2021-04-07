@@ -8,12 +8,12 @@ function crypt_password(password) {
   return saved_hash;
 }
 
+db.prepare('DROP TABLE IF EXISTS acceptedchallenges').run();
+db.prepare('DROP TABLE IF EXISTS terminatedchallenges').run();
 db.prepare('DROP TABLE IF EXISTS challenge').run();
 db.prepare('DROP TABLE IF EXISTS category').run();
 db.prepare('DROP TABLE IF EXISTS state').run();
 db.prepare('DROP TABLE IF EXISTS user').run();
-db.prepare('DROP TABLE IF EXISTS acceptedchallenges').run();
-db.prepare('DROP TABLE IF EXISTS terminatedchallenges').run();
 
 db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profilePic TEXT, isAdmin INTEGER)').run();
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
@@ -25,7 +25,7 @@ db.prepare('CREATE TABLE terminatedchallenges (challengeid INTEGER, username TEX
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
 
 let username1 = "SuperMarmotton";
-let username2 = "PachydermeDéclicat";
+let username2 = "PachydermeDélicat";
 let username3 = "PapillonCourageux";
 let username4 = "PieuvreDumbo";
 

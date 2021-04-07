@@ -79,6 +79,7 @@ exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
     .get(username);
   
+  if (!select.password) return null;
   return (compare_password(password, select.password) ? select.username: null);
 };
 
@@ -107,12 +108,11 @@ exports.createChallenge = (username, title, description) => {
 }
 
 
-exports.edit_user_infos = (old_username, username, password) => {
+exports.edit_user_infos = (username, password) => {
   let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
   if(verify) return null;
-  let update = db.prepare("UPDATE user SET username = ?, password = ? WHERE username = ?");
+  let update = db.prepare("UPDATE user SET password = ? WHERE username = ?");
   let cryptedPassword = crypt_password(password);
-  update.run(username, cryptedPassword, old_username);
+  update.run(cryptedPassword, username);
   return (update.changes!=0)? username : null;
 };
-}
