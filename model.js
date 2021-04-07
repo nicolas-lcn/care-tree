@@ -57,3 +57,7 @@ exports.new_user = (username, password) => {
   insert.run(username, cryptedPassword);
   return (insert.changes!=0)? username : null;
 };
+
+exports.createChallenge = (username, title, description) => {
+  
+}

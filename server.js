@@ -61,7 +61,8 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-app.get("/createChallenge", (req, res) => {
+app.get("/createChallenge", 
+         is_authenticated,(req, res) => {
   res.render("createChallenge");
 });
 
@@ -107,11 +108,8 @@ app.post("/signup",
   }
 });
 
-app.post("/createChallenge", 
-         is_authenticated(),
-         (req, res) => {
-  const errors = validationResult(req);
-  if (errors.isEmpty()) {
+app.post("/createChallenge", (req, res) => {
+  model.createChallenge(req.session.name, req.body.title, req.body.description)
     let new_username = model.new_user(req.body.username, req.body.password);
     if (new_username != null) {
       req.session.name = req.body.username;
@@ -119,9 +117,6 @@ app.post("/createChallenge",
     } else{
       res.render("signup", {errors : {msg : "Nom d'utilisateur déjà pris"}});
     }
-  }else {
-    res.render("signup", {errors : errors.array()});
-  }
 });
 
 app.post("/logout", (req, res) => {
