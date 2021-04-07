@@ -113,6 +113,40 @@ app.post("/signup",
   }
 });
 
+app.post("/edit_profile", 
+         //body("email").isEmail(),
+         body("oldPassword").custom((value, { req }) => {
+    if (model.login(req.body.username, value) == null) {
+      throw new Error('Mot de passe erroné');
+    }
+    return true;
+  }),
+         body('newPassword')
+         .isLength({ min: 8 })
+    .withMessage('Le mot de passe doit faire au moins 8 caractères')
+    .matches(/\d/)
+    .withMessage('Le mot de passe doit contenir au moins 1 chiffre'),
+         body('passwordConfirmation').custom((value, { req }) => {
+    if (value !== req.body.newPassword) {
+      throw new Error('Les mots de passe de correspondent pas.');
+    }
+    return true;
+  }),
+         (req, res) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    let new_username = model.edit_user_infos(req.session.name, req.body.username, req.body.password);
+    if (new_username != null) {
+      req.session.name = req.body.username;
+      res.render("profile");
+    } else{
+      res.render("profile", {errors : {msg : "Nom d'utilisateur déjà pris"}});
+    }
+  }else {
+    res.render("profile", {errors : errors.array()});
+  }
+});
+
 app.post("/createChallenge", (req, res) => {
   model.createChallenge(req.session.name, req.body.title, req.body.description)
   res.render("createChallenge", {success : {msg: "Votre défi a été créé !"}})

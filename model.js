@@ -51,20 +51,17 @@ exports.getAcceptedChallenges = (page, username) => {
   page = parseInt(page || 1);
 
   var num_found = db.prepare("SELECT count(*) FROM acceptedchallenges " +
-            "JOIN challenge ON acceptedchallenges.challengeid = challenge.id " +
-            "JOIN user ON acceptedchallenges.userid = user.id " +
-            "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
+            "JOIN user ON acceptedchallenges.username = user.username ").get()["count(*)"];
   
   var results = db
     .prepare(
-      "SELECT challenge.id, title, description, nbUpvotes, state.name, author " +
+      "SELECT challenge.id, title, description, nbUpvotes, author " +
         "FROM challenge " +
-        "JOIN state ON challenge.state = state.id " +
-        "WHERE expireDate > ? " +
-        "AND state.name = ? " +
+        "JOIN acceptedchallenges ON challenge.id = acceptedchallenges.challengeid " +
+        "WHERE username == ? " +
         "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
     )
-    .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+    .all(username, num_per_page, (page - 1) * num_per_page);
 
   return {
     results: results,
@@ -107,4 +104,15 @@ exports.createChallenge = (username, title, description) => {
   db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
     + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, description, 0, 0, open, username, Date.now() + 24 * 60 * 60 * 1000);
 
+}
+
+
+exports.edit_user_infos = (old_username, username, password) => {
+  let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
+  if(verify) return null;
+  let update = db.prepare("UPDATE user SET username = ?, password = ? WHERE username = ?");
+  let cryptedPassword = crypt_password(password);
+  update.run(username, cryptedPassword, old_username);
+  return (update.changes!=0)? username : null;
+};
 }

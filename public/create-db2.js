@@ -32,10 +32,10 @@ let username4 = "PieuvreDumbo";
 let password = crypt_password('1234');
 
 db.prepare('INSERT INTO user VALUES (?, ?, \'\', 1)').run('admin', password);
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username1, password).lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username2, password).lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username3, password).lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username4, password).lastInsertRowid;
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username1, password);
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username2, password);
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username3, password);
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username4, password);
 
 let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowid;
 let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowid;
@@ -44,6 +44,7 @@ let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().la
 
 expireDate = Date.now() + 24 * 60 * 60 * 1000 * 7;
 
+// INSERT CHALLENGE
 
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) VALUES "
            + "(?, ?, ?, ?, ?, ?, ?)").run('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, open, username1, expireDate);
@@ -60,3 +61,9 @@ db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, sta
            + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', 0, 0, open, username1, Date.now() - 1000);
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
            + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', 0, 0, closed, username1, expireDate);
+
+
+// INSERT ACCEPTED CHALLENGES 
+db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(1, username2)
+db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(3, username2)
+db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(4, username2)
