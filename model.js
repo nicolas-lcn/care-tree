@@ -63,5 +63,7 @@ exports.new_user = (username, password) => {
 };
 
 exports.createChallenge = (username, title, description) => {
-  
+  db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, description, 0, 0, open, username, Date.now() + 24 * 60 * 60);
+
 }

@@ -110,13 +110,7 @@ app.post("/signup",
 
 app.post("/createChallenge", (req, res) => {
   model.createChallenge(req.session.name, req.body.title, req.body.description)
-    let new_username = model.new_user(req.body.username, req.body.password);
-    if (new_username != null) {
-      req.session.name = req.body.username;
-      res.redirect("/");
-    } else{
-      res.render("signup", {errors : {msg : "Nom d'utilisateur déjà pris"}});
-    }
+  res.render("createChallenge", {success : {msg: "Votre défi a été créé !"}})
 });
 
 app.post("/logout", (req, res) => {
