@@ -63,21 +63,16 @@ exports.new_user = (username, password) => {
 };
 
 exports.createChallenge = (username, title, description) => {
-  let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN")
+  let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
   
   console.log(username)
   console.log(title)
   console.log(description)
-  //if (!description) description = "";
+  console.log(open)
+  if (!description) description = " ";
   console.log(description)
   
-  if (description) {
   db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
-    + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, description, 0, 0, open, username, Date.now() + 24 * 60 * 60);  
-  } else {
-    db.prepare("INSERT INTO challenge (title, nbUpvotes, nbReports, state, author, expireDate) "
-    + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, 0, 0, open, username, Date.now() + 24 * 60 * 60);  
-  }
-  
+    + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, description, 0, 0, open, username, Date.now() + 24 * 60 * 60 * 1000);
 
 }

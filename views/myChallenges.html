@@ -1,0 +1,59 @@
+{{> header}}
+ 
+<div class="px-5 mx-5 pt-5">
+    <a class="btn btn-outline-success mx-5" type="button" href="/createChallenge">
+      <i class="fas fa-plus"></i> <span class="ms-3">Défiez la communauté !</span>
+    </a>
+</div>
+
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 mx-5 px-3 pt-5 g-5">
+      {{#results}}
+        <div class="col mb-2">
+            <div class="card mb-0 h-100">
+              
+              <div class="d-flex align-items-start flex-column mb-3 h-100">
+                <div class="w-100 px-4">
+                  <p class="mx-2 mt-3" style="text-align: justify;">{{title}}</p>
+                  <hr/>
+                </div>
+                <div class="my-3 px-2">
+                  <p class="mx-3" style="text-align: justify">{{description}}</p>
+                </div>
+                
+                
+                <div class="mt-auto p-2 bd-highlight w-100">
+                  <p style="font-size: 0.8em;">  Suggéré par : <i>{{author}}</i></p>
+                  <div class="row justify-content-center">
+                  <div class="col-3 d-flex px-0 pt-2  justify-content-center">
+                    <a class="text-decoration-none" style="color: black;" href="/upvoteChallenge/{{id}}">
+                    <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
+                    {{nbUpvotes}}
+                    </a>
+                  </div>
+                    <a class = "col-6 px-0 d-flex justify-content-center text-decoration-none btn btn-outline-primary" href="/acceptChallenge/{{id}}">
+                        Je relève le défi !
+                    </a>
+                  <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
+                </div>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+      {{/results}}
+  </div>
+    <nav class="pt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item {{#prev_disabled}}disabled{{/prev_disabled}}">
+          <a class="page-link" href="/challenges?page={{prev_page}}"><i class="fas fa-chevron-left"></i></a>
+        </li>
+        <li class="page-item"><p class="page-link" href="#">{{page}}</p></li>
+        <li class="page-item {{#next_disabled}}disabled{{/next_disabled}}">
+          <a class="page-link" href="/challenges?page={{next_page}}"><i class="fas fa-chevron-right"></i></a>
+        </li>
+      </ul>
+    </nav>
+    
+    
+
+{{> footer}}

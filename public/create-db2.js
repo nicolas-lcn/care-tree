@@ -39,7 +39,7 @@ let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run(
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowid;
 
 
-expireDate = Date.now() + 24 * 60 * 60 * 7;
+expireDate = Date.now() + 24 * 60 * 60 * 1000 * 7;
 
 
 db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) VALUES "
