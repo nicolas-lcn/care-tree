@@ -1,11 +1,13 @@
 {{>header}}
-<form class="container overflow-hidden justify-content-center" action="/signup" method="post">
+<form class="container overflow-hidden justify-content-center" >
   <div class="row mt-3" >
   <h1 class = "col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center h3 mb-3 fw-normal">
   Hey, {{name}}
   </h1>
-  <p class="text-white mt-0 mb-5">Voilà votre profil. Soyez libres de le modifier à votre guise. Pour accéder à votre arbre, c'est par là</p>
   </div>
+  <div class = "row mt-3">
+     <p class="text-black col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center mb-3 fw-normal">Voilà votre profil. Soyez libres de le modifier à votre guise. </p>
+    </div>
   <div class="row mt-3" >
     <div
       class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
@@ -46,11 +48,26 @@
         type="password"
         class="form-control"
         id="floatingPassword"
-        placeholder="MotDePasse"
+        placeholder="ancienMotDePasse"
         name="password"
         required
       />
-      <label for="floatingPassword">Mot de passe</label>
+      <label for="floatingPassword">Ancien mot de passe</label>
+    </div>
+  </div>
+  <div class="row mt-3" >
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <input
+        type="password"
+        class="form-control"
+        id="floatingNewPassword"
+        placeholder="nouveauMotDePasse"
+        name="newPassword"
+        required
+      />
+      <label for="floatingNewPassword">Nouveau mot de passe</label>
     </div>
   </div>
   <div class="row mt-3" >
@@ -62,7 +79,7 @@
         class="form-control"
         id="floatingPasswordConfirmation"
         placeholder="MotDePasse"
-        name="passwordConfirmation"
+        name="newPasswordConfirmation"
         required
       />
       <label for="floatingPasswordConfirmation">Confirmer votre mot de passe</label>
