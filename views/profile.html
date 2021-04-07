@@ -1,41 +1,95 @@
 {{>header}}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6 uxa-form-group mt-5">
-
-      <h1 class="text-center mt-5 mb-2">First Name, Last Name</h1>
-      <!-- single sentence description -->
-      <p class="lead text-center">{{email-address}}</p>
-      <!-- /single sentence description -->
-
-      <div class="uxa-user-avatar">
-        <img src="https://s-media-cache-ak0.pinimg.com/564x/07/3d/4c/073d4c881442c782d2cefed3e7e814f2.jpg" alt="User avatar">
-      </div>
-      
-      
-      <form class="mt-5 mb-5">
-
-        <div class="form-group">
-          <label for="exampleInputEmail1">Your Email Address<span>*</span></label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share or spam your email address.</small>
-        </div>
-
-        <div class="form-group">
-          <label for="exampleInputName">First Name</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your First Name">
-        </div>
-
-        <div class="form-group">
-          <label for="exampleInputName">Last Name</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your First Name">
-        </div>
-        
-      </form>
-      
-      <button class="btn btn-success" (click)="save()"><i class="fa fa-save mr-2"></i> Update Account Details</button>
-
+<form class="container overflow-hidden justify-content-center" action="/signup" method="post">
+  <div class="row mt-3" >
+  <h1 class = "col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center h3 mb-3 fw-normal">
+  Hey, {{name}}
+  </h1>
+  <p class="text-white mt-0 mb-5">Voilà votre profil. Soyez libres de le modifier à votre guise. Pour accéder à votre arbre, c'est par là</p>
+  </div>
+  <div class="row mt-3" >
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <input
+        type="text"
+        class="form-control"
+        id="floatingUsername"
+        placeholder="votreNomUtilisateur"
+        name="username"
+        required
+      />
+      <label for="floatingUsername">Nom d'utilisateur</label>
     </div>
   </div>
-</div>
+  <!--
+  <div class="row mt-3" >
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <input
+        type="email"
+        class="form-control"
+        id="floatingEmail"
+        placeholder="Votremail"
+        name="email"
+        required
+      />
+      <label for="floatingEmail">E-mail</label>
+    </div>
+  </div>
+-->
+  <div class="row mt-3" >
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <input
+        type="password"
+        class="form-control"
+        id="floatingPassword"
+        placeholder="MotDePasse"
+        name="password"
+        required
+      />
+      <label for="floatingPassword">Mot de passe</label>
+    </div>
+  </div>
+  <div class="row mt-3" >
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <input
+        type="password"
+        class="form-control"
+        id="floatingPasswordConfirmation"
+        placeholder="MotDePasse"
+        name="passwordConfirmation"
+        required
+      />
+      <label for="floatingPasswordConfirmation">Confirmer votre mot de passe</label>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <button type="submit" class="btn btn-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+</svg>
+        Modifier
+      </button>
+    </div>
+  </div>
+</form>
+{{#errors}}
+<div class="row mt-3" >
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-danger"
+      role = "alert"
+    >
+    {{msg}}
+    </div>
+  </div>
+{{/errors}}
 {{>footer}}
