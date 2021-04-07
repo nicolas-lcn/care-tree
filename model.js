@@ -46,6 +46,38 @@ exports.getChallenges = page => {
   };
 };
 
+exports.getAcceptedChallenges = (page, username) => {
+  const num_per_page = 6;
+  page = parseInt(page || 1);
+
+  var num_found = db.prepare("SELECT count(*) FROM acceptedchallenges " +
+            "JOIN challenge ON acceptedchallenges.challengeid = challenge.id " +
+            "JOIN user ON acceptedchallenges.userid = user.id " +
+            "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
+  
+  var results = db
+    .prepare(
+      "SELECT challenge.id, title, description, nbUpvotes, state.name, author " +
+        "FROM challenge " +
+        "JOIN state ON challenge.state = state.id " +
+        "WHERE expireDate > ? " +
+        "AND state.name = ? " +
+        "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
+    )
+    .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+
+  return {
+    results: results,
+    num_found: num_found,
+    prev_page: page > 1 ? page - 1 : 1,
+    prev_disabled: page == 1,
+    next_page: page * num_per_page <= num_found ? page + 1 : page,
+    next_disabled: page * num_per_page > num_found,
+    page: page,
+    num_pages: parseInt(num_found / num_per_page) + 1
+  };
+};
+
 exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
     .get(username);

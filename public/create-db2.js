@@ -14,7 +14,7 @@ db.prepare('DROP TABLE IF EXISTS state').run();
 db.prepare('DROP TABLE IF EXISTS user').run();
 db.prepare('DROP TABLE IF EXISTS acceptedchallenges').run();
 
-db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profilePic TEXT, points INTEGER, isAdmin INTEGER)').run();
+db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profilePic TEXT, isAdmin INTEGER)').run();
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
 db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbUpvotes INTEGER, nbReports INTEGER, state INTEGER, author TEXT, expireDate INTEGER, '
           + 'FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (author) REFERENCES user(username))').run();
@@ -28,9 +28,9 @@ let username4 = "PieuvreDumbo";
 
 let password = crypt_password('1234');
 
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 1)').run('admin', password);
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 0)').run(username1, password).lastInsertRowid;
-db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 0)').run(username2, password).lastInsertRowid;
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 1)').run('admin', password);
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username1, password).lastInsertRowid;
+db.prepare('INSERT INTO user VALUES (?, ?, \'\', 00)').run(username2, password).lastInsertRowid;
 db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 0)').run(username3, password).lastInsertRowid;
 db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0, 0)').run(username4, password).lastInsertRowid;
 
