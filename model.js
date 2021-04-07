@@ -24,8 +24,9 @@ exports.getChallenges = page => {
   ];
   var results = db
     .prepare(
-      "SELECT challenge.id, title, description, nbUpvotes, state, author " +
+      "SELECT id, title, description, nbUpvotes, state, author " +
         "FROM challenge " +
+        "WHERE expireDate " +
         "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
     )
     .all(num_per_page, (page - 1) * num_per_page);
