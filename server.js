@@ -135,9 +135,8 @@ app.post("/edit_profile",
          (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    let new_username = model.edit_user_infos(req.body.newPassword);
-    if (new_username != null) {
-      req.session.name = req.body.username;
+    let edit = model.edit_user_infos(req.body.newPassword, req.session.name);
+    if (edit != null) {
       res.render("profile");
     } else{
       res.render("profile", {errors : {msg : "Nom d'utilisateur déjà pris"}});
