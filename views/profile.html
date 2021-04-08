@@ -52,7 +52,8 @@
     <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
       <div class="card h-100">
         <div class="card-body">
-          <div class="row gutters">
+          <form action = "edit_profile" method = "post">
+            <div class="row gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
               <h6 class="mt-3 mb-2 text-primary">Mot de Passe</h6>
             </div>
@@ -131,108 +132,12 @@
               </div>
             {{/errors}}
         </div>
+          </form>
+          
+          
         </div>
       </div>
-    </form>
-  <form class = "col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12" method = "post" action ="/edit_profile_pic" >
-                <div
-      class="mx-auto text-center form-group"
-    >
-      <select class="selectpicker form-control" name="avatar" title = "Changer la photo de profil">
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon1.png?v=1617871979407'></img> Chevalier"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon1.png?v=1617871979407"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon2.png?v=1617871999757'></img> Archère"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon2.png?v=1617871999757"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon3.png?v=1617872002014'></img> Voleur"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon3.png?v=1617872002014"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon4.png?v=1617872003351'></img> Guerrier"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon4.png?v=1617872003351"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon5.png?v=1617872004582'></img> Voleuse"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon5.png?v=1617872004582"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon6.png?v=1617872005713'></img> Archer"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon6.png?v=1617872005713"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon7.png?v=1617872006936'></img> Paladin"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon7.png?v=1617872006936"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon8.png?v=1617872009096'></img> Magicienne"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon8.png?v=1617872009096"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon9.png?v=1617872011096'></img> Assassin"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon9.png?v=1617872011096"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon15.png?v=1617872013848'></img> Arbre"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon15.png?v=1617872013848"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon10.png?v=1617872015607'></img> Barbare"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon10.png?v=1617872015607"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon24.png?v=1617872018121'></img> Vampire"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon24.png?v=1617872018121"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon33.png?v=1617872019706'></img> Guerrier Maléfique"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon33.png?v=1617872019706"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon39.png?v=1617872022058'></img> Génie"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon39.png?v=1617872022058"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon29.png?v=1617872023972'></img> Salamandre"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon29.png?v=1617872023972"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon21.png?v=1617872026467'></img> Dragon Squelette"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon21.png?v=1617872026467"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon41.png?v=1617872030356'></img> Méduse"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon41.png?v=1617872030356"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon28.png?v=1617872044381'></img> Gargouille"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon28.png?v=1617872044381"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon32.png?v=1617872046305'></img> Corbeau"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon32.png?v=1617872046305"
-        ></option>
-        <option
-          data-content="<img class = 'img-thumbnail' src='https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon42.png?v=1617872048941'></img> Dragon"
-          value="https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon42.png?v=1617872048941"
-        ></option>
-      </select>
-    </div>
-                <div
-      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 form-floating"
-    >
-      <button type="submit" class="btn btn-success">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-</svg>
-        Modifier
-      </button>
-    </div>
-              </form>
+ 
   </div>
 </div>
 {{>footer}}
