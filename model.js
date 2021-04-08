@@ -106,10 +106,10 @@ exports.createChallenge = (username, title, description) => {
 }
 
 
-exports.edit_user_infos = (username, password) => {
+exports.edit_user_infos = (username, password, profilePicURL) => {
   let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
   if( ! verify) return -1;
-  let update = db.prepare("UPDATE user SET password = ? WHERE username = ?");
+  let update = db.prepare("UPDATE user SET password = ?, profilePic = ? WHERE username = ?");
   let cryptedPassword = crypt_password(password);
   update.run(cryptedPassword, username);
   return (update.changes!=0)? 0 : -1;
