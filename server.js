@@ -20,6 +20,7 @@ function update_locals(req, res, next) {
     res.locals.authenticated = true;
     res.locals.name = req.session.name;
     let avatar = model.getProfilePicURL(req.session.name);
+    console.log(avatar);
     if(avatar != null) res.locals.avatar = avatar;
   }
   return next();
@@ -141,13 +142,21 @@ app.post("/edit_profile",
     if (edit != -1) {
       res.render("profile");
     } else{
-      console.log("error");
       res.render("profile", {errors : errors.array()});
     }
   }else {
     res.render("profile", {errors : errors.array()});
   }
 });
+
+app.post("/edit_profile_pic", (req, res) => {
+  let edit = model.edit_user_infos(req.session.name, req.body.avatar);
+    if (edit != -1) {
+      res.render("profile");
+    } else{
+      res.render("profile", {errors : {msg: "Il y a une erreur"}});
+    }
+})
 
 app.post("/createChallenge", (req, res) => {
   model.createChallenge(req.session.name, req.body.title, req.body.description)
