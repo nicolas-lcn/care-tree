@@ -150,7 +150,7 @@ app.post("/edit_profile",
 });
 
 app.post("/edit_profile_pic", (req, res) => {
-  let edit = model.edit_user_infos(req.session.name, req.body.avatar);
+  let edit = model.edit_profilePic(req.session.name, req.body.avatar);
     if (edit != -1) {
       res.render("profile");
     } else{

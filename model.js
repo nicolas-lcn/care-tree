@@ -123,5 +123,6 @@ exports.getProfilePicURL = (username) =>{
 exports.edit_profilePic = (username, profilePicURL) =>{
   let update = db.prepare("UPDATE user SET profilePic = ? WHERE username = ?");
   update.run(username,profilePicURL);
+  console.log(update.changes);
   return (update.changes!=0)? 0 : -1;
 };
