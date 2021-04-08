@@ -14,13 +14,6 @@ function crypt_password(password) {
   return saved_hash;
 }
 
-function getProfilePicURL(num) {
-  switch(num){
-    case 1:
-      
-  }
-}
-
 exports.getChallenges = page => {
   const num_per_page = 4;
   page = parseInt(page || 1);
@@ -89,12 +82,12 @@ exports.login = (username, password) => {
   return (compare_password(password, select.password) ? select.username: null);
 };
 
-exports.new_user = (username, password, profilePicNum) => {
+exports.new_user = (username, password, profilePicURL) => {
   let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
   if(verify) return null;
   let insert = db.prepare("INSERT INTO user (username, password, profilePic) VALUES (?,?,?)");
   let cryptedPassword = crypt_password(password);
-  insert.run(username, cryptedPassword, profilePic);
+  insert.run(username, cryptedPassword, profilePicURL);
   return (insert.changes!=0)? username : null;
 };
 
@@ -122,3 +115,8 @@ exports.edit_user_infos = (username, password) => {
   update.run(cryptedPassword, username);
   return (update.changes!=0)? 0 : -1;
 };
+
+exports.getProfilePicURL = (username) =>{
+  let select = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username);
+  return (select)? select.profilePic : null;
+}

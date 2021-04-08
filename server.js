@@ -19,6 +19,8 @@ function update_locals(req, res, next) {
   if (req.session.name) {
     res.locals.authenticated = true;
     res.locals.name = req.session.name;
+    let avatar = model.getProfilePicURL(req.session.name);
+    if(avatar != null) res.locals.avatar = avatar;
   }
   return next();
 }
@@ -101,8 +103,7 @@ app.post("/signup",
          (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    console.log(req.body.avatar);
-    let new_username = model.new_user(req.body.username, req.body.password);
+    let new_username = model.new_user(req.body.username, req.body.password, req.body.avatar);
     if (new_username != null) {
       req.session.name = req.body.username;
       res.redirect("/");
