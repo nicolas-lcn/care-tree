@@ -76,8 +76,8 @@ exports.getAcceptedChallenges = (page, username) => {
 
 exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
-    .get(username);
-  
+    .get([username]);
+  console.log(select);
   if (!select.password) return null;
   return (compare_password(password, select.password) ? select.username: null);
 };
