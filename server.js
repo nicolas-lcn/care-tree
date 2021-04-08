@@ -101,6 +101,7 @@ app.post("/signup",
          (req, res) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
+    console.log(req.body.avatar);
     let new_username = model.new_user(req.body.username, req.body.password);
     if (new_username != null) {
       req.session.name = req.body.username;
