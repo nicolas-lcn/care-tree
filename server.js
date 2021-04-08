@@ -20,7 +20,6 @@ function update_locals(req, res, next) {
     res.locals.authenticated = true;
     res.locals.name = req.session.name;
     let avatar = model.getProfilePicURL(req.session.name);
-    console.log(avatar);
     if(avatar != null) res.locals.avatar = avatar;
   }
   return next();
