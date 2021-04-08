@@ -139,7 +139,9 @@ app.post("/edit_profile",
   if (errors.isEmpty()) {
     let edit = model.edit_user_infos(req.session.name, req.body.newPassword);
     if (edit != -1) {
-      res.render("profile");
+      let avatar = model.getProfilePicURL(req.session.name);
+      if(avatar != null) res.render("profile", {avatar : avatar , success : {msg: "Informations modifiées !"}});
+      else res.render("profile", {success : {msg: "Informations modifiées !"}});
     } else{
       res.render("profile", {errors : errors.array()});
     }
@@ -151,7 +153,7 @@ app.post("/edit_profile",
 app.post("/edit_profile_pic", (req, res) => {
   let edit = model.edit_profilePic(req.session.name, req.body.avatar);
     if (edit != -1) {
-      res.render("profile", {avatar : req.body.avatar});
+      res.render("profile", {avatar : req.body.avatar, success : {msg: "Avatar modifié !"}});
     } else{
       res.render("profile", {errors : {msg: "Il y a une erreur"}});
     }

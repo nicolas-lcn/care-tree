@@ -1,6 +1,11 @@
 {{> header}}
+<div class="container">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
 <form
-  class="container overflow-hidden justify-content-center"
+  class="justify-content-center"
   action="/signup"
   method="post"
 >
@@ -11,21 +16,8 @@
       Créer un compte
     </h1>
   </div>
-  <div class="row mt-3">
-    <div
-      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
-    >
-      <input
-        type="text"
-        class="form-control"
-        id="floatingUsername"
-        placeholder="votreNomUtilisateur"
-        name="username"
-        required
-      />
-      <label for="floatingUsername">Nom d'utilisateur</label>
-    </div>
-    <div
+  <div class = "row mt-3">
+     <div
       class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-group"
     >
       <select class="selectpicker form-control" name="avatar">
@@ -112,6 +104,21 @@
       </select>
     </div>
   </div>
+  <div class="row mt-3">
+    <div
+      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating"
+    >
+      <input
+        type="text"
+        class="form-control"
+        id="floatingUsername"
+        placeholder="votreNomUtilisateur"
+        name="username"
+        required
+      />
+      <label for="floatingUsername">Nom d'utilisateur</label>
+    </div>
+  </div>
   <!--
   <div class="row mt-3" >
     <div
@@ -191,4 +198,9 @@
   </div>
 </div>
 {{/success}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {{> footer}}
