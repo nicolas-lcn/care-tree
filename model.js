@@ -118,4 +118,10 @@ exports.edit_user_infos = (username, password) => {
 exports.getProfilePicURL = (username) =>{
   let select = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username);
   return (select)? select.profilePic : null;
-}
+};
+
+exports.edit_profilePic = (username, profilePicURL) =>{
+  let update = db.prepare("UPDATE user SET profilePic = ? WHERE username = ?");
+  update.run(username,profilePicURL);
+  return (update.changes!=0)? 0 : -1;
+};
