@@ -49,9 +49,15 @@
             <a class="nav-link" href="#">Mon arbre</a>
           </li>
           {{#authenticated}}
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">{{name}}</a>
-          </li>
+           <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/profile">Editer le profil</a>
+          <a class="dropdown-item" href="/mychallenges">Mes défis</a>
+        </div>
+      </li>
           {{/authenticated}}
         </ul>
       </div>
