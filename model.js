@@ -76,18 +76,17 @@ exports.getAcceptedChallenges = (page, username) => {
 
 exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
-    .get([username]);
-  console.log(select);
-  if (!select.password) return null;
-  return (compare_password(password, select.password) ? select.username: null);
+    .get(username);
+  if (!select || !select.password) return null;
+  return (compare_password(password, select.password))? select.username: null;
 };
 
 exports.new_user = (username, password, profilePicURL) => {
   let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
   if(verify) return null;
-  let insert = db.prepare("INSERT INTO user (username, password, profilePic) VALUES (?,?,?)");
+  let insert = db.prepare("INSERT INTO user (username, password, profilePic, isAdmin) VALUES (?,?,?,?)");
   let cryptedPassword = crypt_password(password);
-  insert.run(username, cryptedPassword, profilePicURL);
+  insert.run(username, cryptedPassword, profilePicURL,0);
   return (insert.changes!=0)? username : null;
 };
 

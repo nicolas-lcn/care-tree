@@ -80,7 +80,7 @@ app.get("/profile", (req,res) => {
 app.post("/login", (req, res) => {
   let username = model.login(req.body.username, req.body.password);
   if (username == null) {
-    res.redirect("/login");
+    res.render("login", {errors : {msg : "Nom d'utilisateur ou mot de passe erroné"}});
   } else {
     req.session.name = req.body.username;
     res.redirect("/");
