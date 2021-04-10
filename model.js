@@ -14,7 +14,7 @@ function crypt_password(password) {
   return saved_hash;
 }
 
-exports.getChallenges = page => {
+exports.getChallenges = (page, username) => {
   const num_per_page = 4;
   page = parseInt(page || 1);
 
@@ -32,17 +32,22 @@ exports.getChallenges = page => {
         "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
     )
     .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  
+  if (username) {
+      var results = db.prepare(
+        "SELECT challenge.id, title, description, nbUpvotes, state.name, author " +
+          "FROM challenge " +
+          "JOIN state ON challenge.state = state.id " +
+          "JOIN user ON challenge.state = state.id " +
+          "JOIN userchallenge ON challenge.state = state.id " +
+          "WHERE expireDate > ? " +
+          "AND state.name = ? " +
+          "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
+      ).all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+    
+  }
 
-  var results = db
-    .prepare(
-      "SELECT challenge.id, title, description, nbUpvotes, state.name, author " +
-        "FROM challenge " +
-        "JOIN state ON challenge.state = state.id " +
-        "WHERE expireDate > ? " +
-        "AND state.name = ? " +
-        "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
-    )
-    .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+
   
   return {
     results: results,
