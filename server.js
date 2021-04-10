@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/challenges", (req, res) => {
-  let found = model.getChallenges(req.query.page), ;
+  let found = model.getChallenges(req.query.page, req.session.name);
   res.render("challenges", found);
 });
 

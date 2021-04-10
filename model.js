@@ -35,7 +35,7 @@ exports.getChallenges = (page, username) => {
   
   //if (username) {
       var results = db.prepare(
-        "SELECT challenge.id, title, description, COUNT(isLike) AS nbUpvotes, author " +
+        "SELECT challenge.id AS id, title, description, COUNT(isLiked) AS nbUpvotes, author " +
           "FROM challenge " +
           "JOIN state ON challenge.state = state.id " +
           "JOIN userchallenge ON challenge.id = userchallenge.challengeid " +
@@ -45,6 +45,11 @@ exports.getChallenges = (page, username) => {
           "GROUP BY challenge.id, title, description, state.name, author " +
           "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
       ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
+  
+  for (let result of results) {
+    console.log(result);
+    
+  }
     
   //}
 
