@@ -33,6 +33,17 @@ exports.getChallenges = page => {
     )
     .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
 
+  var results = db
+    .prepare(
+      "SELECT challenge.id, title, description, nbUpvotes, state.name, author " +
+        "FROM challenge " +
+        "JOIN state ON challenge.state = state.id " +
+        "WHERE expireDate > ? " +
+        "AND state.name = ? " +
+        "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
+    )
+    .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  
   return {
     results: results,
     num_found: num_found,
@@ -92,14 +103,7 @@ exports.new_user = (username, password, profilePicURL) => {
 
 exports.createChallenge = (username, title, description) => {
   let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
-  
-  console.log(username)
-  console.log(title)
-  console.log(description)
-  console.log(open)
   if (!description) description = " ";
-  console.log(description)
-  
   db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
     + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, description, 0, 0, open, username, Date.now() + 24 * 60 * 60 * 1000);
 

@@ -39,7 +39,7 @@ let accepted = db.prepare('INSERT INTO state (name) VALUES (\'ACCEPTED\')').run(
 let succeeded = db.prepare('INSERT INTO state (name) VALUES (\'SUCCEEDED\')').run().lastInsertRowid;
 
 
-expireDate = Date.now() + 24 * 60 * 60 * 1000 * 7;
+let expireDate = Date.now() + 24 * 60 * 60 * 1000 * 7;
 
 // INSERT CHALLENGE
 
