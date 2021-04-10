@@ -19,7 +19,7 @@ db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profile
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
 db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbUpvotes INTEGER, nbReports INTEGER, state INTEGER, author TEXT, expireDate INTEGER, '
           + 'FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (author) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE userchallenge (challengeid INTEGER, username TEXT, isLiked INTEGER, isReported INTEGER, isAccepted INTEGER, isSucceeded INEGER'
+db.prepare('CREATE TABLE userchallenge (challengeid INTEGER, username TEXT, isLiked INTEGER, isReported INTEGER, isAccepted INTEGER, isSucceeded INTEGER'
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
 
 let username1 = "SuperMarmotton";
