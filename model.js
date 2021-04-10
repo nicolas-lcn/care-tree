@@ -47,18 +47,12 @@ exports.getChallenges = (page, username) => {
       ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
   
   for (let result of results) {
-    console.log(result);
-    let user_relation = db.prepare(
-        "SELECT isLiked, " +
+    result.hasLiked = db.prepare(
+        "SELECT isLiked " +
           "FROM userchallenge " +
-          "JOIN state ON challenge.state = state.id " +
-          "JOIN userchallenge ON challenge.id = userchallenge.challengeid " +
-          "WHERE expireDate > ? " +
-          "AND state.name = ? " +
-          "AND author != ? " +
-          "GROUP BY challenge.id, title, description, state.name, author " +
-          "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
-      ).get(result.id);
+          "WHERE challengeid = ? " +
+          "AND username = ? "
+      ).get(result.id, username)["isLiked"];
   }
     
   //}
