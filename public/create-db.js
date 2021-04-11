@@ -105,3 +105,110 @@ db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, us
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username2, 0, 1, 0, 1);
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username3, 0, 0, 1, 0);
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username4, 0, 0, 0, 1);
+
+
+// Filler challenges
+let fill1 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill2 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill3 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill4 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill5 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill6 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill7 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill8 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill9 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill10 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill11 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill12 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill13 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill14 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill15 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill16 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill17 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill1, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill1, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill1, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill1, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill2, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill2, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill2, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill2, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill4, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill4, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill4, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill4, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill5, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill5, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill5, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill5, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username2, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username3, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(fill3, username4, 0, 0, 0, 0);
+
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username2, 0, 1, 0, 1);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username3, 0, 0, 1, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username4, 0, 0, 0, 1);
