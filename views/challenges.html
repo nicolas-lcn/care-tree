@@ -40,9 +40,20 @@
                     {{/hasLiked}}
                     
                   </div>
+                    {{#hasAccepted}}
+                    <div class = "col-6 px-0 d-flex justify-content-center mt-2">
+                      Défi accepté !
+                    </div>
+                    {{/hasAccepted}}
+                    {{^hasAccepted}}
                     <a class = "col-6 px-0 d-flex justify-content-center text-decoration-none btn btn-outline-primary" href="/acceptChallenge/{{id}}">
                         Je relève le défi !
                     </a>
+                    {{/hasAccepted}}
+                    {{#hasReported}}
+                    {{/hasReported}}
+                    {{^hasReported}}
+                    {{/hasReported}}
                   <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
                 </div>
                 </div>

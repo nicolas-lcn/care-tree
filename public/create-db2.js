@@ -82,7 +82,6 @@ db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username2)
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username3);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall2, username1);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall2, username4);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall3, username2);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall5, username3);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall8, username1);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall8, username3);

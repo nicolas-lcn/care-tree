@@ -77,9 +77,10 @@ exports.getChallenges = (page, username) => {
             "WHERE challengeid = ? " +
             "AND username = ? " +
             "UNION " +
-            "SELECT * FROM succeededchallenges" +
-            "WHERE"
-        ).get(result.id, username);
+            "SELECT * FROM succeededchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? "
+        ).get(result.id, username, result.id, username);
       result.hasReported = db.prepare(
           "SELECT * " +
             "FROM reportedchallenges " +
