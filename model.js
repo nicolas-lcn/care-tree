@@ -23,17 +23,19 @@ exports.getChallenges = (page, username) => {
             "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
 
   let results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author " +
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
       "FROM challenge " +
       "JOIN state ON challenge.state = state.id " +
       "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "GROUP BY challenge.id, title, description, author " +
       "UNION " +
-      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
+      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author, profilePic " +
       "FROM challenge " +
       "JOIN state ON challenge.state = state.id " +
+      "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "AND challenge.id NOT IN " +
