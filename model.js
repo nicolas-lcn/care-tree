@@ -15,7 +15,7 @@ function crypt_password(password) {
 }
 
 exports.getChallenges = (page, username) => {
-  const num_per_page = 4;
+  const num_per_page = 9;
   page = parseInt(page || 1);
 
   var num_found = db.prepare("SELECT count(*) FROM challenge " +
