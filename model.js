@@ -186,6 +186,65 @@ exports.getSucceededChallenges = (page, username) => {
   };
 };
 
+exports.getCreatedChallenges = (page, username) => {
+  const num_per_page = 9;
+  page = parseInt(page || 1);
+
+  let num_found = db.prepare("SELECT count(*) FROM challenge " +
+                            "WHERE author = ?").get(username)["count(*)"];
+  
+ let results = db.prepare(
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author " +
+      "FROM challenge " +
+      "JOIN state ON challenge.state = state.id " +
+      "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "AND author = ? " +
+      "GROUP BY challenge.id, title, description, author " +
+      "UNION " +
+      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
+      "FROM challenge " +
+      "JOIN state ON challenge.state = state.id " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "AND challenge.id NOT IN " +
+      "(SELECT challengeid FROM likedchallenges) " +
+      "AND author = ? " +
+      "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
+  ).all(Date.now(), "OPEN", username, username, Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+
+  for (let result of results) {
+      result.hasLiked = db.prepare(
+          "SELECT * " +
+            "FROM likedchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? "
+        ).get(result.id, username);
+      result.hasAccepted = db.prepare(
+          "SELECT * " +
+            "FROM acceptedchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? " +
+            "UNION " +
+            "SELECT * FROM succeededchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? "
+        ).get(result.id, username, result.id, username);
+    }
+  
+  return {
+    createdchallenges: results,
+    num_found: num_found,
+    prev_page: page > 1 ? page - 1 : 1,
+    prev_disabled: page == 1,
+    next_page: page * num_per_page <= num_found ? page + 1 : page,
+    next_disabled: page * num_per_page > num_found,
+    page: page,
+    num_pages: parseInt(num_found / num_per_page) + 1
+  };
+};
+
 exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
     .get(username);
