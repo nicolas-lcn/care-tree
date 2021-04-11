@@ -90,7 +90,6 @@ db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall8, username4)
 // Succeed Challenges
 db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall1, username1);
 db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall2, username1);
-db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall1, username2);
 db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall3, username3);
 db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall4, username3);
 db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall1, username4);
