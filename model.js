@@ -103,7 +103,7 @@ exports.getChallenges = (page, username) => {
 };
 
 exports.getAcceptedChallenges = (page, username) => {
-  const num_per_page = 6;
+  const num_per_page = 4;
   page = parseInt(page || 1);
 
   let num_found = db.prepare("SELECT count(*) FROM acceptedchallenges " +

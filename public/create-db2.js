@@ -78,7 +78,6 @@ let chall9 = db.prepare("INSERT INTO challenge (title, description, state, autho
 
 // Accept Challenges
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username2);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username3);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall2, username1);
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall2, username4);
