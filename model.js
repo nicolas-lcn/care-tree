@@ -106,18 +106,27 @@ exports.getAcceptedChallenges = (page, username) => {
   const num_per_page = 6;
   page = parseInt(page || 1);
 
-  var num_found = db.prepare("SELECT count(*) FROM userchallenge" +
+  let num_found = db.prepare("SELECT count(*) FROM acceptedchallenges" +
                             "WHERE username = ?").get(username)["count(*)"];
   
-  var results = db
-    .prepare(
-      "SELECT challenge.id, title, description, nbUpvotes, author " +
-        "FROM challenge " +
-        "JOIN acceptedchallenges ON challenge.id = acceptedchallenges.challengeid " +
-        "WHERE username == ? " +
-        "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
-    )
-    .all(username, num_per_page, (page - 1) * num_per_page);
+ let results = db.prepare(
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author " +
+      "FROM challenge " +
+      "JOIN state ON challenge.state = state.id " +
+      "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "GROUP BY challenge.id, title, description, author " +
+      "UNION " +
+      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
+      "FROM challenge " +
+      "JOIN state ON challenge.state = state.id " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "AND challenge.id NOT IN " +
+      "(SELECT challengeid FROM likedchallenges) " +
+      "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
+  ).all(Date.now(), "OPEN", Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
 
   return {
     results: results,
