@@ -134,8 +134,17 @@ exports.getAcceptedChallenges = (page, username) => {
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
   ).all(Date.now(), "OPEN", username, username, Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
 
+  for (let result of results) {
+      result.hasLiked = db.prepare(
+          "SELECT * " +
+            "FROM likedchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? "
+        ).get(result.id, username);
+    }
+  
   return {
-    results: results,
+    acceptedchallenges: results,
     num_found: num_found,
     prev_page: page > 1 ? page - 1 : 1,
     prev_disabled: page == 1,
