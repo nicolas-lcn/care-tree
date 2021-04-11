@@ -1,13 +1,13 @@
 {{> header}}
  
 <div class="px-5 mx-5 pt-5">
-    <a class="btn btn-outline-success mx-5" type="button" href="/createChallenge">
-      <i class="fas fa-plus"></i> <span class="ms-3">Défiez la communauté !</span>
-    </a>
+  <h2>
+     Mes défis en cours
+  </h2>
 </div>
 
   <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 mx-5 px-3 pt-5 g-5">
-      {{#results}}
+      {{#succeededchallenges}}
         <div class="col mb-2">
             <div class="card mb-0 h-100">
               
@@ -25,7 +25,6 @@
                   <p style="font-size: 0.8em;">  Suggéré par : <i>{{author}}</i></p>
                   <div class="row justify-content-center">
                   <div class="col-3 d-flex px-0 pt-2  justify-content-center">
-                    
                     {{#hasLiked}}
                       <a class="text-decoration-none" style="color: black;" href="/cancelUpvoteChallenge/{{id}}">
                         <i class="fas fa-thumbs-up fa-lg" style="color: black;"></i>
@@ -38,43 +37,27 @@
                       {{nbUpvotes}}
                       </a>
                     {{/hasLiked}}
-                    
                   </div>
-                    {{#hasAccepted}}
-                    <div class = "col-6 px-0 d-flex justify-content-center mt-2">
-                      Défi accepté !
-                    </div>
-                    {{/hasAccepted}}
-                    {{^hasAccepted}}
-                    <a class = "col-6 px-0 d-flex justify-content-center text-decoration-none btn btn-outline-primary" href="/acceptChallenge/{{id}}">
-                        Je relève le défi !
+                    <a class = "col-6 px-0 d-flex justify-content-center text-decoration-none btn btn-outline-success" href="/delChallenge/{{id}}">
+                        Supprimer
                     </a>
-                    {{/hasAccepted}}
-                    {{#hasReported}}
-                      <div class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;">
-                        <i>Signalé</i>
-                    </div>
-                    {{/hasReported}}
-                    {{^hasReported}}
-                      <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
-                    {{/hasReported}}
-                  </div>
+                  <div class="col-3" ></div>
+                </div>
                 </div>
               </div>
               
             </div>
         </div>
-      {{/results}}
+      {{/succeededchallenges}}
+      
   </div>
-
-  {{^results}}
+  {{^succeededchallenges}}
   <div class="px-5 mx-5 pt-5">
     <h6 class = "px-5 mx-5">
        Aucun défi pour le moment !
     </h6>
   </div>
-  {{/results}}  
-
+  {{/succeededchallenges}}
     <nav class="pt-4">
       <ul class="pagination justify-content-center">
         <li class="page-item {{#prev_disabled}}disabled{{/prev_disabled}}">
@@ -86,7 +69,5 @@
         </li>
       </ul>
     </nav>
-    
-    
 
 {{> footer}}
