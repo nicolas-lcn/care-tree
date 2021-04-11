@@ -109,6 +109,15 @@ exports.new_user = (username, password, profilePicURL) => {
   let insert = db.prepare("INSERT INTO user (username, password, profilePic, isAdmin) VALUES (?,?,?,?)");
   let cryptedPassword = crypt_password(password);
   insert.run(username, cryptedPassword, profilePicURL,0);
+  
+  if (insert.changes != 0) {
+    let challenges = db.prepare("SELECT id FROM challenge").all();
+    
+    for (let challenge of challenges) {
+      db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(challenge.id, username, 0, 0, 0, 0);
+    }
+  }
+  
   return (insert.changes!=0)? username : null;
 };
 
@@ -121,7 +130,6 @@ exports.createChallenge = (username, title, description) => {
   let users = db.prepare("SELECT username FROM user").all();
   
   for (let user of users) {
-    console.log(user)
     db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(challengeid, user.username, 0, 0, 0, 0);
   }
 
