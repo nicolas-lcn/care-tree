@@ -51,11 +51,14 @@
                     </a>
                     {{/hasAccepted}}
                     {{#hasReported}}
+                      <div class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;">
+                        <i>Signalé</i>
+                    </div>
                     {{/hasReported}}
                     {{^hasReported}}
+                      <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
                     {{/hasReported}}
-                  <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
-                </div>
+                  </div>
                 </div>
               </div>
               
