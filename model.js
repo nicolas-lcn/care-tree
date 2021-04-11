@@ -44,6 +44,17 @@ exports.getChallenges = (page, username) => {
       "GROUP BY challenge.id, title, description, state.name, author " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
   ).all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  
+  /*
+  for (let result of results) {
+      result.nbUpvotes = db.prepare(
+          "SELECT COUNT(isLiked)" +
+            "FROM userchallenge " +
+            "WHERE challengeid = ? " +
+            "WHERE isLiked = 1 "
+        ).get(result.id, username);
+    }
+  */
 
   if (username) {
     for (let result of results) {
@@ -54,8 +65,6 @@ exports.getChallenges = (page, username) => {
             "AND username = ? "
         ).get(result.id, username)["isLiked"];
     }
-  } else {
-    
   }
 
 

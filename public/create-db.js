@@ -100,3 +100,8 @@ db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall7, us
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall7, username2, 1, 1, 0, 0);
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall7, username3, 1, 0, 1, 0);
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall7, username4, 1, 0, 0, 1);
+
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username1, 0, 0, 0, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username2, 0, 1, 0, 1);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username3, 0, 0, 1, 0);
+db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall8, username4, 0, 0, 0, 1);
