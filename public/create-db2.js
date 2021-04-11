@@ -9,19 +9,25 @@ function crypt_password(password) {
 }
 
 db.prepare('DROP TABLE IF EXISTS acceptedchallenges').run();
-db.prepare('DROP TABLE IF EXISTS terminatedchallenges').run();
+db.prepare('DROP TABLE IF EXISTS succeededchallenges').run();
+db.prepare('DROP TABLE IF EXISTS likedchallenges').run();
+db.prepare('DROP TABLE IF EXISTS reportedchallenges').run();
+db.prepare('DROP TABLE IF EXISTS userchallenge').run();
 db.prepare('DROP TABLE IF EXISTS challenge').run();
-db.prepare('DROP TABLE IF EXISTS category').run();
 db.prepare('DROP TABLE IF EXISTS state').run();
 db.prepare('DROP TABLE IF EXISTS user').run();
 
 db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profilePic TEXT, isAdmin INTEGER)').run();
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
-db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbUpvotes INTEGER, nbReports INTEGER, state INTEGER, author TEXT, expireDate INTEGER, '
+db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, state INTEGER, author TEXT, expireDate INTEGER, '
           + 'FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (author) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT, '
+db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT '
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE terminatedchallenges (challengeid INTEGER, username TEXT, '
+db.prepare('CREATE TABLE succeededchallenges (challengeid INTEGER, username TEXT '
+          + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
+db.prepare('CREATE TABLE likedchallenges (challengeid INTEGER, username TEXT '
+          + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
+db.prepare('CREATE TABLE reportedchallenges (challengeid INTEGER, username TEXT '
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
 
 let username1 = "SuperMarmotton";
@@ -38,32 +44,82 @@ db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username3, password);
 db.prepare('INSERT INTO user VALUES (?, ?, \'\', 0)').run(username4, password);
 
 let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowid;
-let reported = db.prepare('INSERT INTO state (name) VALUES (\'REPORTED\')').run().lastInsertRowid;
+let suspended = db.prepare('INSERT INTO state (name) VALUES (\'SUSPENDED\')').run().lastInsertRowid;
 let closed = db.prepare('INSERT INTO state (name) VALUES (\'CLOSED\')').run().lastInsertRowid;
 
 
-expireDate = Date.now() + 24 * 60 * 60 * 1000 * 7;
+
+let expireDate = Date.now() + 24 * 60 * 60 * 1000 * 7; // 7 days
 
 // INSERT CHALLENGE
 
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) VALUES "
-           + "(?, ?, ?, ?, ?, ?, ?)").run('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', 5, 0, open, username1, expireDate);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) VALUES "
-           + "(?, ?, ?, ?, ?, ?, ?)").run('Donner son sang', 'Donner son sang permet de sauver 3 vies !', 10, 0, open, username2, expireDate);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) VALUES "
-           + "(?, ?, ?, ?, ?, ?, ?)").run('Complimenter un inconnu', '', 3, 0, open, username3, expireDate);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) VALUES "
-           + "(?, ?, ?, ?, ?, ?, ?)").run('No meat !', 'Ne pas manger de viande pendant toute une semaine.', 15, 1, open, username4, expireDate);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("Donner 20€ à l'association de votre choix", 'Tout est dit dans le titre :)', 15, 1, open, username1, expireDate);
+let chall1 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) VALUES "
+           + "(?, ?, ?, ?, ?)").run('Se débarrasser de ses vieux vêtements', 'Donnez-les ou revendez-les !', open, username1, expireDate).lastInsertRowid;
+let chall2 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) VALUES "
+           + "(?, ?, ?, ?, ?)").run('Donner son sang', 'Donner son sang permet de sauver 3 vies !', open, username2, expireDate).lastInsertRowid;
+let chall3 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) VALUES "
+           + "(?, ?, ?, ?, ?)").run('Complimenter un inconnu', '', open, username3, expireDate).lastInsertRowid;
+let chall4 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) VALUES "
+           + "(?, ?, ?, ?, ?)").run('No meat !', 'Ne pas manger de viande pendant toute une semaine.', open, username4, expireDate).lastInsertRowid;
+let chall5 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Donner 20€ à l'association de votre choix", 'Tout est dit dans le titre :)', open, username1, expireDate).lastInsertRowid;
 
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', 0, 0, open, username1, Date.now() - 1000);
-db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', 0, 0, closed, username1, expireDate);
+let chall6 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', open, username1, Date.now() - 1000).lastInsertRowid;
+let chall7 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', closed, username1, expireDate).lastInsertRowid;
+
+let chall8 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Supprimez vos mails !", "supprimer 30 messages permet d'économiser l'équivalent de la consommation d'une ampoule pendant une journée !", open, username3, expireDate).lastInsertRowid;
 
 
-// INSERT ACCEPTED CHALLENGES 
-db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(1, username2)
-db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(3, username2)
-db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(4, username2)
+// Accept Challenges
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+
+// Succeed Challenges
+
+// Like Challenges
+
+// Report Challenges
+
+
+// Filler challenges
+let fill1 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill2 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill3 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill4 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill5 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill6 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill7 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill8 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill9 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill10 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill11 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill12 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill13 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill14 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill15 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill16 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill17 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
