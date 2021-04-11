@@ -53,7 +53,7 @@ app.get("/challenges", (req, res) => {
 
 app.get("/myChallenges", (req, res) => {
   let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
-  res.render("challenges", acceptedChallenges);
+  res.render("myChallenges", acceptedChallenges);
 });
 
 //////////////////////////////////////////////////////////////////////////////////
