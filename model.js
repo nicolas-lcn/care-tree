@@ -52,14 +52,37 @@ exports.getChallenges = (page, username) => {
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "GROUP BY challenge.id, title, description, author " +
+      "UNION " +
+      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
+      "FROM challenge " +
+      "JOIN state ON challenge.state = state.id " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "AND challenge.id NOT IN " +
+      "(SELECT challengeid FROM likedchallenges) " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  ).all(Date.now(), "OPEN", Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
   
   if (username) {
     for (let result of results) {
       result.hasLiked = db.prepare(
           "SELECT * " +
             "FROM likedchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? "
+        ).get(result.id, username);
+      result.hasAccepted = db.prepare(
+          "SELECT * " +
+            "FROM acceptedchallenges " +
+            "WHERE challengeid = ? " +
+            "AND username = ? " +
+            "UNION " +
+            "SELECT * FROM succeededchallenges" +
+            "WHERE"
+        ).get(result.id, username);
+      result.hasReported = db.prepare(
+          "SELECT * " +
+            "FROM reportedchallenges " +
             "WHERE challengeid = ? " +
             "AND username = ? "
         ).get(result.id, username);
