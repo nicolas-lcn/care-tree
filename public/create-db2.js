@@ -21,13 +21,13 @@ db.prepare('CREATE TABLE user (username TEXT PRIMARY KEY, password TEXT, profile
 db.prepare('CREATE TABLE state (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)').run();
 db.prepare('CREATE TABLE challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, state INTEGER, author TEXT, expireDate INTEGER, '
           + 'FOREIGN KEY (state) REFERENCES state(id), FOREIGN KEY (author) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT '
+db.prepare('CREATE TABLE acceptedchallenges (challengeid INTEGER, username TEXT, '
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE succeededchallenges (challengeid INTEGER, username TEXT '
+db.prepare('CREATE TABLE succeededchallenges (challengeid INTEGER, username TEXT, '
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE likedchallenges (challengeid INTEGER, username TEXT '
+db.prepare('CREATE TABLE likedchallenges (challengeid INTEGER, username TEXT, '
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
-db.prepare('CREATE TABLE reportedchallenges (challengeid INTEGER, username TEXT '
+db.prepare('CREATE TABLE reportedchallenges (challengeid INTEGER, username TEXT, '
           + 'PRIMARY KEY(challengeid, username), FOREIGN KEY (challengeid) REFERENCES challenge(id), FOREIGN KEY (username) REFERENCES user(username))').run();
 
 let username1 = "SuperMarmotton";
@@ -72,20 +72,59 @@ let chall7 = db.prepare("INSERT INTO challenge (title, description, state, autho
 let chall8 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
            + "VALUES (?, ?, ?, ?, ?)").run("Supprimez vos mails !", "supprimer 30 messages permet d'économiser l'équivalent de la consommation d'une ampoule pendant une journée !", open, username3, expireDate).lastInsertRowid;
 
+let chall9 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Contenu diffamatoire !", "Signalez-le et ce défi sera suspendu !", open, username4, expireDate).lastInsertRowid;
+
 
 // Accept Challenges
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
-db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username2);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username3);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall2, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall2, username4);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall3, username2);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall5, username3);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall8, username1);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall8, username3);
+db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall8, username4);
 
 // Succeed Challenges
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall2, username1);
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall1, username2);
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall3, username3);
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall4, username3);
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall1, username4);
+db.prepare("INSERT INTO succeededchallenges VALUES(?, ?)").run(chall8, username2);
 
 // Like Challenges
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username1);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username2);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username3);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username4);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall8, username1);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall8, username2);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall8, username3);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall8, username4);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall2, username1);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall2, username2);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall3, username1);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall3, username3);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall3, username4);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall5, username1);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username4);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username2);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall9, username3);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall9, username4);
+
 
 // Report Challenges
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall3, username1);
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall3, username2);
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall2, username3);
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall1, username4);
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall9, username4);
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall9, username4);
 
 
 // Filler challenges
