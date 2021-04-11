@@ -116,6 +116,9 @@ exports.getAcceptedChallenges = (page, username) => {
       "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
+      "AND challenge.id IN " +
+      "(SELECT challengeid FROM acceptedchallenges " +
+      "" +
       "GROUP BY challenge.id, title, description, author " +
       "UNION " +
       "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
