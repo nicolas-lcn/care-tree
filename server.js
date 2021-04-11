@@ -51,9 +51,9 @@ app.get("/challenges", (req, res) => {
   res.render("challenges", found);
 });
 
-app.get("/myChallenges", (req, res) => {
+app.get("/acceptedChallenges", is_authenticated, (req, res) => {
   let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
-  res.render("myChallenges", acceptedChallenges);
+  res.render("acceptedChallenges", acceptedChallenges);
 });
 
 //////////////////////////////////////////////////////////////////////////////////
