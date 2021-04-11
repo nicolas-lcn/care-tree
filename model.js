@@ -55,8 +55,6 @@ exports.getChallenges = (page, username) => {
     }
   }
 
-
-  
   return {
     results: results,
     num_found: num_found,
@@ -117,8 +115,15 @@ exports.new_user = (username, password, profilePicURL) => {
 exports.createChallenge = (username, title, description) => {
   let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
   if (!description) description = " ";
-  db.prepare("INSERT INTO challenge (title, description, nbUpvotes, nbReports, state, author, expireDate) "
-    + "VALUES (?, ?, ?, ?, ?, ?, ?)").run(title, description, 0, 0, open, username, Date.now() + 24 * 60 * 60 * 1000);
+  let challengeid = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+    + "VALUES (?, ?, ?, ?, ?)").run(title, description, open, username, Date.now() + 24 * 60 * 60 * 1000).lastInsertRowid;
+  
+  let users = db.prepare("SELECT username FROM user").all();
+  
+  for (let user of users) {
+    console.log(user)
+    db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(challengeid, user.username, 0, 0, 0, 0);
+  }
 
 }
 
