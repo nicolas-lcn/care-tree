@@ -61,6 +61,9 @@ let chall6 = db.prepare("INSERT INTO challenge (title, description, state, autho
 let chall7 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
            + "VALUES (?, ?, ?, ?, ?)").run("This challenge should not appear !", 'If you see this, there is a problem somewhere...', closed, username1, expireDate).lastInsertRowid;
 
+let chall8 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Supprimez vos mails !", "supprimer 30 messages permet d'économiser l'équivalent de la consommation d'une ampoule pendant une journée !", open, username3, expireDate).lastInsertRowid;
+
 
 // INSERT USERCHALLENGE
 db.prepare("INSERT INTO userchallenge VALUES (?, ?, ?, ?, ?, ?)").run(chall1, username1, 1, 0, 0, 0);

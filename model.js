@@ -39,6 +39,7 @@ exports.getChallenges = (page, username) => {
       "JOIN state ON challenge.state = state.id " +
       "JOIN userchallenge ON challenge.id = userchallenge.challengeid " +
       "WHERE expireDate > ? " +
+      "AND isLiked = 1 " +
       "AND state.name = ? " +
       "GROUP BY challenge.id, title, description, state.name, author " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
