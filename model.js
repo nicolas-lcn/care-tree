@@ -20,7 +20,7 @@ exports.getChallenges = (page, username) => {
 
   var num_found = db.prepare("SELECT count(*) FROM challenge " +
             "JOIN state ON challenge.state = state.id " +
-            "WHERE expireDate > ? AND state.name = ? AND author != ? ").get(Date.now(), "OPEN", username)["count(*)"];
+            "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
   /*
   var results = db
     .prepare(
@@ -33,19 +33,18 @@ exports.getChallenges = (page, username) => {
     )
     .all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page); */
   
-  if (username) {
-    var results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(isLiked) AS nbUpvotes, author " +
-        "FROM challenge " +
-        "JOIN state ON challenge.state = state.id " +
-        "JOIN userchallenge ON challenge.id = userchallenge.challengeid " +
-        "WHERE expireDate > ? " +
-        "AND state.name = ? " +
-        "AND author != ? " +
-        "GROUP BY challenge.id, title, description, state.name, author " +
-        "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
-    ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
+  var results = db.prepare(
+    "SELECT challenge.id AS id, title, description, COUNT(isLiked) AS nbUpvotes, author " +
+      "FROM challenge " +
+      "JOIN state ON challenge.state = state.id " +
+      "JOIN userchallenge ON challenge.id = userchallenge.challengeid " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "GROUP BY challenge.id, title, description, state.name, author " +
+      "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ?"
+  ).all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
 
+  if (username) {
     for (let result of results) {
       result.hasLiked = db.prepare(
           "SELECT isLiked " +
