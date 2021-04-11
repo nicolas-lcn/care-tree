@@ -112,8 +112,8 @@ db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall3, username1);
 db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall3, username3);
 db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall3, username4);
 db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall5, username1);
-db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username4);
-db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall1, username2);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall4, username4);
+db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall4, username2);
 db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall9, username3);
 db.prepare("INSERT INTO likedchallenges VALUES(?, ?)").run(chall9, username4);
 
@@ -124,7 +124,7 @@ db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall3, username2)
 db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall2, username3);
 db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall1, username4);
 db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall9, username4);
-db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall9, username4);
+db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall9, username3);
 
 
 // Filler challenges
