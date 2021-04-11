@@ -71,8 +71,8 @@ exports.getAcceptedChallenges = (page, username) => {
   const num_per_page = 6;
   page = parseInt(page || 1);
 
-  var num_found = db.prepare("SELECT count(*) FROM acceptedchallenges " +
-            "JOIN user ON acceptedchallenges.username = user.username ").get()["count(*)"];
+  var num_found = db.prepare("SELECT count(*) FROM userchallenge" +
+                            "WHERE username = ?").get(username)["count(*)"];
   
   var results = db
     .prepare(
