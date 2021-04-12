@@ -91,7 +91,9 @@ app.get("/tree", is_authenticated,
         (req,res) =>{
   let treePic = model.getTree(req.session.name);
   let nbPoints = model.getPoints(req.session.name);
-  res.render("tree", {treePic : treePic, nbPoints : nbPoints});
+  let filling = "width : " + nbPoints*100/2000 + "% ;";
+  console.log(filling)
+  res.render("tree", {treePic : treePic, nbPoints : nbPoints, filling : filling });
   
 });
 
