@@ -13,6 +13,15 @@ function crypt_password(password) {
   var saved_hash = bcrypt.hashSync(password,10);
   return saved_hash;
 }
+ /////////////////////////CHALLENGES /////////////////////////////
+
+exports.createChallenge = (username, title, description) => {
+  let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
+  if (!description) description = " ";
+  db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+    + "VALUES (?, ?, ?, ?, ?)").run(title, description, open, username, Date.now() + 24 * 60 * 60 * 1000);
+
+}
 
 exports.getChallenges = (page, username) => {
   const num_per_page = 9;
@@ -247,6 +256,14 @@ exports.getCreatedChallenges = (page, username) => {
   };
 };
 
+
+exports.getPoints = (username) =>{
+  
+}
+
+
+ /////////////////////////////////// USER//////////////////////////
+
 exports.login = (username, password) => {
   let select = db.prepare("SELECT username, password FROM user WHERE username = ?")
     .get(username);
@@ -264,14 +281,12 @@ exports.new_user = (username, password, profilePicURL) => {
   return (insert.changes!=0)? username : null;
 };
 
-exports.createChallenge = (username, title, description) => {
-  let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
-  if (!description) description = " ";
-  db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-    + "VALUES (?, ?, ?, ?, ?)").run(title, description, open, username, Date.now() + 24 * 60 * 60 * 1000);
-
-}
-
+exports.getProfilePicURL = (username) =>{
+  let select = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username);
+  return (select)? select.profilePic : null;
+};
+   
+      //Edit User //
 
 exports.edit_user_infos = (username, password) => {
   let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
@@ -282,10 +297,6 @@ exports.edit_user_infos = (username, password) => {
   return (update.changes!=0)? 0 : -1;
 };
 
-exports.getProfilePicURL = (username) =>{
-  let select = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username);
-  return (select)? select.profilePic : null;
-};
 
 exports.edit_profilePic = (username, profilePicURL) =>{
   let update = db.prepare("UPDATE user SET profilePic = ? WHERE username = ?");
