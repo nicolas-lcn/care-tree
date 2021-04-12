@@ -89,7 +89,8 @@ app.get("/createChallenge",
 
 app.get("/tree", is_authenticated,
         (req,res) =>{
-  res.render("tree");
+  let treePic = model.getTree(req.session.name);
+  res.render("tree", {treePic : treePic});
   
 });
 

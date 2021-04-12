@@ -268,12 +268,19 @@ exports.getTree = (username) => {
   for(let index =0; index<select.length; index++){
     points += getNumberOfLikes(select[index].challengeid).nbLikes*2;
   }
-  function get_tree(nbPoints){
-  switch (nbPoints){
+  switch (points){
     case 500:
+      return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout.png?v=1618234931458";
+    case 1000:
+      return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout2.png?v=1618234934510";
+    case 1500:
+      return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout3.png?v=1618234937138";
+    case 2000:
+      return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout4.png?v=1618234943870";
+    default:
       return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout0.png?v=1618234904927";
   }
-}
+
 }
 
 
