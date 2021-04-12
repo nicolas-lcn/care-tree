@@ -15,6 +15,8 @@ app.use(
   })
 );
 
+console.log(model.getPoints("PachydermeDélicat"));
+
 function update_locals(req, res, next) {
   if (req.session.name) {
     res.locals.authenticated = true;
