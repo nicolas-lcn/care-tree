@@ -90,7 +90,8 @@ app.get("/createChallenge",
 app.get("/tree", is_authenticated,
         (req,res) =>{
   let treePic = model.getTree(req.session.name);
-  res.render("tree", {treePic : treePic});
+  let nbPoints = model.getPoints(req.session.name);
+  res.render("tree", {treePic : treePic, nbPoints : nbPoints});
   
 });
 
