@@ -257,7 +257,13 @@ exports.getCreatedChallenges = (page, username) => {
 };
 
 
-exports.getPoints = (username) =>{
+function getNumberOfLikes(challengeid){
+  let nbLikes  = db.prepare("SELECT COUNT(challengeid) FROM likedchallenges WHERE challengeid = ?");
+  return nbLikes.get(challengeid);
+}
+
+exports.getPoints = (username) => {
+  let points = db.prepare("SELECT COUNT(challengeid) FROM succeededchallenges WHERE username = ?").get(username);
   
 }
 
