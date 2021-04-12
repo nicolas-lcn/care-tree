@@ -262,13 +262,18 @@ function getNumberOfLikes(challengeid){
   return nbLikes.get(challengeid);
 };
 
-exports.getPoints = (username) => {
+exports.getTree = (username) => {
   let select = db.prepare("SELECT challengeid FROM succeededchallenges WHERE username = ?").all(username);
   let points = select.length * 100;
   for(let index =0; index<select.length; index++){
     points += getNumberOfLikes(select[index].challengeid).nbLikes*2;
   }
-  return points;
+  function get_tree(nbPoints){
+  switch (nbPoints){
+    case 500:
+      return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout0.png?v=1618234904927";
+  }
+}
 }
 
 

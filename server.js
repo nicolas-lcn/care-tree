@@ -41,6 +41,7 @@ function is_authenticated(req, res, next) {
   res.render("login");
 }
 
+
 /**** Routes pour voir les pages du site ****/
 
 app.get("/", (req, res) => {
@@ -67,7 +68,11 @@ app.get("/createdChallenges", is_authenticated, (req, res) => {
   res.render("createdChallenges", createdChallenges);
 });
 
-//////////////////////////////////////////////////////////////////////////////////
+app.get("/profile", (req,res) => {
+  let avatar = model.getProfilePicURL(req.session.name);
+  if(avatar != null) res.render("profile", {avatar : avatar});
+  else res.render("profile");
+})
 
 app.get("/login", (req, res) => {
   res.render("login");
@@ -82,11 +87,14 @@ app.get("/createChallenge",
   res.render("createChallenge");
 });
 
-app.get("/profile", (req,res) => {
-  let avatar = model.getProfilePicURL(req.session.name);
-  if(avatar != null) res.render("profile", {avatar : avatar});
-  else res.render("profile");
-})
+app.get("/tree", is_authenticated,
+        (req,res) =>{
+  res.render("tree");
+  
+});
+
+//////////////////////////////////////////////////////////////////////////////////
+
 
 app.post("/login", (req, res) => {
   let username = model.login(req.body.username, req.body.password);
