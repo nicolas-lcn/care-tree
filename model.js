@@ -23,6 +23,10 @@ exports.createChallenge = (username, title, description) => {
 
 }
 
+exports.acceptChallenge = (username, challengeid) => {
+  db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(challengeid, username)
+}
+
 exports.getChallenges = (page, username) => {
   const num_per_page = 9;
   page = parseInt(page || 1);
@@ -30,28 +34,7 @@ exports.getChallenges = (page, username) => {
   var num_found = db.prepare("SELECT count(*) FROM challenge " +
             "JOIN state ON challenge.state = state.id " +
             "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
-/*
-  let results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
-      "FROM challenge " +
-      "JOIN state ON challenge.state = state.id " +
-      "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
-      "JOIN user ON user.username = challenge.author " +
-      "WHERE expireDate > ? " +
-      "AND state.name = ? " +
-      "GROUP BY challenge.id, title, description, author " +
-      "UNION " +
-      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author, profilePic " +
-      "FROM challenge " +
-      "JOIN state ON challenge.state = state.id " +
-      "JOIN user ON user.username = challenge.author " +
-      "WHERE expireDate > ? " +
-      "AND state.name = ? " +
-      "AND challenge.id NOT IN " +
-      "(SELECT challengeid FROM likedchallenges) " +
-      "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
-  */
+
   
   let results = db.prepare(
       "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +

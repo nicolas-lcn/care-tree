@@ -96,6 +96,11 @@ app.get("/tree", is_authenticated,
   
 });
 
+app.get("/acceptChallenge/:id"), is_authenticated, (req, res) => {
+  model.acceptChallenge(req.session.name, req.params.id);
+  res.render("acceptedChallenges", {success : {msg : "Défi accepté !"}})
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 
 
