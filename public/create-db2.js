@@ -160,3 +160,9 @@ let fill16 = db.prepare("INSERT INTO challenge (title, description, state, autho
            + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill17 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
            + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill18 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill19 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+let fill20 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;

@@ -94,7 +94,9 @@ exports.getAcceptedChallenges = (page, username) => {
   page = parseInt(page || 1);
 
   let num_found = db.prepare("SELECT count(*) FROM acceptedchallenges " +
-                            "WHERE username = ?").get(username)["count(*)"];
+                            "JOIN challenge ON acceptedchallenges.challengeid = challenge.id " +
+                            "JOIN state ON challenge.state = state.id " +
+                            "WHERE username = ? AND state.name = ?").get(username, "OPEN")["count(*)"];
   
  let results = db.prepare(
       "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
@@ -102,14 +104,13 @@ exports.getAcceptedChallenges = (page, username) => {
       "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
       "JOIN state ON challenge.state = state.id " +
       "JOIN user ON user.username = challenge.author " +
-      "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "AND challenge.id IN " +
       "(SELECT challengeid FROM acceptedchallenges " +
       "WHERE username = ? ) " +
       "GROUP BY challenge.id, title, description, author, profilePic " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
+  ).all("OPEN", username, num_per_page, (page - 1) * num_per_page);
 
   for (let result of results) {
       result.hasLiked = db.prepare(
