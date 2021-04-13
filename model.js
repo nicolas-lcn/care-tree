@@ -61,9 +61,9 @@ exports.getChallenges = (page, username) => {
       "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
-      "GROUP BY challenge.id, title, description, author " +
+      "GROUP BY challenge.id, title, description, author, profilePic " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  ).all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
   
   if (username) {
     for (let result of results) {
@@ -112,29 +112,19 @@ exports.getAcceptedChallenges = (page, username) => {
                             "WHERE username = ?").get(username)["count(*)"];
   
  let results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author " +
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
       "FROM challenge " +
+      "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
       "JOIN state ON challenge.state = state.id " +
-      "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "AND challenge.id IN " +
       "(SELECT challengeid FROM acceptedchallenges " +
       "WHERE username = ? ) " +
-      "GROUP BY challenge.id, title, description, author " +
-      "UNION " +
-      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
-      "FROM challenge " +
-      "JOIN state ON challenge.state = state.id " +
-      "WHERE expireDate > ? " +
-      "AND state.name = ? " +
-      "AND challenge.id NOT IN " +
-      "(SELECT challengeid FROM likedchallenges) " +
-      "AND challenge.id IN " +
-      "(SELECT challengeid FROM acceptedchallenges " +
-      "WHERE username = ? ) " +
+      "GROUP BY challenge.id, title, description, author, profilePic " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", username, username, Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
 
   for (let result of results) {
       result.hasLiked = db.prepare(
@@ -165,29 +155,19 @@ exports.getSucceededChallenges = (page, username) => {
                             "WHERE username = ?").get(username)["count(*)"];
   
  let results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author " +
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
       "FROM challenge " +
+      "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
       "JOIN state ON challenge.state = state.id " +
-      "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "AND challenge.id IN " +
       "(SELECT challengeid FROM succeededchallenges " +
       "WHERE username = ? ) " +
-      "GROUP BY challenge.id, title, description, author " +
-      "UNION " +
-      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
-      "FROM challenge " +
-      "JOIN state ON challenge.state = state.id " +
-      "WHERE expireDate > ? " +
-      "AND state.name = ? " +
-      "AND challenge.id NOT IN " +
-      "(SELECT challengeid FROM likedchallenges) " +
-      "AND challenge.id IN " +
-      "(SELECT challengeid FROM succeededchallenges " +
-      "WHERE username = ? ) " +
+      "GROUP BY challenge.id, title, description, author, profilePic " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", username, username, Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
 
   for (let result of results) {
       result.hasLiked = db.prepare(
@@ -218,25 +198,17 @@ exports.getCreatedChallenges = (page, username) => {
                             "WHERE author = ?").get(username)["count(*)"];
   
  let results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author " +
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
       "FROM challenge " +
+      "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
       "JOIN state ON challenge.state = state.id " +
-      "JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
       "AND author = ? " +
-      "GROUP BY challenge.id, title, description, author " +
-      "UNION " +
-      "SELECT challenge.id AS id, title, description, 0 AS nbUpvotes, author " +
-      "FROM challenge " +
-      "JOIN state ON challenge.state = state.id " +
-      "WHERE expireDate > ? " +
-      "AND state.name = ? " +
-      "AND challenge.id NOT IN " +
-      "(SELECT challengeid FROM likedchallenges) " +
-      "AND author = ? " +
+      "GROUP BY challenge.id, title, description, author, profilePic " +
       "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", username, username, Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
+  ).all(Date.now(), "OPEN", username, num_per_page, (page - 1) * num_per_page);
 
   for (let result of results) {
       result.hasLiked = db.prepare(
