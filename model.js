@@ -24,9 +24,11 @@ exports.createChallenge = (username, title, description) => {
 }
 
 exports.acceptChallenge = (username, challengeid) => {
-  let alreadyAccepted = db.prepare("SELECT * FROM acceptedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
-  if (alreadyAccepted) return;
+  let alreadyAccepted = db.prepare("SELECT * FROM acceptedchallenges WHERE username = ? AND challengeid = ?" +
+                                  "UNION SELECT * FROM succeededchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid, username, challengeid);
+  if (alreadyAccepted) return false;
   db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(challengeid, username)
+  return true;
 }
 
 exports.getChallenges = (page, username) => {
@@ -83,7 +85,7 @@ exports.getChallenges = (page, username) => {
     prev_page: page > 1 ? page - 1 : 1,
     prev_disabled: page == 1,
     next_page: page * num_per_page <= num_found ? page + 1 : page,
-    next_disabled: page * num_per_page > num_found,
+    next_disabled: page * num_per_page >= num_found,
     page: page,
     num_pages: parseInt(num_found / num_per_page) + 1
   };
@@ -127,7 +129,7 @@ exports.getAcceptedChallenges = (page, username) => {
     prev_page: page > 1 ? page - 1 : 1,
     prev_disabled: page == 1,
     next_page: page * num_per_page <= num_found ? page + 1 : page,
-    next_disabled: page * num_per_page > num_found,
+    next_disabled: page * num_per_page >= num_found,
     page: page,
     num_pages: parseInt(num_found / num_per_page) + 1
   };
@@ -170,7 +172,7 @@ exports.getSucceededChallenges = (page, username) => {
     prev_page: page > 1 ? page - 1 : 1,
     prev_disabled: page == 1,
     next_page: page * num_per_page <= num_found ? page + 1 : page,
-    next_disabled: page * num_per_page > num_found,
+    next_disabled: page * num_per_page >= num_found,
     page: page,
     num_pages: parseInt(num_found / num_per_page) + 1
   };
@@ -221,7 +223,7 @@ exports.getCreatedChallenges = (page, username) => {
     prev_page: page > 1 ? page - 1 : 1,
     prev_disabled: page == 1,
     next_page: page * num_per_page <= num_found ? page + 1 : page,
-    next_disabled: page * num_per_page > num_found,
+    next_disabled: page * num_per_page >= num_found,
     page: page,
     num_pages: parseInt(num_found / num_per_page) + 1
   };
