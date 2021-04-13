@@ -96,10 +96,12 @@ app.get("/tree", is_authenticated,
   
 });
 
-app.get("/acceptChallenge/:id"), is_authenticated, (req, res) => {
+app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
   model.acceptChallenge(req.session.name, req.params.id);
+  let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
+  res.render("acceptedChallenges", acceptedChallenges);
   res.render("acceptedChallenges", {success : {msg : "Défi accepté !"}})
-}
+});
 
 //////////////////////////////////////////////////////////////////////////////////
 

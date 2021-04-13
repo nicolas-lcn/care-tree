@@ -24,6 +24,8 @@ exports.createChallenge = (username, title, description) => {
 }
 
 exports.acceptChallenge = (username, challengeid) => {
+  let alreadyAccepted = db.prepare("SELECT * FROM acceptedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (alreadyAccepted) return;
   db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(challengeid, username)
 }
 
