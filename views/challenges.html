@@ -33,7 +33,7 @@
                       </a>
                     {{/hasLiked}}
                     {{^hasLiked}}
-                      <a id="unlikeButton{{id}}" onclick = "clicked(this, false)" class="text-decoration-none" style="color: black;" href="/upvote/{{id}}">
+                      <a id="unlikeButton{{id}}" onclick = "clicked(this, false, {{nbUpvotes}})" class="text-decoration-none" style="color: black;" href="/upvote/{{id}}">
                         <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
                       <span id ="nbUpvotesText">{{nbUpvotes}}</span>
                       </a>
