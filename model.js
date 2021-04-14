@@ -32,6 +32,11 @@ exports.acceptChallenge = (username, challengeid) => {
 }
 
 exports.endChallenge = (username, challengeid) => {
+  let confirmAccepted = db.prepare("SELECT * FROM acceptedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (confirmAccepted) {
+    db.prepare("DELETE FROM acceptedchallenges WHERE username = ? AND challengeid = ?").run(username, challengeid);
+  }
+  
   let alreadySucceeded = db.prepare("SELECT * FROM succeededchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
   if (alreadySucceeded) return false;
   db.prepare("INSERT INTO succeededchallenges VALUES (?, ?)").run(challengeid, username)
