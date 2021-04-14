@@ -13,7 +13,7 @@ function crypt_password(password) {
   var saved_hash = bcrypt.hashSync(password,10);
   return saved_hash;
 }
- //////////////////////// CHALLENGE INSERT /////////////////////////////
+ //////////////////////// CHALLENGE MODIFY /////////////////////////////
 
 exports.createChallenge = (username, title, description) => {
   let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
@@ -59,7 +59,7 @@ exports.delChallenge = (username, challengeid) => {
   return del.changes != 0;
 }
 
- //////////////////////// CHALLENGE SELECT /////////////////////////////
+ //////////////////////// CHALLENGE GET /////////////////////////////
 
 
 exports.getChallenges = (page, username) => {
