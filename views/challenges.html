@@ -27,17 +27,13 @@
                   <div class="col-3 d-flex px-0 pt-2  justify-content-center">
                     
                     {{#hasLiked}}
-                      <a id="likeButton{{id}}" onclick="clicked(this, 'red')" class="text-decoration-none" style="color: black;" href="#">
+                      <a id="likeButton{{id}}" onclick="clicked(this, true, {{nbUpvotes}})" class="text-decoration-none" style="color: black;" href="/cancelUpvote/{{id}}">
                         <i class="fas fa-thumbs-up fa-lg" style="color: black;"></i>
                         {{nbUpvotes}}
                       </a>
-                    <script>
-   function clicked(element, clr){
-  console.log(element.firstChild);
-}</script>
-       {{/hasLiked}}
+                    {{/hasLiked}}
                     {{^hasLiked}}
-                      <a id="unlikeButton{{id}}" onclick = "likeButtonClicked(this)" class="text-decoration-none" style="color: black;" href="#">
+                      <a id="unlikeButton{{id}}" onclick = "clicked(this, false)" class="text-decoration-none" style="color: black;" href="/upvote/{{id}}">
                         <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
                       {{nbUpvotes}}
                       </a>
@@ -91,6 +87,6 @@
       </ul>
     </nav>
     
-    
+ 
 
 {{> footer}}
