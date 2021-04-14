@@ -43,6 +43,14 @@ exports.endChallenge = (username, challengeid) => {
   return true;
 }
 
+exports.abandonChallenge = (username, challengeid) => {
+  let confirmAccepted = db.prepare("SELECT * FROM acceptedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (! confirmAccepted) return false;
+    
+  let del = db.prepare("DELETE FROM acceptedchallenges WHERE username = ? AND challengeid = ?").run(username, challengeid);
+  return del.changes != 0;
+}
+
  //////////////////////// CHALLENGE SELECT /////////////////////////////
 
 

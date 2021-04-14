@@ -1,8 +1,4 @@
 {{> header}}
- <script>
-   function likedButtonClicked(element){
-  console.log(element);
-}</script>
 <div class="px-5 mx-5 pt-5">
     <a class="btn btn-outline-success mx-5" type="button" href="/createChallenge">
       <i class="fas fa-plus"></i> <span class="ms-3">Défiez la communauté !</span>
@@ -31,19 +27,15 @@
                   <div class="col-3 d-flex px-0 pt-2  justify-content-center">
                     
                     {{#hasLiked}}
-                      <a id="likeButton{{id}}" onclick = "likeButtonClicked(this)" class="text-decoration-none" style="color: black;" href="#">
+                      <a id="likeButton{{id}}" onclick="clicked(this, 'red')" class="text-decoration-none" style="color: black;" href="#">
                         <i class="fas fa-thumbs-up fa-lg" style="color: black;"></i>
                         {{nbUpvotes}}
                       </a>
-                    <p onclick="myFunction(this, 'red')">Click me to change my text color.</p>
-
-<script>
-function myFunction(elmnt,clr) {
-  elmnt.style.color = clr;
-  console.log(elmnt)
-}
-</script>
-                    {{/hasLiked}}
+                    <script>
+   function clicked(element, clr){
+  console.log(element.firstChild);
+}</script>
+       {{/hasLiked}}
                     {{^hasLiked}}
                       <a id="unlikeButton{{id}}" onclick = "likeButtonClicked(this)" class="text-decoration-none" style="color: black;" href="#">
                         <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
