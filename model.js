@@ -13,7 +13,7 @@ function crypt_password(password) {
   var saved_hash = bcrypt.hashSync(password,10);
   return saved_hash;
 }
- /////////////////////////CHALLENGES /////////////////////////////
+ //////////////////////// CHALLENGE INSERT /////////////////////////////
 
 exports.createChallenge = (username, title, description) => {
   let open = db.prepare("SELECT id FROM state WHERE name = ?").get("OPEN").id
@@ -30,6 +30,16 @@ exports.acceptChallenge = (username, challengeid) => {
   db.prepare("INSERT INTO acceptedchallenges VALUES (?, ?)").run(challengeid, username)
   return true;
 }
+
+exports.endChallenge = (username, challengeid) => {
+  let alreadySucceeded = db.prepare("SELECT * FROM succeededchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (alreadySucceeded) return false;
+  db.prepare("INSERT INTO succeededchallenges VALUES (?, ?)").run(challengeid, username)
+  return true;
+}
+
+ //////////////////////// CHALLENGE SELECT /////////////////////////////
+
 
 exports.getChallenges = (page, username) => {
   const num_per_page = 9;

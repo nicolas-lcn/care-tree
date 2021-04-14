@@ -28,13 +28,13 @@
                   <div class="col-3 d-flex px-0 pt-2  justify-content-center">
                     
                     {{#hasLiked}}
-                      <a id="likeButton{{id}}" class="text-decoration-none" style="color: black;" href="/cancelUpvoteChallenge/{{id}}">
+                      <a id="likeButton{{id}}" onclick="" class="text-decoration-none" style="color: black;" href="/cancelUpvoteChallenge/{{id}}">
                         <i class="fas fa-thumbs-up fa-lg" style="color: black;"></i>
                         {{nbUpvotes}}
                       </a>
                     {{/hasLiked}}
                     {{^hasLiked}}
-                      <a id="unlikeButton{{id}}" class="text-decoration-none" style="color: black;" href="/upvoteChallenge/{{id}}">
+                      <a id="likeButton{{id}}" class="text-decoration-none" style="color: black;" href="/upvoteChallenge/{{id}}">
                         <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
                       {{nbUpvotes}}
                       </a>

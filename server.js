@@ -105,9 +105,9 @@ app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
 
 app.get("/endChallenge/:id", is_authenticated, (req, res) => {
   let success = model.endChallenge(req.session.name, req.params.id);
-  let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
-  if (success) acceptedChallenges.success = {msg : "Défi accepté !"};
-  res.render("acceptedChallenges", acceptedChallenges);
+  let succeededChallenges = model.getSucceededChallenges(req.query.page, req.session.name);
+  if (success) succeededChallenges.success = {msg : "Bravo, défi terminé !"};
+  res.render("succeededChallenges", succeededChallenges);
 });
 
 //////////////////////////////////////////////////////////////////////////////////
