@@ -4,6 +4,27 @@
     <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mx-auto">
       <div class="card h-auto">
         <div class="card-body">
+          {{#errors}}
+    <div class="row mt-2">
+      <div
+        class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-danger"
+        role="alert"
+      >
+        {{msg}}
+      </div>
+    </div>
+    {{/errors}}
+    {{#success}}
+    <div class="row mt-2" >
+      <div
+          class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-success"       
+          role = "alert"
+      >
+      {{msg}}
+      </div>
+    </div>
+    {{/success}}
+  
 <form
   class="justify-content-center"
   action="/signup"
@@ -178,26 +199,7 @@
     </div>
   </div>
 </form>
-{{#errors}}
-<div class="row mt-3">
-  <div
-    class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-danger"
-    role="alert"
-  >
-    {{msg}}
-  </div>
-</div>
-{{/errors}}
-{{#success}}
-<div class="row mt-3" >
-  <div
-      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-success"       
-      role = "alert"
-  >
-  {{msg}}
-  </div>
-</div>
-{{/success}}
+
         </div>
       </div>
     </div>
