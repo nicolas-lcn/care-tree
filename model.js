@@ -269,19 +269,18 @@ exports.getPoints = (username) =>{
 
 exports.getTree = (username) => {
   let points = this.getPoints(username);
-  switch (points){
-    case 500:
+  
+    if(points>500)
       return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout.png?v=1618234931458";
-    case 1000:
+    else if(points>1000)
       return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout2.png?v=1618234934510";
-    case 1500:
+    else if (points>1500)
       return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout3.png?v=1618234937138";
-    case 2000:
+    else if (points>2000)
       return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout4.png?v=1618234943870";
-    default:
+    else
       return "https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fsprout0.png?v=1618234904927";
-  }
-
+  
 }
 
 

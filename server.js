@@ -117,6 +117,13 @@ app.get("/abandonChallenge/:id", is_authenticated, (req, res) => {
   res.render("acceptedChallenges", acceptedChallenges);
 });
 
+app.get("/abandonChallenge/:id", is_authenticated, (req, res) => {
+  let success = model.abandonChallenge(req.session.name, req.params.id);
+  let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
+  if (success) acceptedChallenges.info = {msg : "Défi abandonné"};
+  res.render("acceptedChallenges", acceptedChallenges);
+});
+
 //////////////////////////////////////////////////////////////////////////////////
 
 
