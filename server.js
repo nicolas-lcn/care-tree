@@ -103,6 +103,13 @@ app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
   res.render("acceptedChallenges", acceptedChallenges);
 });
 
+app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
+  let success = model.acceptChallenge(req.session.name, req.params.id);
+  let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
+  if (success) acceptedChallenges.success = {msg : "Défi accepté !"};
+  res.render("acceptedChallenges", acceptedChallenges);
+});
+
 //////////////////////////////////////////////////////////////////////////////////
 
 

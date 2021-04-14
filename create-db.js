@@ -12,7 +12,6 @@ db.prepare('DROP TABLE IF EXISTS acceptedchallenges').run();
 db.prepare('DROP TABLE IF EXISTS succeededchallenges').run();
 db.prepare('DROP TABLE IF EXISTS likedchallenges').run();
 db.prepare('DROP TABLE IF EXISTS reportedchallenges').run();
-db.prepare('DROP TABLE IF EXISTS userchallenge').run();
 db.prepare('DROP TABLE IF EXISTS challenge').run();
 db.prepare('DROP TABLE IF EXISTS state').run();
 db.prepare('DROP TABLE IF EXISTS user').run();
