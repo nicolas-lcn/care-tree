@@ -124,6 +124,10 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
   res.render("succeededChallenges", succeededChallenges);
 });
 
+app.get("/upvote/:id", is_authenticated, (req, res) => {
+  let success = model.upvoteChallenge(req.session.name, req.params.id);
+});
+
 //////////////////////////////////////////////////////////////////////////////////
 
 

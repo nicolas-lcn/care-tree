@@ -59,6 +59,14 @@ exports.delChallenge = (username, challengeid) => {
   return del.changes != 0;
 }
 
+exports.upvoteChallenge = (username, challengeid) => {
+  let alreadyLiked = db.prepare("SELECT * FROM likedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (alreadyLiked) return false;
+    
+  let insert = db.prepare("INSERT INTO likedchallenges VALUES (?, ?)").run(challengeid, username);
+  return insert.changes != 0;
+}
+
  //////////////////////// CHALLENGE GET /////////////////////////////
 
 
