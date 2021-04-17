@@ -1,14 +1,19 @@
 {{> header}}
 {{#info}}
 <div class="row mb-3" >
-    <div
-      class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-info"
-      role = "alert"
-    >
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-info" role = "alert">
     {{msg}}
     </div>
   </div>
 {{/info}}
+
+{{#errors}}
+<div class="row mt-2">
+  <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-danger" role="alert">
+    {{msg}}
+  </div>
+</div>
+{{/errors}}
 
   <main>
     <div class="container py-4">
