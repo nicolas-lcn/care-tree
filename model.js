@@ -59,12 +59,21 @@ exports.delChallenge = (username, challengeid) => {
   return del.changes != 0;
 }
 
-exports.upvoteChallenge = (username, challengeid) => {
+exports.upvote = (username, challengeid) => {
   let alreadyLiked = db.prepare("SELECT * FROM likedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
   if (alreadyLiked) return false;
     
   let insert = db.prepare("INSERT INTO likedchallenges VALUES (?, ?)").run(challengeid, username);
   return insert.changes != 0;
+}
+
+exports.cancelUpvote = (username, challengeid) => {
+  console.log("ok")
+  let confirmLiked = db.prepare("SELECT * FROM likedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (! confirmLiked) return false;
+  console.log("ok")
+  let del = db.prepare("DELETE FROM likedchallenges WHERE challengeid = ? AND username = ?").run(challengeid, username);
+  return del.changes != 0;
 }
 
  //////////////////////// CHALLENGE GET /////////////////////////////

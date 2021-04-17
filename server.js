@@ -127,10 +127,12 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
 });
 
 app.post("/upvote", is_authenticated, (req, res) => {
-  if (req.body.isliked) {
+  console.log(req.body.isLiked)
+  if (req.body.isLiked) {
     model.cancelUpvote(req.session.name, req.body.challengeid);
+  } else {
+    model.upvote(req.session.name, req.body.challengeid);
   }
-  model.upvote(req.session.name, req.body.challengeid)
 });
 
 //////////////////////////////////////////////////////////////////////////////////
