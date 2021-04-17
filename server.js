@@ -6,7 +6,7 @@ const cookieSession = require("cookie-session");
 const { body, validationResult } = require("express-validator");
 
 var model = require("./model");
-var NB_MAX_REPORTS = 3; // When a challenge gets this number of report
+var NB_MAX_REPORTS = 3; // When a challenge gets this number of reports, it is suspended
 var app = express();
 app.use(express.static('public'));
 
