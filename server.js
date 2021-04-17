@@ -28,6 +28,7 @@ app.use(update_locals);
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.engine("html", mustache());
 app.set("view engine", "html");
@@ -125,8 +126,11 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
   res.render("succeededChallenges", succeededChallenges);
 });
 
-app.get("/upvote/:id", is_authenticated, (req, res) => {
-  let success = model.upvoteChallenge(req.session.name, req.params.id);
+app.post("/upvote", is_authenticated, (req, res) => {
+  if (req.body.isliked) {
+    model.cancelUpvote(req.session.name, req.body.challengeid);
+  }
+  model.upvote(req.session.name, req.body.challengeid)
 });
 
 //////////////////////////////////////////////////////////////////////////////////
