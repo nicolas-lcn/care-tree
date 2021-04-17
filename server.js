@@ -43,7 +43,7 @@ function is_authenticated(req, res, next) {
   res.render("login");
 }
 
-/**** Routes pour voir les pages du site ****/
+/**** Routes to render views ****/
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -97,6 +97,9 @@ app.get("/tree", is_authenticated,
   
 });
 
+
+/**** Routes to update challenge data ****/
+
 app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
   let success = model.acceptChallenge(req.session.name, req.params.id);
   let acceptedChallenges = model.getAcceptedChallenges(req.query.page, req.session.name);
@@ -132,10 +135,6 @@ app.get("/reportChallenge/:id", is_authenticated, (req, res) => {
   res.render("challenges", challenges);
 });
 
-
-//////////////////////////////////////////////////////////////////////////////////
-
-
 app.post("/upvote", is_authenticated, (req, res) => {
   console.log(req.body.isLiked)
   if (req.body.isLiked) {
@@ -145,6 +144,7 @@ app.post("/upvote", is_authenticated, (req, res) => {
   }
 });
 
+/**** Routes to update challenge data ****/
 
 app.post("/login", (req, res) => {
   let username = model.login(req.body.username, req.body.password);
@@ -226,6 +226,10 @@ app.post("/edit_profile_pic", (req, res) => {
     } else{
       res.render("profile", {errors : {msg: "Il y a une erreur"}});
     }
+})
+
+app.post("/deleteUser", (req, res) => {
+  
 })
 
 app.post("/createChallenge", (req, res) => {

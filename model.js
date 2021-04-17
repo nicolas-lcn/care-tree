@@ -369,5 +369,11 @@ exports.deleteUser = (username) => {
   let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
   if( ! verify) return false;
   
-  
+  db.prepare("UPDATE acceptedchallenges SET username = ? WHERE username = ?").run("Anonyme", username);
+  db.prepare("UPDATE reportedchallenges SET username = ? WHERE username = ?").run("Anonyme", username);
+  db.prepare("UPDATE likedchallenges SET username = ? WHERE username = ?").run("Anonyme", username);
+  db.prepare("UPDATE succeededchallenges SET username = ? WHERE username = ?").run("Anonyme", username);
+  db.prepare("UPDATE challenge SET author = ? WHERE author = ?").run("Anonyme", username);
+  let del = db.prepare("DELETE FROM user WHERE username = ?").run(username);
+  return del.changes != 0;
 }
