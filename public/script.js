@@ -5,21 +5,23 @@ function clicked(element, isliked, nbUpvotes) {
     element.setAttribute("onclick", newValue);
     element.firstElementChild.className = "far fa-thumbs-up fa-lg";
     element.lastElementChild.innerText = nbUpvotes - 1;
+    upvote(element["id"].substring(10), true)
   }else{
     let newValue = "clicked(this, true,"+ (nbUpvotes + 1) + ")"
     element.setAttribute("onclick" ,newValue);
     element.firstElementChild.className = "fas fa-thumbs-up fa-lg";
     element.lastElementChild.innerText = nbUpvotes + 1;
+    upvote(element["id"].substring(10), false)
   }
-  console.log(element.id)
+  console.log(element["id"].substring(10))
 }
 
-function upvote(challengeid) {
-var data = {};
-data.challengeid = '.txt';
-console.log(data);
+function upvote(challengeid, isLiked) {
+  var data = {};
+  data.challengeid = challengeid;
+  data.isLiked = isLiked;
   $.ajax({
-    url: '/read_file',
+    url: '/upvote',
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify(data),
