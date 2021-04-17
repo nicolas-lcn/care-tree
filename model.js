@@ -65,6 +65,7 @@ exports.reportChallenge = (username, challengeid) => {
     
   let insert = db.prepare("INSERT INTO reportedchallenges VALUES (?, ?)").run(challengeid, username);
   
+  let numberReports = db.prepare("SELECT COUNT(*) FROM reportedchallenges WHERE challengeid = ?")
   // TODO: Check number of reports
   return insert.changes != 0;
 }
