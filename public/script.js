@@ -11,11 +11,11 @@ function clicked(element, isliked, nbUpvotes) {
     element.firstElementChild.className = "fas fa-thumbs-up fa-lg";
     element.lastElementChild.innerText = nbUpvotes + 1;
   }
+  console.log(element.id)
 }
 
-function readfile() {
+function upvote(challengeid) {
 var data = {};
-data.username = '/home/test/pgadmin.txt';
 data.challengeid = '.txt';
 console.log(data);
   $.ajax({
