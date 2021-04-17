@@ -43,6 +43,23 @@ function is_authenticated(req, res, next) {
   res.render("login");
 }
 
+/**** Routes to update session ****/
+
+app.post("/login", (req, res) => {
+  let username = model.login(req.body.username, req.body.password);
+  if (username == null) {
+    res.render("login", {errors : {msg : "Nom d'utilisateur ou mot de passe erroné"}});
+  } else {
+    req.session.name = req.body.username;
+    res.redirect("/");
+  }
+});
+
+app.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+});
+
 /**** Routes to render views ****/
 
 app.get("/", (req, res) => {
@@ -98,7 +115,7 @@ app.get("/tree", is_authenticated,
 });
 
 
-/**** Routes to update challenge data ****/
+/**** Routes to update challenges ****/
 
 app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
   let success = model.acceptChallenge(req.session.name, req.params.id);
@@ -144,17 +161,13 @@ app.post("/upvote", is_authenticated, (req, res) => {
   }
 });
 
-/**** Routes to update challenge data ****/
-
-app.post("/login", (req, res) => {
-  let username = model.login(req.body.username, req.body.password);
-  if (username == null) {
-    res.render("login", {errors : {msg : "Nom d'utilisateur ou mot de passe erroné"}});
-  } else {
-    req.session.name = req.body.username;
-    res.redirect("/");
-  }
+app.post("/createChallenge", (req, res) => {
+  model.createChallenge(req.session.name, req.body.title, req.body.description)
+  res.render("createChallenge", {success : {msg: "Votre défi a été créé !"}})
 });
+
+/**** Routes to update user ****/
+
 
 app.post("/signup", 
          //body("email").isEmail(),
@@ -228,20 +241,18 @@ app.post("/edit_profile_pic", (req, res) => {
     }
 })
 
-app.post("/deleteUser", (req, res) => {
+app.get("/deleteUser", is_authenticated, (req, res) => {
+  let success = model.deleteUser(req.session.name);
+  if (success) {
+    req.session = null;
+    res.render("index", {info : {msg : "Nous sommes tristes de vous voir partir... "
+                               + "Mais vous serez toujours le bienvenu pour relever de nouveaux défis !"}});
+  } else {
+    res.render("index", {error : {msg : "Tout ne s'est pas déroulé comme prévu et nous n'avons pas réussi à supprimer votre compte... "
+                               + "Contactez-nous et nous ferons tout notre possible pour résoudre ce problème !"}});
+  }
   
 })
 
-app.post("/createChallenge", (req, res) => {
-  model.createChallenge(req.session.name, req.body.title, req.body.description)
-  res.render("createChallenge", {success : {msg: "Votre défi a été créé !"}})
-});
-
-app.post("/logout", (req, res) => {
-  req.session = null;
-  res.redirect("/");
-});
-
-/**** Routes pour modifier les données ****/
 
 app.listen(3000, () => console.log("listening on http://localhost:3000"));
