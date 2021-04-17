@@ -244,8 +244,10 @@ app.post("/edit_profile_pic", (req, res) => {
 app.get("/deleteAccount", is_authenticated, (req, res) => {
   let success = model.deleteUser(req.session.name);
   if (success) {
-    res.render("index", {info : {msg : "Nous sommes tristes de vous voir partir... "
-                               + "Mais vous serez toujours le bienvenu pour relever de nouveaux défis !"}});
+    req.session = null;
+    res.render("index", {info : {msg : "Nous sommes tristes de vous voir partir... Votre compte a bien été supprimé, "
+                               + "mais vous serez toujours le bienvenu pour relever de nouveaux défis !"}});
+    
   } else {
     res.render("index", {error : {msg : "Tout ne s'est pas déroulé comme prévu et nous n'avons pas réussi à supprimer votre compte... "
                                + "Contactez-nous et nous ferons tout notre possible pour résoudre ce problème !"}});
