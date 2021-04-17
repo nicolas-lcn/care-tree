@@ -64,6 +64,8 @@ exports.reportChallenge = (username, challengeid) => {
   if (alreadyReported) return false;
     
   let insert = db.prepare("INSERT INTO reportedchallenges VALUES (?, ?)").run(challengeid, username);
+  
+  // TODO: Check number of reports
   return insert.changes != 0;
 }
 
@@ -359,5 +361,8 @@ exports.edit_profilePic = (username, profilePicURL) =>{
 };
 
 exports.deleteUser = (username) => {
+  let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
+  if( ! verify) return false;
+  
   
 }
