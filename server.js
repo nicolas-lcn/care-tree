@@ -7,6 +7,7 @@ const { body, validationResult } = require("express-validator");
 
 var model = require("./model");
 var app = express();
+app.use(express.static('public'));
 
 app.use(
   cookieSession({

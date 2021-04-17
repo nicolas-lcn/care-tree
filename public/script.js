@@ -1,15 +1,22 @@
+
 function clicked(element, isliked, nbUpvotes) {
-  element.firstElementChild.className = isliked
-    ? "far fa-thumbs-up fa-lg"
-    : "fas fa-thumbs-up fa-lg";
-  element.lastElementChild.innerText = isliked ? nbUpvotes - 1 : nbUpvotes + 1;
-  //todo : add the feature to re-like an unliked challenge
+  if(isliked){
+    let newValue = "clicked(this, false,"+ (nbUpvotes - 1) + ")";
+    element.setAttribute("onclick", newValue);
+    element.firstElementChild.className = "far fa-thumbs-up fa-lg";
+    element.lastElementChild.innerText = nbUpvotes - 1;
+  }else{
+    let newValue = "clicked(this, true,"+ (nbUpvotes + 1) + ")"
+    element.setAttribute("onclick" ,newValue);
+    element.firstElementChild.className = "fas fa-thumbs-up fa-lg";
+    element.lastElementChild.innerText = nbUpvotes + 1;
+  }
 }
 
 function readfile() {
 var data = {};
-data.path = '/home/test/pgadmin.txt';
-data.ext = '.txt';
+data.username = '/home/test/pgadmin.txt';
+data.challengeid = '.txt';
 console.log(data);
   $.ajax({
     url: '/read_file',
