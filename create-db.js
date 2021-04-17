@@ -33,6 +33,7 @@ let username1 = "SuperMarmotton";
 let username2 = "PachydermeDélicat";
 let username3 = "PapillonCourageux";
 let username4 = "PieuvreDumbo";
+let anonymous = "Anonyme";
 
 let password = crypt_password('1234');
 
@@ -41,6 +42,7 @@ db.prepare('INSERT INTO user VALUES (?, ?, ?, 0)').run(username1, password, 'htt
 db.prepare('INSERT INTO user VALUES (?, ?, ?, 0)').run(username2, password, 'https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon4.png?v=1617872003351');
 db.prepare('INSERT INTO user VALUES (?, ?, ?, 0)').run(username3, password, 'https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon5.png?v=1617872004582');
 db.prepare('INSERT INTO user VALUES (?, ?, ?, 0)').run(username4, password, 'https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon9.png?v=1617872011096');
+db.prepare('INSERT INTO user VALUES (?, ?, ?, 0)').run(anonymous, password, 'https://cdn.glitch.com/f9be0b84-d35c-45c8-8689-5d4042a91ff2%2Fcon9.png?v=1617872011096');
 
 let open = db.prepare('INSERT INTO state (name) VALUES (\'OPEN\')').run().lastInsertRowid;
 let suspended = db.prepare('INSERT INTO state (name) VALUES (\'SUSPENDED\')').run().lastInsertRowid;
