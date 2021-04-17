@@ -43,7 +43,6 @@ function is_authenticated(req, res, next) {
   res.render("login");
 }
 
-
 /**** Routes pour voir les pages du site ****/
 
 app.get("/", (req, res) => {
