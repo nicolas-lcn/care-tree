@@ -59,14 +59,16 @@ exports.delChallenge = (username, challengeid) => {
   return del.changes != 0;
 }
 
-exports.reportChallenge = (username, challengeid) => {
+exports.reportChallenge = (username, challengeid, nbReportsMax) => {
   let alreadyReported = db.prepare("SELECT * FROM reportedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
   if (alreadyReported) return false;
     
   let insert = db.prepare("INSERT INTO reportedchallenges VALUES (?, ?)").run(challengeid, username);
   
-  let numberReports = db.prepare("SELECT COUNT(*) FROM reportedchallenges WHERE challengeid = ?")
-  // TODO: Check number of reports
+  let numberReports = db.prepare("SELECT COUNT(*) FROM reportedchallenges WHERE challengeid = ?").get(challengeid)["COUNT(*)"]
+  if (numberReports >= nbReportsMax) {
+    
+  }
   return insert.changes != 0;
 }
 

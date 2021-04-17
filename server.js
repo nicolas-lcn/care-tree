@@ -6,6 +6,7 @@ const cookieSession = require("cookie-session");
 const { body, validationResult } = require("express-validator");
 
 var model = require("./model");
+var NB_MAX_REPORTS = 3; // When a challenge gets this number of report
 var app = express();
 app.use(express.static('public'));
 
@@ -126,7 +127,7 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
 });
 
 app.get("/reportChallenge/:id", is_authenticated, (req, res) => {
-  let success = model.reportChallenge(req.session.name, req.params.id);
+  let success = model.reportChallenge(req.session.name, req.params.id, NB_MAX_REPORTS);
   let challenges = model.getChallenges(req.query.page, req.session.name);
   if (success) challenges.success = {msg : "Défi signalé, merci pour votre vigilance !"};
   res.render("challenges", challenges);
