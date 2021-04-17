@@ -39,13 +39,13 @@
                   <div class="col-3 d-flex px-0 pt-2  justify-content-center">
                     
                     {{#hasLiked}}
-                      <a id="likeButton{{id}}" onclick="clicked(this, true, {{nbUpvotes}})" class="text-decoration-none" style="color: black; cursor: pointer">
+                      <a id="likeButton{{id}}" {#authenticated}} onclick="clicked(this, true, {{nbUpvotes}})" {/authenticated}} class="text-decoration-none" style="color: black; cursor: pointer">
                         <i class="fas fa-thumbs-up fa-lg" style="color: black;"></i>
                         <span>{{nbUpvotes}}</span>
                       </a>
                     {{/hasLiked}}
                     {{^hasLiked}}
-                      <a id="likeButton{{id}}" onclick = "clicked(this, false, {{nbUpvotes}})" class="text-decoration-none" style="color: black; cursor: pointer">
+                      <a id="likeButton{{id}}" {{#authenticated}} onclick = "clicked(this, false, {{nbUpvotes}})" {{/authenticated}} class="text-decoration-none" style="color: black; cursor: pointer">
                         <i class="far fa-thumbs-up fa-lg" style="color: black;"></i>
                       <span>{{nbUpvotes}}</span>
                       </a>
