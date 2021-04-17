@@ -59,6 +59,14 @@ exports.delChallenge = (username, challengeid) => {
   return del.changes != 0;
 }
 
+exports.reportChallenge = (username, challengeid) => {
+  let alreadyReported = db.prepare("SELECT * FROM reportedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
+  if (alreadyReported) return false;
+    
+  let insert = db.prepare("INSERT INTO reportedchallenges VALUES (?, ?)").run(challengeid, username);
+  return insert.changes != 0;
+}
+
 exports.upvote = (username, challengeid) => {
   let alreadyLiked = db.prepare("SELECT * FROM likedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
   if (alreadyLiked) return false;
@@ -349,3 +357,7 @@ exports.edit_profilePic = (username, profilePicURL) =>{
   update.run(profilePicURL, username);
   return (update.changes!=0)? 0 : -1;
 };
+
+exports.deleteUser = (username) => {
+  
+}

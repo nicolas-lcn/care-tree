@@ -125,6 +125,17 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
   res.render("succeededChallenges", succeededChallenges);
 });
 
+app.get("/reportChallenge/:id", is_authenticated, (req, res) => {
+  let success = model.reportChallenge(req.session.name, req.params.id);
+  let challenges = model.getChallenges(req.query.page, req.session.name);
+  if (success) challenges.success = {msg : "Défi signalé, merci pour votre vigilance !"};
+  res.render("challenges", challenges);
+});
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
 app.post("/upvote", is_authenticated, (req, res) => {
   console.log(req.body.isLiked)
   if (req.body.isLiked) {
@@ -133,8 +144,6 @@ app.post("/upvote", is_authenticated, (req, res) => {
     model.upvote(req.session.name, req.body.challengeid);
   }
 });
-
-//////////////////////////////////////////////////////////////////////////////////
 
 
 app.post("/login", (req, res) => {
