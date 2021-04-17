@@ -13,7 +13,6 @@ function clicked(element, isliked, nbUpvotes) {
     element.lastElementChild.innerText = nbUpvotes + 1;
     upvote(element["id"].substring(10), false)
   }
-  console.log(element["id"].substring(10))
 }
 
 function upvote(challengeid, isLiked) {

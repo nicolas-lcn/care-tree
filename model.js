@@ -68,10 +68,9 @@ exports.upvote = (username, challengeid) => {
 }
 
 exports.cancelUpvote = (username, challengeid) => {
-  console.log("ok")
   let confirmLiked = db.prepare("SELECT * FROM likedchallenges WHERE username = ? AND challengeid = ?").get(username, challengeid);
   if (! confirmLiked) return false;
-  console.log("ok")
+  
   let del = db.prepare("DELETE FROM likedchallenges WHERE challengeid = ? AND username = ?").run(challengeid, username);
   return del.changes != 0;
 }
