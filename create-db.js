@@ -76,6 +76,14 @@ let chall8 = db.prepare("INSERT INTO challenge (title, description, state, autho
 let chall9 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
            + "VALUES (?, ?, ?, ?, ?)").run("Contenu diffamatoire !", "Signalez-le et ce défi sera suspendu !", open, username4, expireDate).lastInsertRowid;
 
+// Suspended challenges 
+db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Défi suspendu", "À vous de juger !", suspended, username1, expireDate);
+db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Défi suspendu n°2", "À vous de juger !", suspended, username2, expireDate);
+db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
+           + "VALUES (?, ?, ?, ?, ?)").run("Défi suspendu n°3", "À vous de juger !", suspended, username3, expireDate);
+
 
 // Accept Challenges
 db.prepare("INSERT INTO acceptedchallenges VALUES(?, ?)").run(chall1, username1);

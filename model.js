@@ -428,6 +428,8 @@ exports.openChallenge = (challengeid) => {
   let verify = db.prepare("SELECT * FROM challenge WHERE id = ? AND state = (SELECT id FROM state WHERE name = ?)").get(challengeid, "SUSPENDED");
   if (! verify) return false;
   
+  db.prepare("DELETE FROM reportedchallenges WHERE challengeid = ?").run(challengeid)
+  
   let upd = db.prepare("UPDATE challenge SET state = (SELECT id FROM state WHERE name = ?), expireDate = ? WHERE id = ?").run("OPEN", Date.now() + 24 * 60 * 60 * 1000, challengeid);
   return upd.changes != 0;
 }
