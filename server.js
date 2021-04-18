@@ -174,6 +174,17 @@ app.post("/createChallenge", (req, res) => {
 });
 
 
+app.post("/closeChallenge/:id", (req, res) => {
+  model.closeChallenge(req.params.id)
+  res.render("suspendedChallenges", {success : {msg: "Défi clos !"}})
+});
+
+app.post("/openChallenge/:id", (req, res) => {
+  model.openChallenge(req.params.id)
+  res.render("suspendedChallenges", {success : {msg: "Défi ré-ouvert !"}})
+});
+
+
 /**** Routes to update user ****/
 
 
