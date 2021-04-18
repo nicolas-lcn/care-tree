@@ -416,6 +416,18 @@ exports.getSuspendedChallenges = (page) => {
   };
 };
 
-exports.closeChallenge = (id) => {
+exports.closeChallenge = (challengeid) => {
+  let verify = db.prepare("SELECT * FROM challenge WHERE id = ? AND state = (SELECT id FROM state WHERE name = ?)").get(challengeid, "SUSPENDED");
+  if (! verify) return false;
   
+  let upd = db.prepare("UPDATE challenge SET state = (SELECT id FROM state WHERE name = ?) WHERE id = ?").run("CLOSE", challengeid);
+  return upd.changes != 0;
+}
+
+exports.openChallenge = (challengeid) => {
+  let verify = db.prepare("SELECT * FROM challenge WHERE id = ? AND state = (SELECT id FROM state WHERE name = ?)").get(challengeid, "SUSPENDED");
+  if (! verify) return false;
+  
+  let upd = db.prepare("UPDATE challenge SET state = (SELECT id FROM state WHERE name = ?), expireDate = ? WHERE id = ?").run("OPEN", Date.now() + 24 * 60 * 60 * 1000, challengeid);
+  return upd.changes != 0;
 }

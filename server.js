@@ -174,14 +174,20 @@ app.post("/createChallenge", (req, res) => {
 });
 
 
-app.post("/closeChallenge/:id", (req, res) => {
-  model.closeChallenge(req.params.id)
-  res.render("suspendedChallenges", {success : {msg: "Défi clos !"}})
+app.get("/closeChallenge/:id", is_authenticated, is_admin, (req, res) => {
+  let success = model.closeChallenge(req.params.id)
+  if (success) {
+    res.render("suspendedChallenges", {success : {msg: "Défi clos !"}})
+  }
+  res.render("suspendedChallenges", {error : {msg: "Le défi n'a pas pu être fermé"}})
 });
 
-app.post("/openChallenge/:id", (req, res) => {
-  model.openChallenge(req.params.id)
-  res.render("suspendedChallenges", {success : {msg: "Défi ré-ouvert !"}})
+app.get("/openChallenge/:id", is_authenticated, is_admin, (req, res) => {
+  let success = model.openChallenge(req.params.id)
+  if (success) {
+    res.render("suspendedChallenges", {success : {msg: "Défi ré-ouvert !"}})
+  }
+  res.render("suspendedChallenges", {error : {msg: "Le défi n'a pas pu être ré-ouvert"}})
 });
 
 
