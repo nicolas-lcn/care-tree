@@ -117,6 +117,10 @@ app.get("/tree", is_authenticated,
   res.render("tree", {treePic : treePic, nbPoints : nbPoints, filling : filling })
 });
 
+app.get("/suspendedChallenges", is_authenticated, is_admin, (req, res) => {
+  let suspendedChallenges = model.getSuspendedChallenges(req.query.page);
+  res.render("suspendedChallenges", suspendedChallenges);
+});
 
 /**** Routes to update challenges ****/
 
