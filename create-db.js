@@ -74,7 +74,7 @@ let chall8 = db.prepare("INSERT INTO challenge (title, description, state, autho
            + "VALUES (?, ?, ?, ?, ?)").run("Supprimez vos mails !", "supprimer 30 messages permet d'économiser l'équivalent de la consommation d'une ampoule pendant une journée !", open, username3, expireDate).lastInsertRowid;
 
 let chall9 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Contenu diffamatoire !", "Signalez-le et ce défi sera suspendu !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Contenu diffamatoire !", "Ce défi a déjà été signalé 2 fois, signalez-le et il sera suspendu !", open, username4, expireDate).lastInsertRowid;
 
 // Suspended challenges 
 db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
