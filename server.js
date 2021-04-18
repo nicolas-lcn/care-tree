@@ -43,6 +43,10 @@ function is_authenticated(req, res, next) {
   res.render("login");
 }
 
+function is_admin(req, res, next) {
+  return next();
+}
+
 /**** Routes to update session ****/
 
 app.post("/login", (req, res) => {
@@ -110,8 +114,7 @@ app.get("/tree", is_authenticated,
   let treePic = model.getTree(req.session.name);
   let nbPoints = model.getPoints(req.session.name);
   let filling = nbPoints*100/2000;
-  res.render("tree", {treePic : treePic, nbPoints : nbPoints, filling : filling });
-  
+  res.render("tree", {treePic : treePic, nbPoints : nbPoints, filling : filling })
 });
 
 
@@ -165,6 +168,7 @@ app.post("/createChallenge", (req, res) => {
   model.createChallenge(req.session.name, req.body.title, req.body.description)
   res.render("createChallenge", {success : {msg: "Votre défi a été créé !"}})
 });
+
 
 /**** Routes to update user ****/
 

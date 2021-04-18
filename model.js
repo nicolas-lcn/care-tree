@@ -154,67 +154,6 @@ exports.getChallenges = (page, username) => {
 };
 
 
-exports.getSuspendedChallenges = (page, username) => {
-  const num_per_page = 9;
-  page = parseInt(page || 1);
-
-  var num_found = db.prepare("SELECT count(*) FROM challenge " +
-            "JOIN state ON challenge.state = state.id " +
-            "WHERE state.name = ?").get("OPEN")["count(*)"];
-
-  
-  let results = db.prepare(
-      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
-      "FROM challenge " +
-      "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
-      "JOIN state ON challenge.state = state.id " +
-      "JOIN user ON user.username = challenge.author " +
-      "WHERE expireDate > ? " +
-      "AND state.name = ? " +
-      "GROUP BY challenge.id, title, description, author, profilePic " +
-      "ORDER BY nbUpvotes DESC LIMIT ? OFFSET ? "
-  ).all(Date.now(), "OPEN", num_per_page, (page - 1) * num_per_page);
-  
-  if (username) {
-    for (let result of results) {
-      result.hasLiked = db.prepare(
-          "SELECT * " +
-            "FROM likedchallenges " +
-            "WHERE challengeid = ? " +
-            "AND username = ? "
-        ).get(result.id, username);
-      result.hasAccepted = db.prepare(
-          "SELECT * " +
-            "FROM acceptedchallenges " +
-            "WHERE challengeid = ? " +
-            "AND username = ? " +
-            "UNION " +
-            "SELECT * FROM succeededchallenges " +
-            "WHERE challengeid = ? " +
-            "AND username = ? "
-        ).get(result.id, username, result.id, username);
-      result.hasReported = db.prepare(
-          "SELECT * " +
-            "FROM reportedchallenges " +
-            "WHERE challengeid = ? " +
-            "AND username = ? "
-        ).get(result.id, username);
-    }
-  }
-
-  return {
-    results: results,
-    num_found: num_found,
-    prev_page: page > 1 ? page - 1 : 1,
-    prev_disabled: page == 1,
-    next_page: page * num_per_page <= num_found ? page + 1 : page,
-    next_disabled: page * num_per_page >= num_found,
-    page: page,
-    num_pages: parseInt(num_found / num_per_page) + 1
-  };
-};
-
-
 exports.getAcceptedChallenges = (page, username) => {
   const num_per_page = 9;
   page = parseInt(page || 1);
@@ -439,3 +378,40 @@ exports.deleteUser = (username) => {
   let del = db.prepare("DELETE FROM user WHERE username = ?").run(username);
   return del.changes != 0;
 }
+
+
+ ////////////////////////////  ADMIN  //////////////////////////////
+
+
+
+exports.getSuspendedChallenges = (page) => {
+  const num_per_page = 9;
+  page = parseInt(page || 1);
+
+  var num_found = db.prepare("SELECT count(*) FROM challenge " +
+            "JOIN state ON challenge.state = state.id " +
+            "WHERE state.name = ?").get("SUSPENDED")["count(*)"];
+
+  
+  let results = db.prepare(
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
+      "FROM challenge " +
+      "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "JOIN state ON challenge.state = state.id " +
+      "JOIN user ON user.username = challenge.author " +
+      "AND state.name = ? " +
+      "GROUP BY challenge.id, title, description, author, profilePic " +
+      "ORDER BY nbUpvotes ASC LIMIT ? OFFSET ? "
+  ).all("SUSPENDED", num_per_page, (page - 1) * num_per_page);
+
+  return {
+    results: results,
+    num_found: num_found,
+    prev_page: page > 1 ? page - 1 : 1,
+    prev_disabled: page == 1,
+    next_page: page * num_per_page <= num_found ? page + 1 : page,
+    next_disabled: page * num_per_page >= num_found,
+    page: page,
+    num_pages: parseInt(num_found / num_per_page) + 1
+  };
+};
