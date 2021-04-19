@@ -182,6 +182,12 @@ app.post("/createChallenge", (req, res) => {
 app.get("/closeChallenge/:id", is_authenticated, is_admin, (req, res) => {
   let success = model.closeChallenge(req.params.id)
   
+  if (req.query.target == "challenges") {
+    let results = model.getChallenges(req.query.page, "")
+  } else {
+    let results = model.getSuspendedChallenges(req.query.page);
+  }
+  
   let suspendedChallenges = model.getSuspendedChallenges(req.query.page);
   if (success) {
     suspendedChallenges.success = {msg: "Défi clos !"}
