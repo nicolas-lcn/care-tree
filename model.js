@@ -306,8 +306,15 @@ exports.getRandomChallenge = (username) => {
       "JOIN user ON user.username = challenge.author " +
       "WHERE expireDate > ? " +
       "AND state.name = ? " +
+      "AND challenge.id NOT IN (SELECT challengeid " +
+                               "FROM acceptedchallenges " +
+                               "WHERE username = ? " +
+                               "UNION " +
+                               "SELECT challengeid " +
+                               "FROM succeededchallenges " +
+                               "WHERE username = ?) " +
       "GROUP BY challenge.id, title, description, author, profilePic "
-  ).all(Date.now(), "OPEN");
+  ).all(Date.now(), "OPEN", username ? username : "", username ? username : "");
   
   let result = results[Math.floor((Math.random() * results.length))];
   

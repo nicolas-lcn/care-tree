@@ -136,42 +136,42 @@ db.prepare("INSERT INTO reportedchallenges VALUES(?, ?)").run(chall9, username3)
 
 // Filler challenges
 let fill1 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 1", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill2 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 2", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill3 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 3", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill4 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 4", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill5 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 5", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill6 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 6", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill7 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 7", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill8 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 8", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill9 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 9", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill10 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 10", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill11 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 11", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill12 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 12", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill13 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 13", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill14 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 14", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill15 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 15", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill16 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 16", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill17 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 17", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill18 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 18", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill19 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 19", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
 let fill20 = db.prepare("INSERT INTO challenge (title, description, state, author, expireDate) "
-           + "VALUES (?, ?, ?, ?, ?)").run("Filler", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
+           + "VALUES (?, ?, ?, ?, ?)").run("Filler 20", "Défi filler pour avoir un aperçu de l'application !", open, username4, expireDate).lastInsertRowid;
