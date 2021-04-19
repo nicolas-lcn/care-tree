@@ -292,7 +292,7 @@ exports.getCreatedChallenges = (page, username) => {
   };
 };
 
-exports.getRandomChallenge = () => {
+exports.getRandomChallenge = (username) => {
   var num_found = db.prepare("SELECT count(*) FROM challenge " +
             "JOIN state ON challenge.state = state.id " +
             "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
@@ -309,7 +309,34 @@ exports.getRandomChallenge = () => {
       "GROUP BY challenge.id, title, description, author, profilePic "
   ).all(Date.now(), "OPEN");
   
-   return results[Math.floor((Math.random() * results.length))]
+  let result = results[Math.floor((Math.random() * results.length))];
+  
+  if (username) {
+    result.hasLiked = db.prepare(
+        "SELECT * " +
+          "FROM likedchallenges " +
+          "WHERE challengeid = ? " +
+          "AND username = ? "
+      ).get(result.id, username);
+    result.hasAccepted = db.prepare(
+        "SELECT * " +
+          "FROM acceptedchallenges " +
+          "WHERE challengeid = ? " +
+          "AND username = ? " +
+          "UNION " +
+          "SELECT * FROM succeededchallenges " +
+          "WHERE challengeid = ? " +
+          "AND username = ? "
+      ).get(result.id, username, result.id, username);
+    result.hasReported = db.prepare(
+        "SELECT * " +
+          "FROM reportedchallenges " +
+          "WHERE challengeid = ? " +
+          "AND username = ? "
+      ).get(result.id, username);
+  }
+  
+   return result;
 };
 
 

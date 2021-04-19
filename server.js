@@ -123,7 +123,7 @@ app.get("/suspendedChallenges", is_authenticated, is_admin, (req, res) => {
 });
 
 app.get("/randomChallenge", is_authenticated, (req, res) => {
-  let randomChallenge = model.getRandomChallenge();
+  let randomChallenge = model.getRandomChallenge(req.session.name);
   res.render("randomChallenge", randomChallenge);
 });
 
