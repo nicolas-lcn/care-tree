@@ -292,6 +292,26 @@ exports.getCreatedChallenges = (page, username) => {
   };
 };
 
+exports.getRandomChallenge = () => {
+  var num_found = db.prepare("SELECT count(*) FROM challenge " +
+            "JOIN state ON challenge.state = state.id " +
+            "WHERE expireDate > ? AND state.name = ?").get(Date.now(), "OPEN")["count(*)"];
+
+  
+  let results = db.prepare(
+      "SELECT challenge.id AS id, title, description, COUNT(likedchallenges.username) AS nbUpvotes, author, profilePic " +
+      "FROM challenge " +
+      "LEFT JOIN likedchallenges ON likedchallenges.challengeid = challenge.id " +
+      "JOIN state ON challenge.state = state.id " +
+      "JOIN user ON user.username = challenge.author " +
+      "WHERE expireDate > ? " +
+      "AND state.name = ? " +
+      "GROUP BY challenge.id, title, description, author, profilePic "
+  ).all(Date.now(), "OPEN");
+  
+   return results[Math.floor((Math.random() * results.length))]
+};
+
 
 function getNumberOfLikes(challengeid){
   let nbLikes  = db.prepare("SELECT COUNT(challengeid) as nbLikes FROM likedchallenges WHERE challengeid = ?");

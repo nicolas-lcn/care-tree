@@ -122,6 +122,11 @@ app.get("/suspendedChallenges", is_authenticated, is_admin, (req, res) => {
   res.render("suspendedChallenges", suspendedChallenges);
 });
 
+app.get("/randomChallenge", is_authenticated, (req, res) => {
+  let randomChallenge = model.getRandomChallenge();
+  res.render("randomChallenge", randomChallenge);
+});
+
 /**** Routes to update challenges ****/
 
 app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
