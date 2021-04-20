@@ -73,10 +73,9 @@
       </div>
         {{/authenticated}}
         {{#authenticated}}
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle my-2 my-lg-0" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="nav-item dropdown" style="padding-right:40px">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class= "img-thumbnail" src ="{{avatar}}">
-          {{name}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownAuth">
           <form class = "dropdown-item form-inline list-group-item border-0" action="/logout" method ="post">
