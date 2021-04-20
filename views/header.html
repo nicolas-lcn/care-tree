@@ -47,12 +47,14 @@
           <li class="nav-item">
             <a class="nav-link" href="/challenges">Challenges</a>
           </li>
+          {{^isAdmin}}
           <li class="nav-item">
             <a class="nav-link" href="/randomChallenge">Défi aléatoire</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/tree">Mon arbre</a>
           </li>
+          {{/isAdmin}}
           {{#isAdmin}}
           <li class="nav-item">
             <a class="nav-link" href = "/suspendedChallenges">Défis signalés</a>
@@ -78,7 +80,7 @@
       </div>
         {{/authenticated}}
         {{#authenticated}}
-      <div class="nav-item dropdown" style="padding-right:40px">
+      <div class="nav-item dropdown" style="padding-right:95px">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class= "img-thumbnail" src ="{{avatar}}">
         </a>
