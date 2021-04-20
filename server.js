@@ -21,6 +21,7 @@ function update_locals(req, res, next) {
   if (req.session.name) {
     res.locals.authenticated = true;
     res.locals.name = req.session.name;
+    res.locals.avatar = req.session.avatar;
   }
   return next();
 }
@@ -55,6 +56,7 @@ app.post("/login", (req, res) => {
     res.render("login", {errors : {msg : "Nom d'utilisateur ou mot de passe erroné"}});
   } else {
     req.session.name = req.body.username;
+    req.session.avatar = model.getProfilePicURL(req.session.name);
     res.redirect("/");
   }
 });

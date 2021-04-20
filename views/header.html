@@ -53,19 +53,6 @@
           <li class="nav-item">
             <a class="nav-link" href="/tree">Mon arbre</a>
           </li>
-          {{#authenticated}}
-           <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{name}}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/profile">Editer le profil</a>
-          <a class="dropdown-item" href="/createdChallenges">Défis créés</a>
-          <a class="dropdown-item" href="/acceptedChallenges">Défis acceptés</a>
-          <a class="dropdown-item" href="/succeededChallenges">Défis terminés</a>
-        </div>
-      </li>
-          {{/authenticated}}
         </ul>
       </div>
       <div class="list-group list-group-horizontal nav-info d-flex mx-md-5 order-0 order-md-last px-0" style="width : 300px;">
@@ -84,11 +71,22 @@
           </a>
         {{/authenticated}}
         {{#authenticated}}
-          <form class = "form-inline list-group-item border-0" action="/logout" method ="post">
+      </div>
+      <img class= "img-thumbnail" src ="{{avatar}}">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownAuth">
+          <form class = "dropdown-item form-inline list-group-item border-0" action="/logout" method ="post">
               <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
             </form>
+          <a class="dropdown-item" href="/profile">Editer le profil</a>
+          <a class="dropdown-item" href="/createdChallenges">Défis créés</a>
+          <a class="dropdown-item" href="/acceptedChallenges">Défis acceptés</a>
+          <a class="dropdown-item" href="/succeededChallenges">Défis terminés</a>
+        </div>
         {{/authenticated}}
-      </div>
+      
       
     </nav>
   </header>
