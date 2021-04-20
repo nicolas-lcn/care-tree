@@ -21,6 +21,7 @@ function update_locals(req, res, next) {
     res.locals.authenticated = true;
     res.locals.name = req.session.name;
     res.locals.avatar = req.session.avatar;
+    res.locals.isAdmin = req.session.isAdmin;
   }
   return next();
 }
@@ -59,6 +60,9 @@ app.post("/login", (req, res) => {
   } else {
     req.session.name = req.body.username;
     req.session.avatar = model.getProfilePicURL(req.session.name);
+    let isAdmin = model.getAdminValue(req.body.username);
+    req.session.isAdmin = (isAdmin == 1)? true : false;
+    console.log(req.session.isAdmin);
     res.redirect("/");
   }
 });

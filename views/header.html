@@ -53,6 +53,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/tree">Mon arbre</a>
           </li>
+          {{#isAdmin}}
+          <li class="nav-item">
+            <a class="nav-link" href = "/suspendedChallenges">Défis signalés</a>
+          </li>
+          {{/isAdmin}}
         </ul>
       {{^authenticated}}
       <div class="list-group list-group-horizontal nav-info d-flex mx-md-5 order-0 order-md-last px-0" style="width : 300px;">
