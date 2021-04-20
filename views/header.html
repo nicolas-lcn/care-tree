@@ -54,9 +54,9 @@
             <a class="nav-link" href="/tree">Mon arbre</a>
           </li>
         </ul>
-      </div>
+      {{^authenticated}}
       <div class="list-group list-group-horizontal nav-info d-flex mx-md-5 order-0 order-md-last px-0" style="width : 300px;">
-        {{^authenticated}}
+        
           <a
             href="/login"
             class="list-group-item list-group-item-action list-group-item-secondary"
@@ -69,11 +69,13 @@
           >
             S'inscrire
           </a>
+        
+      </div>
         {{/authenticated}}
         {{#authenticated}}
-      </div>
-      <img class= "img-thumbnail" src ="{{avatar}}">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle my-2 my-lg-0" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img class= "img-thumbnail" src ="{{avatar}}">
           {{name}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownAuth">
@@ -85,9 +87,10 @@
           <a class="dropdown-item" href="/acceptedChallenges">Défis acceptés</a>
           <a class="dropdown-item" href="/succeededChallenges">Défis terminés</a>
         </div>
+      </div>
         {{/authenticated}}
       
-      
+      </div> 
     </nav>
   </header>
 
