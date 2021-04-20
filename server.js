@@ -42,7 +42,10 @@ function is_authenticated(req, res, next) {
 }
 
 function is_admin(req, res, next) {
-  return next();
+  if(model.getAdminValue(req.session.name) == 1){
+    return next();
+  }
+  res.render("/", {errors : { msg : "Vous n'avez pas la permission d'accé"}})
 }
 
 /**** Routes to update session ****/
@@ -67,7 +70,7 @@ app.post("/logout", (req, res) => {
 
 /**** Routes to render views ****/
 
-app.get("/", (req, res) => {
+app.get("/",(req, res) => {
   res.render("index");
 });
 

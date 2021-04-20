@@ -401,6 +401,11 @@ exports.getProfilePicURL = (username) =>{
   let select = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username);
   return (select)? select.profilePic : null;
 };
+
+exports.getAdminValue = (username) =>{
+  let select = db.prepare("SELECT isAdmin FROM user WHERE username = ?").get(username);
+  return select.isAdmin;
+}
    
       //Edit User //
 
