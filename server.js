@@ -45,7 +45,7 @@ function is_admin(req, res, next) {
   if(model.getAdminValue(req.session.name) == 1){
     return next();
   }
-  res.render("/", {errors : { msg : "Vous n'avez pas la permission d'accé"}})
+  res.render("index", {errors : { msg : "Vous n'avez pas la permission d'accéder à ce contenu"}});
 }
 
 /**** Routes to update session ****/
@@ -103,7 +103,14 @@ app.get("/createdChallenges", is_authenticated, (req, res) => {
   res.render("createdChallenges", createdChallenges);
 });
 
-app.get("/profile", (req, res) => {
+app.get("/suspendedChallenges", is_admin, (req,res)=>{
+  let suspendedChallenges = model.getSuspendedChallenges(
+    req.query.page
+  );
+  res.render("suspendedChallenges", suspendedChallenges);
+})
+
+app.get("/profile", is_authenticated, (req, res) => {
   let avatar = model.getProfilePicURL(req.session.name);
   if (avatar != null) res.render("profile", { avatar: avatar });
   else res.render("profile");
