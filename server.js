@@ -358,6 +358,8 @@ app.get("/deleteAccount", is_authenticated, (req, res) => {
   let success = model.deleteUser(req.session.name);
   if (success) {
     req.session = null;
+    res.locals.avatar = null;
+    res.locals.authenticate
     res.render("index", {
       info: {
         msg:
