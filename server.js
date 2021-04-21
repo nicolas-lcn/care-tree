@@ -43,7 +43,7 @@ function is_authenticated(req, res, next) {
 }
 
 function is_admin(req, res, next) {
-  if(model.getAdminValue(req.session.name) == 1){
+  if(req.session.name && model.getAdminValue(req.session.name) == 1){
     return next();
   }
   res.render("index", {errors : { msg : "Vous n'avez pas la permission d'accéder à ce contenu"}});
