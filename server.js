@@ -26,7 +26,6 @@ function update_locals(req, res, next) {
   return next();
 }
 app.use(update_locals);
-
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
