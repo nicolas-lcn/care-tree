@@ -72,8 +72,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  req.session.name = null;
-  res.redirect("/");
+  req.session.name = null;+ res.redirect("/");
 });
 
 /**** Routes to render views ****/
@@ -384,3 +383,4 @@ app.get("/deleteAccount", is_authenticated, (req, res) => {
 });
 
 app.listen(3000, () => console.log("listening on http://localhost:3000"));
+ 
