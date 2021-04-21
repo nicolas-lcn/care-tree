@@ -48,6 +48,12 @@ function is_admin(req, res, next) {
   res.render("index", {errors : { msg : "Vous n'avez pas la permission d'accéder à ce contenu"}});
 }
 
+/** Routes for cookies **/
+app.get("/accept", (req,res) => {
+  req.session.accept = true;
+});
+
+
 /**** Routes to update session ****/
 
 app.post("/login", (req, res) => {
@@ -66,7 +72,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  req.session = null;
+  req.session.name = null;
   res.redirect("/");
 });
 
@@ -357,7 +363,7 @@ app.post("/edit_profile_pic", (req, res) => {
 app.get("/deleteAccount", is_authenticated, (req, res) => {
   let success = model.deleteUser(req.session.name);
   if (success) {
-    req.session = null;
+    req.session.name = null;
     res.locals.authenticated = false;
     res.render("index", {
       info: {
