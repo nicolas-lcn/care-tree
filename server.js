@@ -61,7 +61,6 @@ app.post("/login", (req, res) => {
     req.session.avatar = model.getProfilePicURL(req.session.name);
     let isAdmin = model.getAdminValue(req.body.username);
     req.session.isAdmin = (isAdmin == 1)? true : false;
-    console.log(req.session.isAdmin);
     res.redirect("/");
   }
 });

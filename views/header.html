@@ -88,10 +88,12 @@
           <form class = "dropdown-item form-inline list-group-item border-0" action="/logout" method ="post">
               <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
             </form>
+          {{^isAdmin}}
           <a class="dropdown-item" href="/profile">Editer le profil</a>
           <a class="dropdown-item" href="/createdChallenges">Défis créés</a>
           <a class="dropdown-item" href="/acceptedChallenges">Défis acceptés</a>
           <a class="dropdown-item" href="/succeededChallenges">Défis terminés</a>
+          {{/isAdmin}}
         </div>
       </div>
         {{/authenticated}}
