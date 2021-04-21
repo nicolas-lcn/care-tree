@@ -58,7 +58,7 @@ app.post("/login", (req, res) => {
     });
   } else {
     req.session.name = req.body.username;
-    req.session.avatar = model.getProfilePicURL(req.session.name);
+    req.session.avatar = model.getProfilePicURL(req.body.username);
     let isAdmin = model.getAdminValue(req.body.username);
     req.session.isAdmin = (isAdmin == 1)? true : false;
     res.redirect("/");
@@ -283,6 +283,9 @@ app.post(
       );
       if (new_username != null) {
         req.session.name = req.body.username;
+        req.session.avatar = model.getProfilePicURL(req.body.username);
+        let isAdmin = model.getAdminValue(req.body.username);
+        req.session.isAdmin = (isAdmin == 1)? true : false;
         res.redirect("/");
       } else {
         res.render("signup", {
