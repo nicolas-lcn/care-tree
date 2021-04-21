@@ -51,6 +51,7 @@ function is_admin(req, res, next) {
 /** Routes for cookies **/
 app.get("/accept", (req,res) => {
   req.session.accept = true;
+  res.redirect("/");
 });
 
 
