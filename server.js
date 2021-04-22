@@ -159,6 +159,8 @@ app.get("/randomChallenge", (req, res) => {
   res.render("randomChallenge", randomChallenge);
 });
 
+app.get("/")
+
 /**** Routes to update challenges ****/
 
 app.get("/acceptChallenge/:id", is_authenticated, (req, res) => {
