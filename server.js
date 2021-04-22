@@ -23,6 +23,8 @@ function update_locals(req, res, next) {
     res.locals.avatar = req.session.avatar;
     res.locals.isAdmin = req.session.isAdmin;
   }
+  res.locals.accept = req.session.accept;
+  console.log("local" + res.locals.accept);
   return next();
 }
 app.use(update_locals);
@@ -51,6 +53,7 @@ function is_admin(req, res, next) {
 /** Routes for cookies **/
 app.get("/accept", (req,res) => {
   req.session.accept = true;
+  console.log(req.session.accept);
   res.redirect("/");
 });
 

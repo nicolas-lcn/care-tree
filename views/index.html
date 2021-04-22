@@ -1,61 +1,86 @@
-{{> header}}
-{{#info}}
-<div class="row mb-3" >
-    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-info" role = "alert">
+{{> header}} {{#info}}
+<div class="row mb-3">
+  <div
+    class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-info"
+    role="alert"
+  >
     {{msg}}
-    </div>
   </div>
-{{/info}}
-
-{{#errors}}
+</div>
+{{/info}} {{#errors}}
 <div class="row mt-2">
-  <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-danger" role="alert">
+  <div
+    class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center alert alert-danger"
+    role="alert"
+  >
     {{msg}}
   </div>
 </div>
 {{/errors}}
 
-  <main>
-    <div class="container py-4">
-      <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-          <h1 class="display-5 fw-bold">Faites grandir votre arbre</h1>
-          <p class="col-md-8 fs-4">
-            Acceptez des défis proposés par la communauté, et gagnez des points
-            en les réalisant. Voyez votre arbre grandir au gré de vos actes positifs. 
-            Partagez de bonnes ondes et créez vos défis pour cultiver le positif autour de vous.
+<main>
+  <div class="container py-4">
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Faites grandir votre arbre</h1>
+        <p class="col-md-8 fs-4">
+          Acceptez des défis proposés par la communauté, et gagnez des points en
+          les réalisant. Voyez votre arbre grandir au gré de vos actes positifs.
+          Partagez de bonnes ondes et créez vos défis pour cultiver le positif
+          autour de vous.
+        </p>
+        <a href="/challenges" class="btn btn-primary btn-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-arrow-right"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+            />
+          </svg>
+          Voir les Challenges
+        </a>
+      </div>
+    </div>
+  </div>
+  {{^accept}}
+  <!-- Modal -->
+  <div id="cookieModal" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-bottom">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Des cookies sont dans le four. </h4>
+          <button type="button" class="btn-close" data-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            En poursuivant votre navigation, vous acceptez l'utilisation de
+            cookies afin d'améliorer votre expérience sur le site. Nous tenons à
+            votre vie privée et ne stockons aucune donnée utilisateur
+            susceptible d’être revendue à des tiers.
           </p>
-          <a href="/challenges" class="btn btn-primary btn-lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-arrow-right"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-              />
-            </svg>
-            Voir les Challenges
-          </a>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-success" href="/accept"
+            >Ok, j'accepte</a
+          >
         </div>
       </div>
     </div>
-    {{^accept}}
-    <div class="container justify-content-center">
-     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <p class = "text-center">
-          En poursuivant votre navigation, vous acceptez l'utilisation de cookies afin d'améliorer votre expérience sur le site. 
-          Nous tenons à votre vie privée et ne stockons aucune donnée utilisateur susceptible d’être revendue à des tiers.
-       </p>
-        <a type="button" class="btn-close" aria-label="Close" href = "/accept"></a>
-      </div>
-    </div>
-    {{/accept}}
+  </div>
+  {{/accept}}
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#cookieModal').modal('show');
+    });
+</script>
+  
 </main>
-
 
 {{> footer}}
