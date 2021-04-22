@@ -24,7 +24,6 @@ function update_locals(req, res, next) {
     res.locals.isAdmin = req.session.isAdmin;
   }
   res.locals.accept = req.session.accept;
-  console.log("local" + res.locals.accept);
   return next();
 }
 app.use(update_locals);
@@ -203,6 +202,7 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
 });
 
 app.get("/reportChallenge/:id", is_authenticated, (req, res) => {
+  console.log()
   let success = model.reportChallenge(
     req.session.name,
     req.params.id,
@@ -354,6 +354,7 @@ app.post(
 app.post("/edit_profile_pic", (req, res) => {
   let edit = model.edit_profilePic(req.session.name, req.body.avatar);
   if (edit != -1) {
+    req.session.avatar = req.body.avatar
     res.render("profile", {
       avatar: req.body.avatar,
       success: { msg: "Avatar modifié !" }
