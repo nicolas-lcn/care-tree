@@ -444,13 +444,16 @@ exports.getUserInfo = (username) => {
   
   let data = {};
   
-  data.pseudo = username;
-  data["Photo de profil"] = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username);
+  data.pseudonyme = username;
+  data["Photo de profil"] = db.prepare("SELECT profilePic FROM user WHERE username = ?").get(username)["profilePic"];
   data["Défis créés"] = db.prepare("SELECT id, title AS titre, description " +
                                    "FROM challenge " +
                                    "WHERE author = ?").all(username);
   data["Défis acceptés"] = db.prepare("SELECT challenge.id, title AS titre, description " + 
                                       "FROM challenge JOIN acceptedchallenges ON challenge.id = acceptedchallenges.challengeid " + 
+                                      "WHERE username = ?").all(username);
+  data["Défis réussis"] = db.prepare("SELECT challenge.id, title AS titre, description " + 
+                                      "FROM challenge JOIN succeededchallenges ON challenge.id = succeededchallenges.challengeid " + 
                                       "WHERE username = ?").all(username);
   data["Défis aimés"] = db.prepare("SELECT challenge.id, title AS titre, description " + 
                                       "FROM challenge JOIN likedchallenges ON challenge.id = likedchallenges.challengeid " + 
@@ -459,7 +462,6 @@ exports.getUserInfo = (username) => {
                                       "FROM challenge JOIN reportedchallenges ON challenge.id = reportedchallenges.challengeid " + 
                                       "WHERE username = ?").all(username);
   
-  console.log(data)
   return data;
 }
 
