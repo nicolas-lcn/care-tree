@@ -438,6 +438,15 @@ exports.deleteUser = (username) => {
   return del.changes != 0;
 }
 
+exports.getUserInfo = (username) => {
+  let verify = db.prepare("SELECT * FROM user WHERE username = ?").get(username);
+  if( ! verify) return false;
+  
+  let data = {};
+  
+  
+}
+
 
  ////////////////////////////  ADMIN  //////////////////////////////
 
@@ -492,3 +501,4 @@ exports.openChallenge = (challengeid) => {
   let upd = db.prepare("UPDATE challenge SET state = (SELECT id FROM state WHERE name = ?), expireDate = ? WHERE id = ?").run("OPEN", Date.now() + 24 * 60 * 60 * 1000, challengeid);
   return upd.changes != 0;
 }
+
