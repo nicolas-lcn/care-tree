@@ -202,13 +202,14 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
 });
 
 app.get("/reportChallenge/:id", is_authenticated, (req, res) => {
-  console.log()
+  console.log(model.getChallenges(req.query.page, req.session.name))
   let success = model.reportChallenge(
     req.session.name,
     req.params.id,
     NB_MAX_REPORTS
   );
   let challenges = model.getChallenges(req.query.page, req.session.name);
+  console.log(challenges)
   if (success)
     challenges.success = { msg: "Défi signalé, merci pour votre vigilance !" };
   res.render("challenges", challenges);

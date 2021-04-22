@@ -64,7 +64,28 @@
                     <a class = "col-6 px-0 d-flex justify-content-center text-decoration-none btn btn-outline-success" href="/endChallenge/{{id}}">
                         Défi terminé !
                     </a>
-                  <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/abandonChallenge/{{id}}?page={{page}}">Abandonner</a>
+                  <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" data-toggle="modal" data-target="#giveupAlert{{id}}">Abandonner</a>
+                    <!-- Modal -->
+                        <div id="giveupAlert{{id}}" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-dialog-centered">
+
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Confirmez votre abandon.</h4>
+                                <button type="button" class="btn-close" data-dismiss="modal"></button>
+                              </div>
+                              <div class="modal-body">
+                                  <p>Êtes-vous sûr.e. de vouloir abandonner ce défi? </p>
+                              </div>
+                              <div class="modal-footer">
+                                <a class="btn btn-success" href = "/abandonChallenge/{{id}}?page={{page}}">Oui</a>
+                                <a class="btn btn-danger" data-dismiss="modal">Non</a>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
                 </div>
                 </div>
               </div>

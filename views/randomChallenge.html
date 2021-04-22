@@ -67,8 +67,31 @@
                 </div>
                 {{/hasReported}}
                 {{^hasReported}}
-                  <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em;" href="/reportChallenge/{{id}}">Signaler</a>
-                {{/hasReported}}
+                        <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em; cursor: pointer" data-toggle="modal" data-target="#reportAlert{{id}}">
+                          Signaler
+                        </a>
+                        <!-- Modal -->
+                        <div id="reportAlert{{id}}" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-dialog-centered">
+
+                          <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Confirmez votre signalement</h4>
+                                <button type="button" class="btn-close" data-dismiss="modal"></button>
+                              </div>
+                              <div class="modal-body">
+                                  <p>Êtes-vous sûr.e. de vouloir signaler ce défi? </p>
+                              </div>
+                              <div class="modal-footer">
+                                <a class="btn btn-success" href = "/reportChallenge/{{id}}">Oui</a>
+                                <a class="btn btn-danger" data-dismiss="modal">Non</a>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      {{/hasReported}}
               </div>
             </div>
           </div>

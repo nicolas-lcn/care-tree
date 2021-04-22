@@ -72,11 +72,11 @@
                       </div>
                       {{/hasReported}}
                       {{^hasReported}}
-                        <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em; cursor: pointer" data-toggle="modal" data-target="#reportAlert">
+                        <a class="col-3 pt-3 px-0 d-flex justify-content-center" style="font-size: 0.8em; cursor: pointer" data-toggle="modal" data-target="#reportAlert{{id}}">
                           Signaler
                         </a>
                         <!-- Modal -->
-                        <div id="reportAlert" class="modal fade" role="dialog">
+                        <div id="reportAlert{{id}}" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-dialog-centered">
 
                           <!-- Modal content-->
