@@ -476,7 +476,7 @@ exports.getSuspendedChallenges = (page) => {
 };
 
 exports.closeChallenge = (challengeid) => {
-  let verify = db.prepare("SELECT * FROM challenge WHERE id = ? AND state = (SELECT id FROM state WHERE name = ?)").get(challengeid, "SUSPENDED");
+  let verify = db.prepare("SELECT * FROM challenge WHERE id = ?").get(challengeid);
   if (! verify) return false;
   
   let upd = db.prepare("UPDATE challenge SET state = (SELECT id FROM state WHERE name = ?) WHERE id = ?").run("CLOSE", challengeid);

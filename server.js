@@ -229,7 +229,7 @@ app.post("/createChallenge", (req, res) => {
 
 app.get("/closeChallenge/:id", is_authenticated, is_admin, (req, res) => {
   let success = model.closeChallenge(req.params.id);
-
+  
   let results;
   if (req.query.target == "challenges") {
     results = model.getChallenges(req.query.page, "");
