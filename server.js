@@ -161,8 +161,7 @@ app.get("/randomChallenge", (req, res) => {
 
 app.get("/getUserInfo", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
-  console.log(JSON.stringify(data));
-  res.render();
+  res.send(data)
 })
 
 /**** Routes to update challenges ****/
