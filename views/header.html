@@ -80,6 +80,12 @@
       </div>
         {{/authenticated}}
         {{#authenticated}}
+      {{#isAdmin}}
+        <form class = "form-inline list-group-item border-0" action="/logout" method ="post">
+              <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
+            </form>
+        {{/isAdmin}}
+      {{^isAdmin}}
       <div class="nav-item dropdown" style="padding-right:95px">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAuth" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img class= "img-thumbnail" src ="{{avatar}}">
@@ -88,14 +94,15 @@
           <form class = "dropdown-item form-inline list-group-item border-0" action="/logout" method ="post">
               <input class="btn btn-outline-dark" type ="submit" value="Se déconnecter">
             </form>
-          {{^isAdmin}}
+          
           <a class="dropdown-item" href="/profile">Editer le profil</a>
           <a class="dropdown-item" href="/createdChallenges">Défis créés</a>
           <a class="dropdown-item" href="/acceptedChallenges">Défis acceptés</a>
           <a class="dropdown-item" href="/succeededChallenges">Défis terminés</a>
-          {{/isAdmin}}
+          
         </div>
       </div>
+      {{/isAdmin}}
         {{/authenticated}}
       
       </div> 
