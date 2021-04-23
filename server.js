@@ -360,11 +360,6 @@ app.post(
   }
 );
 
-app.post("/contact", (req,res)=>{
-  
-})
-
-
 
 app.post("/edit_profile_pic", (req, res) => {
   let edit = model.edit_profilePic(req.session.name, req.body.avatar);
