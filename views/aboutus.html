@@ -1,0 +1,24 @@
+{{>header}}
+<form class="container overflow-hidden justify-content-center" action="/contact" method="post">
+  <div class="row mt-3" >
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form-floating">
+      <input
+        type="text" class="form-control" id="title" placeholder="" name="title" required/>
+      <label for="title" class="ms-2">Objet</label>
+    </div>
+  </div>
+  <div class="row mt-3" >
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form-floating">
+      <textarea class="form-control" placeholder="" id="description" style="height: 10em;"></textarea>
+      <label for="description" class="ms-2">Ecrivez-un message...</label>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form-floating">
+      <button type="submit" class="btn btn-outline-success">
+        Envoyer ! 
+      </button>
+    </div>
+  </div>
+</form>
+{{>footer}}
