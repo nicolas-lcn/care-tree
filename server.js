@@ -52,7 +52,6 @@ function is_admin(req, res, next) {
 /** Routes for cookies **/
 app.get("/accept", (req,res) => {
   req.session.accept = true;
-  console.log(req.session.accept);
   res.redirect("/");
 });
 
@@ -158,6 +157,10 @@ app.get("/randomChallenge", (req, res) => {
   let randomChallenge = model.getRandomChallenge(req.session.name);
   res.render("randomChallenge", randomChallenge);
 });
+
+app.get("/aboutus", (req,res) =>{
+  res.render("aboutus");
+})
 
 app.get("/getUserInfo", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
@@ -356,6 +359,12 @@ app.post(
     }
   }
 );
+
+app.post("/contact", (req,res)=>{
+  
+})
+
+
 
 app.post("/edit_profile_pic", (req, res) => {
   let edit = model.edit_profilePic(req.session.name, req.body.avatar);
