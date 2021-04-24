@@ -164,7 +164,7 @@ app.get("/aboutus", (req,res) =>{
 
 app.get("/getUserInfo", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
-  res.render("personalInfos")
+  res.render("personalInfos", {succeededChallenges : data["Défis Terminés"]})
 })
 
 /**** Routes to update challenges ****/
