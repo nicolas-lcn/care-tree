@@ -18,7 +18,9 @@
                <div class="card h-100">
                       <div class="card-body">
                         <h6 class="d-flex align-items-center mb-3">Défis Terminés</h6>
-                         {{succeededChallenges}}
+                         {{#succeededChallenges}}
+                          {{titre}},
+                        {{/succeededChallenges}}
                       </div>
                     </div>
             </div>
@@ -27,7 +29,10 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <h6 class="d-flex align-items-center mb-3">Défis Aimés</h6>
-                         {{likedChallenges}}
+                         {{#likedChallenges}}
+                         {{id}}. {{titre}} : {{description}
+                        {{/likedChallenges}}
+                        
                       </div>
                     </div>
                   </div>
