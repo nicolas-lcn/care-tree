@@ -6,7 +6,7 @@ const cookieSession = require("cookie-session");
 const { body, validationResult } = require("express-validator");
 
 var model = require("./model");
-var NB_MAX_REPORTS = 3; // When a challenge gets this number of reports, it is suspended
+var NB_MAX_REPORTS = 3; // When a challenge gets this number of reports, it gets suspended
 var app = express();
 
 app.use(
@@ -43,18 +43,19 @@ function is_authenticated(req, res, next) {
 }
 
 function is_admin(req, res, next) {
-  if(req.session.name && model.getAdminValue(req.session.name) == 1){
+  if (req.session.name && model.getAdminValue(req.session.name) == 1) {
     return next();
   }
-  res.render("index", {errors : { msg : "Vous n'avez pas la permission d'accéder à ce contenu"}});
+  res.render("index", {
+    errors: { msg: "Vous n'avez pas la permission d'accéder à ce contenu" }
+  });
 }
 
 /** Routes for cookies **/
-app.get("/accept", (req,res) => {
+app.get("/accept", (req, res) => {
   req.session.accept = true;
   res.redirect("/");
 });
-
 
 /**** Routes to update session ****/
 
@@ -68,18 +69,19 @@ app.post("/login", (req, res) => {
     req.session.name = req.body.username;
     req.session.avatar = model.getProfilePicURL(req.body.username);
     let isAdmin = model.getAdminValue(req.body.username);
-    req.session.isAdmin = (isAdmin == 1)? true : false;
+    req.session.isAdmin = isAdmin == 1 ? true : false;
     res.redirect("/");
   }
 });
 
 app.post("/logout", (req, res) => {
-  req.session.name = null;+ res.redirect("/");
+  req.session.name = null;
+  +res.redirect("/");
 });
 
 /**** Routes to render views ****/
 
-app.get("/",(req, res) => {
+app.get("/", (req, res) => {
   res.render("index");
 });
 
@@ -112,12 +114,10 @@ app.get("/createdChallenges", is_authenticated, (req, res) => {
   res.render("createdChallenges", createdChallenges);
 });
 
-app.get("/suspendedChallenges", is_admin, (req,res)=>{
-  let suspendedChallenges = model.getSuspendedChallenges(
-    req.query.page
-  );
+app.get("/suspendedChallenges", is_admin, (req, res) => {
+  let suspendedChallenges = model.getSuspendedChallenges(req.query.page);
   res.render("suspendedChallenges", suspendedChallenges);
-})
+});
 
 app.get("/profile", is_authenticated, (req, res) => {
   let avatar = model.getProfilePicURL(req.session.name);
@@ -158,25 +158,27 @@ app.get("/randomChallenge", (req, res) => {
   res.render("randomChallenge", randomChallenge);
 });
 
-app.get("/aboutus", (req,res) =>{
+app.get("/aboutus", (req, res) => {
   res.render("aboutus");
-})
+});
 
 app.get("/getUserInfo", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
-  res.render("personalInfos", {succeededChallenges : data["Défis réussis"], 
-                               likedChallenges:      data["Défis aimés"],
-                               createdChallenges:    data["Défis créés"],
-                               signaledChallenges:   data["Défis signalés"],
-                               acceptedChallenges:   data["Défis acceptés"],
-                               profilePic:           data["Photo de profil"],
-                               pseudo:               data.pseudonyme});
-})
+  res.render("personalInfos", {
+    succeededChallenges: data["Défis réussis"],
+    likedChallenges: data["Défis aimés"],
+    createdChallenges: data["Défis créés"],
+    signaledChallenges: data["Défis signalés"],
+    acceptedChallenges: data["Défis acceptés"],
+    profilePic: data["Photo de profil"],
+    pseudo: data.pseudonyme
+  });
+});
 
-app.get("/getUserInfoRaw", is_authenticated, (req,res) =>{
+app.get("/getUserInfoRaw", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
   res.send(data);
-})
+});
 
 /**** Routes to update challenges ****/
 
@@ -221,14 +223,14 @@ app.get("/delChallenge/:id", is_authenticated, (req, res) => {
 });
 
 app.get("/reportChallenge/:id", is_authenticated, (req, res) => {
-  console.log(model.getChallenges(req.query.page, req.session.name))
+  console.log(model.getChallenges(req.query.page, req.session.name));
   let success = model.reportChallenge(
     req.session.name,
     req.params.id,
     NB_MAX_REPORTS
   );
   let challenges = model.getChallenges(req.query.page, req.session.name);
-  console.log(challenges)
+  console.log(challenges);
   if (success)
     challenges.success = { msg: "Défi signalé, merci pour votre vigilance !" };
   res.render("challenges", challenges);
@@ -252,7 +254,7 @@ app.post("/createChallenge", (req, res) => {
 
 app.get("/closeChallenge/:id", is_authenticated, is_admin, (req, res) => {
   let success = model.closeChallenge(req.params.id);
-  
+
   let results;
   if (req.query.target == "challenges") {
     results = model.getChallenges(req.query.page, "");
@@ -314,7 +316,7 @@ app.post(
         req.session.name = req.body.username;
         req.session.avatar = model.getProfilePicURL(req.body.username);
         let isAdmin = model.getAdminValue(req.body.username);
-        req.session.isAdmin = (isAdmin == 1)? true : false;
+        req.session.isAdmin = isAdmin == 1 ? true : false;
         res.redirect("/");
       } else {
         res.render("signup", {
@@ -371,11 +373,10 @@ app.post(
   }
 );
 
-
 app.post("/edit_profile_pic", (req, res) => {
   let edit = model.edit_profilePic(req.session.name, req.body.avatar);
   if (edit != -1) {
-    req.session.avatar = req.body.avatar
+    req.session.avatar = req.body.avatar;
     res.render("profile", {
       avatar: req.body.avatar,
       success: { msg: "Avatar modifié !" }
@@ -409,4 +410,3 @@ app.get("/deleteAccount", is_authenticated, (req, res) => {
 });
 
 app.listen(3000, () => console.log("listening on http://localhost:3000"));
- 
