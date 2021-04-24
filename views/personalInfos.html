@@ -1,6 +1,7 @@
 {{>header}}
 <div class="container">
     <div class="main-body">
+      <a href = "/getUserInfoRaw">Cliquer ici pour afficher les informations sous forme brute</a>
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -19,8 +20,9 @@
                       <div class="card-body">
                         <h6 class="d-flex align-items-center mb-3">Défis Terminés</h6>
                          {{#succeededChallenges}}
-                          {{titre}},
+                          {{id}}. {{titre}} : {{description}}<br>
                         {{/succeededChallenges}}
+                        
                       </div>
                     </div>
             </div>
@@ -30,7 +32,7 @@
                       <div class="card-body">
                         <h6 class="d-flex align-items-center mb-3">Défis Aimés</h6>
                          {{#likedChallenges}}
-                         {{id}}. {{titre}} : {{description}
+                         {{id}}. {{titre}} : {{description}}<br>
                         {{/likedChallenges}}
                         
                       </div>
@@ -40,7 +42,9 @@
                     <div class="card h-100">
                       <div class="card-body">
                         <h6 class="d-flex align-items-center mb-3">Défis Créés</h6>
-                         {{createdChallenges}}
+                         {{#createdChallenges}}
+                        {{id}}. {{titre}} : {{description}}<br>
+                        {{/createdChallenges}}
                       </div>
                     </div>
                   </div>
@@ -51,7 +55,9 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3">Défis Acceptés</h6>
-                       {{acceptedChallenges}}
+                       {{#acceptedChallenges}}
+                      {{id}}. {{titre}} : {{description}}<br>
+                      {{/acceptedChallenges}}
                     </div>
                   </div>
                 </div>
@@ -59,7 +65,9 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3">Défis Signalés</h6>
-                       {{signaledChallenges}}
+                       {{#signaledChallenges}}
+                        {{id}}. {{titre}} : {{description}}<br>
+                      {{/signaledChallenges}}
                     </div>
                   </div>
                 </div>

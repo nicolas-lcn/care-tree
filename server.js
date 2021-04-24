@@ -164,7 +164,6 @@ app.get("/aboutus", (req,res) =>{
 
 app.get("/getUserInfo", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
-  console.log(data);
   res.render("personalInfos", {succeededChallenges : data["Défis réussis"], 
                                likedChallenges:      data["Défis aimés"],
                                createdChallenges:    data["Défis créés"],
@@ -172,6 +171,11 @@ app.get("/getUserInfo", is_authenticated, (req, res) => {
                                acceptedChallenges:   data["Défis acceptés"],
                                profilePic:           data["Photo de profil"],
                                pseudo:               data.pseudonyme});
+})
+
+app.get("/getUserInfoRaw", is_authenticated, (req,res) =>{
+  let data = model.getUserInfo(req.session.name);
+  res.send(data);
 })
 
 /**** Routes to update challenges ****/
