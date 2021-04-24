@@ -164,7 +164,7 @@ app.get("/aboutus", (req,res) =>{
 
 app.get("/getUserInfo", is_authenticated, (req, res) => {
   let data = model.getUserInfo(req.session.name);
-  res.send(data)
+  res.render("personalInfos")
 })
 
 /**** Routes to update challenges ****/
