@@ -1,23 +1,23 @@
 {{>header}}
 <div class="container py-4">
-    <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="px-5 mb-4 bg-light rounded-3">
       <div class="container-fluid py-5">
         <h3 class="display-5 fw-bold">À propos de nous</h3>
-        <p class="col-md-8 fs-4">
+        <p class="col-md-8 fs-4 pt-4">
           Nous sommes deux étudiants désireux d'agir pour rendre notre monde meilleur. Selon nous, nous devons agir chacun à notre échelle.
           C'est pour cela que nous avons lancé CareTree, qui a pour but de réunir une communauté autour du partage de bonnes ondes, et d'actes positifs.
         </p>      
         <h3>
           Une question? Une suggestion? Contactez-nous ! 
         </h3>
-        <span class="fs-4">Envoyez un mail à cette adresse : 
+        <span class="fs-4 pt-4">Envoyez un mail à cette adresse : 
           <a href = "mailto:caretree@contact.fr">caretree@contact.fr</a>
         </span>
         {{#authenticated}}
-        <div class="fs-4">
+        <div class="fs-4 pt-4">
           Aussi, vous pouvez récupérer vos données personnelles en cliquant ci-dessous
         </div>
-        <a class="btn btn-outline-info fs-4" href="/getUserInfo">Récupérer mes données</a>
+        <a class="btn btn-outline-info fs-4 mt-4" href="/getUserInfo">Récupérer mes données</a>
         {{/authenticated}}
       </div>
   </div>
