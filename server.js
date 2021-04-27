@@ -297,7 +297,15 @@ app.post(
     .isLength({ min: 8 })
     .withMessage("Le mot de passe doit faire au moins 8 caractères")
     .matches(/\d/)
-    .withMessage("Le mot de passe doit contenir au moins 1 chiffre"),
+    .withMessage("Le mot de passe doit contenir au moins 1 chiffre")
+    .custom((value) => {
+      console.log(value);
+      for (let letter of value){
+
+        if (letter == letter.toUpperCase()) return true;
+      }
+      throw Error("Le mot de passe doit contenir au moins 1 lettre majuscule");
+    }),
   body("passwordConfirmation").custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error("Les mots de passe de correspondent pas.");
