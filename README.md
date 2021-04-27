@@ -5,9 +5,34 @@
 
 ## Care Tree
 
-On the front-end,
+Les fichiers de vues, se trouvent dans le dossier /views
+Le header et le footer sont affichés sur chacune des pages grâce au moteur de template mustache. 
 
-Les fichiers 
+### Les Challenges
+
+On peut séparer les vues concernant les challenges. On aura : 
+
+ - Une vision générale des challenges 
+ <br>
+     <i>views/challenges.html</i>
+ - Un challenge aléatoire
+ <br>
+     <i>views/randomChallenges.html</i>
+ - Les challenges créés 
+ <br>
+     <i>views/createdChallenges.html</i>
+ - Les challenges acceptés 
+ <br>
+     views/acceptedChallenges.html
+ - Les challenges terminés 
+ <br>
+     <i>views/succeededChallenges.html</i>
+ - Une page de création de challenge 
+ <br>
+     <i>views/createChallenges.html</i>
+ - Pour l'administrateur, une vue des challenges suspendus 
+ <br>
+     <i>views/suspendedChallenges.html</i>
 
 On the back-end,
 
