@@ -292,17 +292,14 @@ app.get("/openChallenge/:id", is_authenticated, is_admin, (req, res) => {
 
 app.post(
   "/signup",
-  //body("email").isEmail(),
   body("password")
     .isLength({ min: 8 })
     .withMessage("Le mot de passe doit faire au moins 8 caractères")
     .matches(/\d/)
     .withMessage("Le mot de passe doit contenir au moins 1 chiffre")
     .custom((value) => {
-      console.log(value);
       for (let letter of value){
-
-        if (letter == letter.toUpperCase()) return true;
+        if (letter.match(/[A-Z]/)) return true;
       }
       throw Error("Le mot de passe doit contenir au moins 1 lettre majuscule");
     }),
@@ -339,7 +336,6 @@ app.post(
 
 app.post(
   "/edit_profile",
-  //body("email").isEmail(),
   body("oldPassword").custom((value, { req }) => {
     if (model.login(req.session.name, value) == null) {
       throw new Error("Mot de passe erroné");
