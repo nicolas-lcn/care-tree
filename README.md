@@ -1,16 +1,13 @@
 # hello-express
 
-A server that serves a webpage, its resources, and some data
 
 
-## Your Project
+
+## Care Tree
 
 On the front-end,
 
-- Edit `views/index.html` to change the content of the webpage
-- `public/client.js` is the javacript that runs when you load the webpage
-- `public/style.css` is the styles for `views/index.html`
-- Drag in `assets`, like images or music, to add them to your project
+Les fichiers 
 
 On the back-end,
 
