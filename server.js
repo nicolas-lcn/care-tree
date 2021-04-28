@@ -51,13 +51,8 @@ function is_admin(req, res, next) {
   });
 }
 
-/** Routes for cookies **/
-app.get("/accept", (req, res) => {
-  req.session.accept = true;
-  res.redirect("/");
-});
 
-/**** Routes to update session ****/
+/**** Routes to update cookie session ****/
 
 app.post("/login", (req, res) => {
   let username = model.login(req.body.username, req.body.password);
@@ -76,7 +71,12 @@ app.post("/login", (req, res) => {
 
 app.post("/logout", (req, res) => {
   req.session.name = null;
-  +res.redirect("/");
+  res.redirect("/");
+});
+
+app.get("/accept", (req, res) => {
+  req.session.accept = true;
+  res.redirect("/");
 });
 
 /**** Routes to render views ****/
