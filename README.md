@@ -20,7 +20,7 @@ Un défi peut également être signalé s’il est jugé inadéquat par un utili
 <br>
 
 ## Le site
-
+https://satisfying-humorous-square.glitch.me/
 ### Partie utilisateur non connecté
 En tant qu’utilisateur non connecté, les seules possibilités sont d’avoir une présentation du site, et des challenges. En effet, il est important qu’un utilisateur puisse avoir un aperçu de ce qu’il est possible de faire en s’inscrivant ou se connectant. Ainsi, on peut donc voir les challenges et les challenges aléatoires. Pour autant, il est impossible de les signaler, de les relever ou de les aimer. <br>
 Aussi, un utilisateur non connecté pourra consulter la page de contact, car cette page se doit d’être accessible à tous. Dans l’en-tête de la page, un utilisateur non connecté trouvera donc deux boutons permettant de se connecter ou de s’inscrire. Ses boutons renvoient respectivement vers deux pages contenant des formulaires de connexion et d’inscription. 
